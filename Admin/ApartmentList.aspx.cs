@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Admin
 {
-    public partial class Contact : Page
+    public partial class ApartmentList : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

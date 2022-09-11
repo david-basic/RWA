@@ -42,6 +42,15 @@ namespace Admin
         protected global::System.Web.UI.WebControls.RequiredFieldValidator vUserName;
 
         /// <summary>
+        /// txtUserPass control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword txtUserPass;
+
+        /// <summary>
         /// vUserPass control.
         /// </summary>
         /// <remarks>

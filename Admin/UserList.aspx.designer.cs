@@ -11,7 +11,7 @@ namespace Admin
 {
 
 
-    public partial class Contact
+    public partial class UserList
     {
     }
 }

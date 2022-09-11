@@ -11,7 +11,7 @@ namespace Admin
 {
 
 
-    public partial class About
+    public partial class ApartmentList
     {
     }
 }

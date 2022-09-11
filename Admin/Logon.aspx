@@ -9,28 +9,29 @@
 </head>
 <body>
     <div class="h3 text-center">
-        <font face="Verdana">Logon page</font>
+        <font face="Verdana">Login page</font>
     </div>
     <div class="container col-md-4 col-md-offset-5">
-        <form id="form1" class="col-lg-6" runat="server">
+        <form id="form1" class="col-lg-4" runat="server">
             <div class="form-inline">
                 <label for="txtUserName">Email address:</label>
                 <input type="text" id="txtUserName" class="form-control" runat="server" />
                 <asp:RequiredFieldValidator ControlToValidate="txtUserName"
-                    Display="Static" ErrorMessage="*" runat="server"
+                    Display="Static" ErrorMessage="* Username not valid" ForeColor="Red" runat="server"
                     ID="vUserName" />
             </div>
             <div class="form-inline">
-                <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd" />
+                <label for="txtUserPass">Password:</label>
+                <input type="password" id="txtUserPass" class="form-control" runat="server" />
                 <asp:RequiredFieldValidator ControlToValidate="txtUserPass"
-                    Display="Static" ErrorMessage="*" runat="server"
+                    Display="Static" ErrorMessage="* Password not valid" ForeColor="Red" runat="server"
                     ID="vUserPass" />
             </div>
-            <div class="form-group">
-                <asp:CheckBox ID="chkPersistCookie" Text="Remember me" runat="server" AutoPostBack="false" />
+            <div class="form-inline">
+                <label>Remember me:</label>
+                <asp:CheckBox ID="chkPersistCookie" runat="server" AutoPostBack="false" />
             </div>
-            <asp:LinkButton ID="lbLogin" runat="server">Login</asp:LinkButton>
+            <asp:LinkButton ID="lbLogin" CssClass="btn btn-default" OnClick="lbLogin_Click" runat="server">Login</asp:LinkButton>
             <asp:Label ID="lblMsg" ForeColor="red" Font-Name="Verdana" Font-Size="10" runat="server" />
         </form>
     </div>
