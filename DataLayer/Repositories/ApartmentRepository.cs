@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,12 +18,28 @@ namespace DataLayer.Repositories
             _connectionString = ConfigurationManager.ConnectionStrings["rwadb"].ConnectionString;
         }
 
-        public List<Models.Apartment> GetApartments()
+        public List<Models.Apartment> GetApartments(int? statusId, int? cityId, int? order)
         {
-            var ds = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "dbo.GetApartments");
+            var commandParameters = new List<SqlParameter>();
+
+            if (statusId.HasValue && statusId.Value != 0)
+            {
+                commandParameters.Add(new SqlParameter("@statusId", statusId));
+            }
+
+            if (cityId.HasValue && cityId.Value != 0)
+            {
+                commandParameters.Add(new SqlParameter("@cityId", cityId));
+            }
+
+            if (order.HasValue && order.Value != 0)
+            {
+                commandParameters.Add(new SqlParameter("@order", order));
+            }
+
+            var ds = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "dbo.GetApartments", commandParameters.ToArray());
 
             var apList = new List<Models.Apartment>();
-
             foreach (DataRow row in ds.Tables[0].Rows)
             {
                 var ap = new Models.Apartment
@@ -48,7 +65,6 @@ namespace DataLayer.Repositories
                 };
                 apList.Add(ap);
             }
-
             return apList;
         }
     }
