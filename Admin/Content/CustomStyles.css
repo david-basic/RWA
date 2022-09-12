@@ -1,0 +1,52 @@
+﻿.navbar-inverse {
+    font-family: 'Century Gothic';
+    background: #4a6c6f;
+    border-color: #4a6c6f;
+    color:white;
+}
+
+.a-custom {
+    color: white;
+}
+
+/*.navbar-brand .navbar-nav > li > a:hover, .navbar-brand .navbar-nav > li > a:focus {
+    background-color: #FFFF00;
+    color: #FFC0CB;
+}*/
+
+table, th, td {
+    font-family: 'Century Gothic';
+}
+
+.table th, td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
+    background-color: #4a6c6f20;
+}
+
+.btn-custom {
+    font-family: 'Century Gothic';
+    background: #4A6C6F;
+    color: white;
+}
+
+.footer-custom {
+    font-family: 'Century Gothic';
+    color: #4a6c6f;
+}
+
+.label-custom {
+    font-family: 'Century Gothic';
+    color: #4a6c6f;
+}
+
+.glyphicon-custom {
+    border-color: white;
+    border-radius: 0px;
+    box-shadow: 0px 0px;
+    color: #4a6c6f;
+    font-size: 400%;
+}

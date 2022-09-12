@@ -14,7 +14,7 @@
 
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
+    <link href="Content/CustomStyles.css" rel="stylesheet" />
 </head>
 <body>
     <form runat="server">
@@ -39,21 +39,21 @@
         </asp:ScriptManager>
 
         <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
+                        <span class="icon-bar" style="background-color:white"></span>
+                        <span class="icon-bar" style="background-color:white"></span>
+                        <span class="icon-bar" style="background-color:white"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">RWA Apartments Admin</a>
+                    <a class="navbar-brand a-custom" runat="server" href="~/"><strong>RWA Apartments Admin</strong></a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <asp:Repeater runat="server" ID="menu" DataSourceID="SiteMapDataSource1">
                             <ItemTemplate>
                                 <li>
-                                    <asp:HyperLink runat="server" NavigateUrl='<%# Eval("Url") %>'><%# Eval("Title") %></asp:HyperLink>
+                                    <asp:HyperLink CssClass="a-custom" runat="server" NavigateUrl='<%# Eval("Url") %>'><%# Eval("Title") %></asp:HyperLink>
                                 </li>
                             </ItemTemplate>
                         </asp:Repeater>
@@ -61,11 +61,12 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <asp:LinkButton ID="lbLogout" runat="server" Text="Logout" OnClick="lbLogout_Click" /></li>
+                            <asp:LinkButton ID="lbLogout" CssClass="a-custom" runat="server" Text="Logout" OnClick="lbLogout_Click" /></li>
                     </ul>
                 </div>
             </div>
         </div>
+
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
