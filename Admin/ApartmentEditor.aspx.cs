@@ -31,12 +31,24 @@ namespace Admin
         {
             if (!IsPostBack)
             {
+                string qryStrId = Request.QueryString["id"];
+                int? id = null;
+                
+                if (!string.IsNullOrEmpty(qryStrId))
+                {
+                    id = int.Parse(qryStrId);
+                }
+
+                if (id.HasValue)
+                {
+                    var dbApartment = _apartmentRepository.GetApartment(id.Value);
+                    dbApartment.Tags = _apartmentRepository.GetApartmentTags(id.Value);
+                    SetExistingApartment(dbApartment);
+                }
+
                 RebindApartmentOwners();
-
                 RebindCities();
-
                 RebindStatuses();
-
                 RebindTags();
             }
         }
@@ -130,9 +142,19 @@ namespace Admin
 
         protected void lblSave_Click(object sender, EventArgs e)
         {
-            var apartment = GetFormApartment();
+            var isNewApartment = (Request.QueryString["id"] == null);
 
-            _apartmentRepository.CreateApartment(apartment);
+            if (isNewApartment)
+            {
+                var apartment = GetFormApartment();
+                _apartmentRepository.CreateApartment(apartment);
+            }
+            else
+            {
+                var apartment = GetFormApartment();
+                apartment.Id = int.Parse(Request.QueryString["id"]);
+                _apartmentRepository.UpdateApartment(apartment);
+            }
 
             Response.Redirect("ApartmentList.aspx");
         }
@@ -190,6 +212,28 @@ namespace Admin
                 BeachDistance = beachDistance,
                 Tags = GetRepeaterTags()
             };
+        }
+
+        private void SetExistingApartment(Apartment apartment)
+        {
+            ddlStatus.SelectedValue = apartment.StatusId.ToString();
+            ddlApartmentOwner.SelectedValue = apartment.OwnerId.ToString();
+            tbName.Text = apartment.Name;
+            tbAddress.Text = apartment.Address;
+            ddlCity.SelectedValue = apartment.CityId.ToString();
+            tbPrice.Text = apartment.Price.ToString();
+            tbMaxAdults.Text = apartment.MaxAdults?.ToString();
+            tbMaxChildren.Text = apartment.MaxChildren?.ToString();
+            tbTotalRooms.Text = apartment.TotalRooms?.ToString();
+            tbBeachDistance.Text = apartment.BeachDistance?.ToString();
+
+            repTags.DataSource = apartment.Tags;
+            repTags.DataBind();
+        }
+
+        protected void lbReturn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ApartmentList.aspx");
         }
     }
 }

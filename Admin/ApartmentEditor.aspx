@@ -83,6 +83,9 @@
             <asp:LinkButton ID="lblSave" runat="server" Text="Spremi" CssClass="btn" Font-Size="60px" OnClick="lblSave_Click">
                 <span class="glyphicon glyphicon-floppy-save"></span>
             </asp:LinkButton>
+            <asp:LinkButton ID="lbReturn" runat="server" Text="Povratak" CssClass="btn" Font-Size="60px" OnClick="lbReturn_Click">
+                <span class="glyphicon glyphicon-log-out"></span>
+            </asp:LinkButton>
         </div>
     </div>
 </asp:Content>
