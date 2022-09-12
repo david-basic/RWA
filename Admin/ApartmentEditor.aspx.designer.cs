@@ -11,17 +11,17 @@ namespace Admin
 {
 
 
-    public partial class ApartmentList
+    public partial class ApartmentEditor
     {
 
         /// <summary>
-        /// lblStatus control.
+        /// ddlApartmentOwner control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStatus;
+        protected global::System.Web.UI.WebControls.DropDownList ddlApartmentOwner;
 
         /// <summary>
         /// ddlStatus control.
@@ -33,13 +33,22 @@ namespace Admin
         protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
 
         /// <summary>
-        /// lblCity control.
+        /// tbName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCity;
+        protected global::System.Web.UI.WebControls.TextBox tbName;
+
+        /// <summary>
+        /// tbAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbAddress;
 
         /// <summary>
         /// ddlCity control.
@@ -51,39 +60,48 @@ namespace Admin
         protected global::System.Web.UI.WebControls.DropDownList ddlCity;
 
         /// <summary>
-        /// lblOrder control.
+        /// tbPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblOrder;
+        protected global::System.Web.UI.WebControls.TextBox tbPrice;
 
         /// <summary>
-        /// ddlOrder control.
+        /// tbMaxAdults control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlOrder;
+        protected global::System.Web.UI.WebControls.TextBox tbMaxAdults;
 
         /// <summary>
-        /// gvListaApartmana control.
+        /// tbMaxChildren control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvListaApartmana;
+        protected global::System.Web.UI.WebControls.TextBox tbMaxChildren;
 
         /// <summary>
-        /// lbApartmentEditor control.
+        /// tbTotalRooms control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbApartmentEditor;
+        protected global::System.Web.UI.WebControls.TextBox tbTotalRooms;
+
+        /// <summary>
+        /// tbBeachDistance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbBeachDistance;
     }
 }
