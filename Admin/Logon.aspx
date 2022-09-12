@@ -8,32 +8,47 @@
     <link href="Content/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="h3 text-center">
-        <font face="Verdana">Login page</font>
-    </div>
-    <div class="container col-md-4 col-md-offset-5">
-        <form id="form1" class="col-lg-4" runat="server">
-            <div class="form-inline">
-                <label for="txtUserName">Email address:</label>
-                <input type="text" id="txtUserName" class="form-control" runat="server" />
-                <asp:RequiredFieldValidator ControlToValidate="txtUserName"
-                    Display="Static" ErrorMessage="* Username not valid" ForeColor="Red" runat="server"
-                    ID="vUserName" />
-            </div>
-            <div class="form-inline">
-                <label for="txtUserPass">Password:</label>
-                <input type="password" id="txtUserPass" class="form-control" runat="server" />
-                <asp:RequiredFieldValidator ControlToValidate="txtUserPass"
-                    Display="Static" ErrorMessage="* Password not valid" ForeColor="Red" runat="server"
-                    ID="vUserPass" />
-            </div>
-            <div class="form-inline">
-                <label>Remember me:</label>
-                <asp:CheckBox ID="chkPersistCookie" runat="server" AutoPostBack="false" />
-            </div>
-            <asp:LinkButton ID="lbLogin" CssClass="btn btn-default" OnClick="lbLogin_Click" runat="server">Login</asp:LinkButton>
-            <asp:Label ID="lblMsg" ForeColor="red" Font-Name="Verdana" Font-Size="10" runat="server" />
-        </form>
+    <br />
+    <div class="container col-sm-6 col-sm-offset-3" style="font-family:'Century Gothic'">
+        <div class="well" style="background:#4A6C6F60">
+            <h2 class="text-center display-2" style="color:#4A6C6F"><strong>Login page</strong></h2>
+            <br />
+            <form id="form1" class="form-horizontal" runat="server">
+                <div class="form-group">
+                    <label class="control-label col-sm-3" style="text-align:right; color:#4A6C6F" for="txtUserName">Email address:</label>
+                    <div class="col-sm-7">
+                        <input type="text" id="txtUserName" placeholder="Enter email" class="form-control" runat="server" />
+                        <asp:RequiredFieldValidator ControlToValidate="txtUserName"
+                            Display="Static" ErrorMessage="* Username not valid" ForeColor="Red" runat="server"
+                            ID="vUserName" />
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label col-sm-3" style="text-align:right; color:#4A6C6F" for="txtUserPass">Password:</label>
+                    <div class="col-sm-7">
+                        <input type="password" id="txtUserPass" placeholder="Enter password" class="form-control" runat="server" />
+                        <asp:RequiredFieldValidator ControlToValidate="txtUserPass"
+                            Display="Static" ErrorMessage="* Password not valid" ForeColor="Red" runat="server"
+                            ID="vUserPass" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-7">
+                        <asp:CheckBox ID="chkPersistCookie" runat="server" AutoPostBack="false" />
+                        <label style="color:#4A6C6F; vertical-align:middle">Remember me</label>
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="text-center">
+                        <asp:LinkButton ID="lbLogin" CssClass="btn btn-default" Style="background:#4A6C6F; color:white" OnClick="lbLogin_Click" runat="server"><strong>Login</strong></asp:LinkButton>
+                        <asp:Label ID="lblMsg" ForeColor="red" Font-Name="Verdana" Font-Size="10" runat="server" />
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>
