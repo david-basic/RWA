@@ -7,11 +7,14 @@ using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
 
 namespace Admin
 {
     public partial class ApartmentEditor : System.Web.UI.Page
     {
+        private readonly string _picPath = "/Content/Pictures/";
+
         private readonly ApartmentOwnerRepository _apartmentOwnerRepository;
         private readonly ApartmentRepository _apartmentRepository;
         private readonly StatusRepository _statusRepository;
@@ -33,7 +36,7 @@ namespace Admin
             {
                 string qryStrId = Request.QueryString["id"];
                 int? id = null;
-                
+
                 if (!string.IsNullOrEmpty(qryStrId))
                 {
                     id = int.Parse(qryStrId);
@@ -43,6 +46,14 @@ namespace Admin
                 {
                     var dbApartment = _apartmentRepository.GetApartment(id.Value);
                     dbApartment.Tags = _apartmentRepository.GetApartmentTags(id.Value);
+                    dbApartment.ApartmentPictures = _apartmentRepository.GetApartmentPictures(id.Value);
+
+                    for (int i = 0; i < dbApartment.ApartmentPictures.Count; i++)
+                    {
+                        dbApartment.ApartmentPictures[i].Path =
+                        Path.Combine(_picPath, dbApartment.ApartmentPictures[i].Path);
+                    }
+
                     SetExistingApartment(dbApartment);
                 }
 
@@ -142,21 +153,56 @@ namespace Admin
 
         protected void lblSave_Click(object sender, EventArgs e)
         {
+            var files = SaveUploadedImagesToDisk();
+
+            var apartmentPictures = files.Select(x => new ApartmentPicture
+                {
+                    Path = x,
+                    Name = Path.GetFileNameWithoutExtension(x),
+                    IsRepresentative = false
+                }).ToList();
+
             var isNewApartment = (Request.QueryString["id"] == null);
 
             if (isNewApartment)
             {
                 var apartment = GetFormApartment();
+
+                apartment.ApartmentPictures = apartmentPictures;
+
                 _apartmentRepository.CreateApartment(apartment);
+
+                Response.Redirect($"ApartmentList.aspx");
             }
             else
             {
                 var apartment = GetFormApartment();
-                apartment.Id = int.Parse(Request.QueryString["id"]);
-                _apartmentRepository.UpdateApartment(apartment);
-            }
 
-            Response.Redirect("ApartmentList.aspx");
+                apartment.Id = int.Parse(Request.QueryString["id"]);
+                apartment.ApartmentPictures.AddRange(apartmentPictures);
+
+                _apartmentRepository.UpdateApartment(apartment);
+
+                Response.Redirect($"ApartmentEditor.aspx?{Request.QueryString}");
+            }
+        }
+
+        private List<string> SaveUploadedImagesToDisk()
+        {
+            var files = new List<string>();
+            if (uplImages.HasFiles)
+            {
+                var uplImagesRoot = Server.MapPath(_picPath);
+                if (!Directory.Exists(uplImagesRoot))
+                    Directory.CreateDirectory(uplImagesRoot);
+                foreach (HttpPostedFile uploadedFile in uplImages.PostedFiles)
+                {
+                    var uplImagePath = Path.Combine(uplImagesRoot, uploadedFile.FileName);
+                    uploadedFile.SaveAs(uplImagePath);
+                    files.Add(uploadedFile.FileName);
+                }
+            }
+            return files;
         }
 
         private Apartment GetFormApartment()
@@ -210,10 +256,26 @@ namespace Admin
                 MaxChildren = maxChildren,
                 TotalRooms = totalRooms,
                 BeachDistance = beachDistance,
-                Tags = GetRepeaterTags()
+                Tags = GetRepeaterTags(),
+                ApartmentPictures = GetRepeaterPictures()
             };
         }
-
+        private List<ApartmentPicture> GetRepeaterPictures()
+        {
+            var repApartmentPicturesItems = repApartmentPictures.Items;
+            var pictures = new List<ApartmentPicture>();
+            foreach (RepeaterItem item in repApartmentPicturesItems)
+            {
+                var pic = new ApartmentPicture();
+                pic.Id = int.Parse((item.FindControl("hidApartmentPictureId") as HiddenField).Value);
+                pic.Name = (item.FindControl("txtApartmentPicture") as TextBox).Text;
+                pic.Path = (item.FindControl("imgApartmentPicture") as Image).ImageUrl;
+                pic.IsRepresentative = (item.FindControl("cbIsRepresentative") as CheckBox).Checked;
+                pic.DoDelete = (item.FindControl("cbDelete") as CheckBox).Checked;
+                pictures.Add(pic);
+            }
+            return pictures;
+        }
         private void SetExistingApartment(Apartment apartment)
         {
             ddlStatus.SelectedValue = apartment.StatusId.ToString();
@@ -229,6 +291,9 @@ namespace Admin
 
             repTags.DataSource = apartment.Tags;
             repTags.DataBind();
+
+            repApartmentPictures.DataSource = apartment.ApartmentPictures;
+            repApartmentPictures.DataBind();
         }
 
         protected void lbReturn_Click(object sender, EventArgs e)

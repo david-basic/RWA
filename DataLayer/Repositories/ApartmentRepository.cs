@@ -131,6 +131,30 @@ namespace DataLayer.Repositories
 
             commandParameters.Add(new SqlParameter("@tags", dtTags));
 
+            DataTable dtPics = new DataTable();
+            dtPics.Columns.AddRange(
+                new DataColumn[] {
+                    new DataColumn("Id", typeof(int)),
+                    new DataColumn("Path", typeof(string)),
+                    new DataColumn("Name", typeof(string)),
+                    new DataColumn("IsRepresentative", typeof(bool)),
+                    new DataColumn("DoDelete", typeof(bool))
+                });
+
+            foreach (var apartmentPicture in apartment.ApartmentPictures)
+            {
+                if (!apartmentPicture.DoDelete)
+                {
+                    dtPics.Rows.Add(
+                    apartmentPicture.Id,
+                    apartmentPicture.Path,
+                    apartmentPicture.Name,
+                    apartmentPicture.IsRepresentative,
+                    apartmentPicture.DoDelete);
+                }
+            }
+            commandParameters.Add(new SqlParameter("@pictures", dtPics));
+
             SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "dbo.CreateApartment", commandParameters.ToArray());
         }
 
@@ -176,7 +200,7 @@ namespace DataLayer.Repositories
             DataTable dtTags = new DataTable();
             dtTags.Columns.AddRange(
                 new DataColumn[1] {
-                    new DataColumn("Key", typeof(int)) 
+                    new DataColumn("Key", typeof(int))
                 });
 
             foreach (var tag in apartment.Tags)
@@ -185,7 +209,54 @@ namespace DataLayer.Repositories
             }
 
             commandParameters.Add(new SqlParameter("@tags", dtTags));
+
+            DataTable dtPics = new DataTable();
+
+            dtPics.Columns.AddRange(
+                new DataColumn[] {
+                    new DataColumn("Id", typeof(int)),
+                    new DataColumn("Path", typeof(string)),
+                    new DataColumn("Name", typeof(string)),
+                    new DataColumn("IsRepresentative", typeof(bool)),
+                    new DataColumn("DoDelete", typeof(bool))
+                });
+
+            foreach (var apartmentPicture in apartment.ApartmentPictures)
+            {
+                if (!apartmentPicture.DoDelete)
+                {
+                    dtPics.Rows.Add(
+                    apartmentPicture.Id,
+                    apartmentPicture.Path,
+                    apartmentPicture.Name,
+                    apartmentPicture.IsRepresentative,
+                    apartmentPicture.DoDelete);
+                }
+            }
+            commandParameters.Add(new SqlParameter("@pictures", dtPics));
+
             SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "dbo.UpdateApartment", commandParameters.ToArray());
+        }
+
+        public List<Models.ApartmentPicture> GetApartmentPictures(int apartmentId)
+        {
+            var commandParameters = new List<SqlParameter>();
+            commandParameters.Add(new SqlParameter("@apartmentId", apartmentId));
+
+            var ds = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "dbo.GetApartmentPictures", commandParameters.ToArray());
+            var pics = new List<Models.ApartmentPicture>();
+
+            foreach (DataRow row in ds.Tables[0].Rows)
+            {
+                pics.Add(new Models.ApartmentPicture
+                {
+                    Id = Convert.ToInt32(row["Id"]),
+                    Path = row["Path"].ToString(),
+                    Name = row["Name"].ToString(),
+                    IsRepresentative = bool.Parse(row["IsRepresentative"].ToString())
+                });
+            }
+            return pics;
         }
     }
 }

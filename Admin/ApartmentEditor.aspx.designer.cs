@@ -123,6 +123,24 @@ namespace Admin
         protected global::System.Web.UI.WebControls.Repeater repTags;
 
         /// <summary>
+        /// uplImages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload uplImages;
+
+        /// <summary>
+        /// repApartmentPictures control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater repApartmentPictures;
+
+        /// <summary>
         /// lblSave control.
         /// </summary>
         /// <remarks>

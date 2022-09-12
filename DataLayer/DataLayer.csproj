@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Models\Apartment.cs" />
     <Compile Include="Models\ApartmentOwner.cs" />
+    <Compile Include="Models\ApartmentPicture.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Status.cs" />
