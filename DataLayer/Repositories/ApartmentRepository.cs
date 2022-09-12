@@ -67,5 +67,39 @@ namespace DataLayer.Repositories
             }
             return apList;
         }
+
+        public void CreateApartment(Models.Apartment apartment)
+        {
+            var commandParameters = new List<SqlParameter>
+            {
+                new SqlParameter("@guid", apartment.Guid),
+                new SqlParameter("@ownerId", apartment.OwnerId),
+                new SqlParameter("@typeId", apartment.TypeId),
+                new SqlParameter("@statusId", apartment.StatusId),
+                new SqlParameter("@cityId", apartment.CityId),
+                new SqlParameter("@address", apartment.Address),
+                new SqlParameter("@name", apartment.Name),
+                new SqlParameter("@price", apartment.Price),
+                new SqlParameter("@maxAdults", apartment.MaxAdults),
+                new SqlParameter("@maxChildren", apartment.MaxChildren),
+                new SqlParameter("@totalRooms", apartment.TotalRooms),
+                new SqlParameter("@beachDistance", apartment.BeachDistance)
+            };
+
+            DataTable dtTags = new DataTable();
+            dtTags.Columns.AddRange(
+                new DataColumn[1] {
+                    new DataColumn("Key", typeof(int)) 
+                });
+
+            foreach (var tag in apartment.Tags)
+            {
+                dtTags.Rows.Add(tag.Id);
+            }
+
+            commandParameters.Add(new SqlParameter("@tags", dtTags));
+
+            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "dbo.CreateApartment", commandParameters.ToArray());
+        }
     }
 }

@@ -50,9 +50,39 @@
                     <asp:TextBox ID="tbBeachDistance" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
                 </div>
             </div>
+
             <div class="col-md-6">
-                <!-- TU IDE ODABIR TAGOVA -->
+                <div class="form-group">
+                    <label>Odabir tagova</label>
+                    <asp:DropDownList ID="ddlTags" runat="server" CssClass="form-control" DataValueField="Id" DataTextField="Name" OnSelectedIndexChanged="ddlTags_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                </div>
+                <div class="col-md-7">
+                    <asp:Repeater ID="repTags" runat="server">
+                        <HeaderTemplate>
+                            <ul class="list-group">
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <li class="list-group-item">
+                                <asp:HiddenField runat="server" ID="hidTagId" Value='<%# Eval("ID") %>' />
+                                <asp:Label runat="server" ID="txtTagName" Text='<%# Eval("Name") %>' />
+                                <asp:LinkButton runat="server" ID="btnDeleteTag" CssClass="btn" OnClick="btnDeleteTag_Click">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                </asp:LinkButton>
+                            </li>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            </ul>
+                        </FooterTemplate>
+                    </asp:Repeater>
+                </div>
+                <div class="col-md-5">
+                </div>
             </div>
+        </div>
+        <div class="text-center">
+            <asp:LinkButton ID="lblSave" runat="server" Text="Spremi" CssClass="btn" Font-Size="60px" OnClick="lblSave_Click">
+                <span class="glyphicon glyphicon-floppy-save"></span>
+            </asp:LinkButton>
         </div>
     </div>
 </asp:Content>
