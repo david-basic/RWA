@@ -9,6 +9,10 @@
     color: white;
 }
 
+.a-custom:hover {
+    color: #a7d0f1;
+}
+
 /*.navbar-brand .navbar-nav > li > a:hover, .navbar-brand .navbar-nav > li > a:focus {
     background-color: #FFFF00;
     color: #FFC0CB;
