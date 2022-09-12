@@ -46,14 +46,14 @@
                         <span class="icon-bar" style="background-color:white"></span>
                         <span class="icon-bar" style="background-color:white"></span>
                     </button>
-                    <a class="navbar-brand a-custom" runat="server" href="~/"><strong>RWA Apartments Admin</strong></a>
+                    <a class="navbar-brand a-custom" style="color:white" runat="server" href="~/"><strong>RWA Apartments Admin</strong></a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <asp:Repeater runat="server" ID="menu" DataSourceID="SiteMapDataSource1">
                             <ItemTemplate>
                                 <li>
-                                    <asp:HyperLink CssClass="a-custom" runat="server" NavigateUrl='<%# Eval("Url") %>'><%# Eval("Title") %></asp:HyperLink>
+                                    <asp:HyperLink CssClass="a-custom" ForeColor="White" runat="server" NavigateUrl='<%# Eval("Url") %>'><%# Eval("Title") %></asp:HyperLink>
                                 </li>
                             </ItemTemplate>
                         </asp:Repeater>
@@ -61,7 +61,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <asp:LinkButton ID="lbLogout" CssClass="a-custom" runat="server" Text="Logout" OnClick="lbLogout_Click" /></li>
+                            <asp:LinkButton ID="lbLogout" CssClass="a-custom" ForeColor="White" runat="server" Text="Logout" OnClick="lbLogout_Click" /></li>
                     </ul>
                 </div>
             </div>
@@ -72,7 +72,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer class="text-center">
-                <p>&copy; <%: DateTime.Now.Year %> - RWA Apartmani - David Bašić</p>
+                <p class="footer-custom">&copy; <%: DateTime.Now.Year %> - RWA Apartmani - David Bašić</p>
             </footer>
         </div>
 

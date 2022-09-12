@@ -10,12 +10,12 @@
 <body>
     <br />
     <div class="container col-sm-6 col-sm-offset-3" style="font-family:'Century Gothic'">
-        <div class="well" style="background:#4A6C6F60">
-            <h2 class="text-center display-2" style="color:#4A6C6F"><strong>Login page</strong></h2>
+        <div class="well" style="background:#12477360">
+            <h2 class="text-center display-2" style="color:#124773"><strong>Login page</strong></h2>
             <br />
             <form id="form1" class="form-horizontal" runat="server">
                 <div class="form-group">
-                    <label class="control-label col-sm-3" style="text-align:right; color:#4A6C6F" for="txtUserName">Email address:</label>
+                    <label class="control-label col-sm-3" style="text-align:right; color:#124773" for="txtUserName">Email address:</label>
                     <div class="col-sm-7">
                         <input type="text" id="txtUserName" placeholder="Enter email" class="form-control" runat="server" />
                         <asp:RequiredFieldValidator ControlToValidate="txtUserName"
@@ -25,7 +25,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label class="control-label col-sm-3" style="text-align:right; color:#4A6C6F" for="txtUserPass">Password:</label>
+                    <label class="control-label col-sm-3" style="text-align:right; color:#124773" for="txtUserPass">Password:</label>
                     <div class="col-sm-7">
                         <input type="password" id="txtUserPass" placeholder="Enter password" class="form-control" runat="server" />
                         <asp:RequiredFieldValidator ControlToValidate="txtUserPass"
@@ -37,13 +37,13 @@
                 <div class="form-group">
                     <div class="col-sm-offset-3 col-sm-7">
                         <asp:CheckBox ID="chkPersistCookie" runat="server" AutoPostBack="false" />
-                        <label style="color:#4A6C6F; vertical-align:middle">Remember me</label>
+                        <label style="color:#124773; vertical-align:middle">Remember me</label>
                     </div>
                 </div>
                 <br />
                 <div class="form-group">
                     <div class="text-center">
-                        <asp:LinkButton ID="lbLogin" CssClass="btn btn-default" Style="background:#4A6C6F; color:white" OnClick="lbLogin_Click" runat="server"><strong>Login</strong></asp:LinkButton>
+                        <asp:LinkButton ID="lbLogin" CssClass="btn btn-default" Style="background:#124773; color:white" OnClick="lbLogin_Click" runat="server"><strong>Login</strong></asp:LinkButton>
                         <asp:Label ID="lblMsg" ForeColor="red" Font-Name="Verdana" Font-Size="10" runat="server" />
                     </div>
                 </div>

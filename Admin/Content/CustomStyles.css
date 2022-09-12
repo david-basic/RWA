@@ -1,8 +1,8 @@
 ﻿.navbar-inverse {
     font-family: 'Century Gothic';
-    background: #4a6c6f;
-    border-color: #4a6c6f;
-    color:white;
+    background: #124773;
+    border-color: #124773;
+    color: white;
 }
 
 .a-custom {
@@ -16,6 +16,7 @@
 
 table, th, td {
     font-family: 'Century Gothic';
+    border:none;
 }
 
 .table th, td {
@@ -24,29 +25,30 @@ table, th, td {
 }
 
 .table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
-    background-color: #4a6c6f20;
+    background-color: #12477320;
 }
 
 .btn-custom {
     font-family: 'Century Gothic';
-    background: #4A6C6F;
+    background: #124773;
     color: white;
 }
 
 .footer-custom {
     font-family: 'Century Gothic';
-    color: #4a6c6f;
+    color: #124773;
 }
 
 .label-custom {
     font-family: 'Century Gothic';
-    color: #4a6c6f;
+    color: #124773;
+    font-weight: bold;
 }
 
 .glyphicon-custom {
     border-color: white;
     border-radius: 0px;
     box-shadow: 0px 0px;
-    color: #4a6c6f;
+    color: #124773;
     font-size: 400%;
 }
