@@ -71,7 +71,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer class="text-center">
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+                <p>&copy; <%: DateTime.Now.Year %> - RWA Apartmani - David Bašić</p>
             </footer>
         </div>
 
