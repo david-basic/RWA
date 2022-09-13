@@ -12,6 +12,11 @@ namespace Public.Models.Authentication
     {
         private readonly IList<TUser> _users;
 
+        public UserStoreService(IList<TUser> users)
+        {
+            _users = users;
+        }
+
         public Task AddToRoleAsync(TUser user, string roleName)
         {
             user.AddRole(roleName);

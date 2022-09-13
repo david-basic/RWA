@@ -21,6 +21,7 @@ namespace DataLayer.Models
         public string CityName { get; set; }
         public string Address { get; set; }
         public string Name { get; set; }
+        public string NameEng { get; set; }
         public decimal Price { get; set; }
         public int? MaxAdults { get; set; }
         public int? MaxChildren { get; set; }
@@ -28,5 +29,8 @@ namespace DataLayer.Models
         public int? BeachDistance { get; set; }
         public List<Tag> Tags { get; set; }
         public List<ApartmentPicture> ApartmentPictures { get; set; }
+        public ApartmentStatus Status { get; set; }
+        public City City { get; set; } = new City();
+        public IList<ApartmentReview> Reviews { get; set; }
     }
 }

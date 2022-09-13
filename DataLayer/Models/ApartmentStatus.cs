@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 namespace DataLayer.Models
 {
     [Serializable]
-    public class ApartmentOwner
+    public class ApartmentStatus
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }
-        public DateTime CreatedAt { get; set; }
         public string Name { get; set; }
-        public IList<Apartment> Apartments { get; set; }
+        public string NameEng { get; set; }
     }
 }

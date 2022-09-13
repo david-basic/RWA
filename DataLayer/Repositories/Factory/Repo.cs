@@ -15,7 +15,7 @@ namespace DataLayer.Repositories.Factory
         private int LoadApartmentIdByGuid(Guid guid)
         {
             int apartmentId = 1;
-            var tblApartments = SqlHelper.ExecuteDataset(APARTMENS_CS, nameof(LoadApartmentIdByGuid), guid).Tables[0];
+            var tblApartments = SqlHelper.ExecuteDataset(cs, nameof(LoadApartmentIdByGuid), guid).Tables[0];
             foreach (DataRow row in tblApartments.Rows)
             {
                 apartmentId = (int)(row[nameof(Apartment.Id)]);
@@ -26,15 +26,14 @@ namespace DataLayer.Repositories.Factory
 
         private void DeleteTaggedApartmentByApartmentId(int apartmentId)
         {
-            SqlHelper.ExecuteNonQuery(APARTMENS_CS, nameof(DeleteTaggedApartmentByApartmentId), apartmentId);
+            SqlHelper.ExecuteNonQuery(cs, nameof(DeleteTaggedApartmentByApartmentId), apartmentId);
         }
 
         private void DeleteTaggedApartment(TaggedApartment taggedApartment)
         {
-            SqlHelper.ExecuteNonQuery(APARTMENS_CS, nameof(DeleteTaggedApartment), taggedApartment.ApartmentId, taggedApartment.TagId);
+            SqlHelper.ExecuteNonQuery(cs, nameof(DeleteTaggedApartment), taggedApartment.ApartmentId, taggedApartment.TagId);
         }
 
-        //Move to abstract class as much as possible
         public override User AuthUser(string username, string password)
         {
             throw new NotImplementedException();
@@ -44,33 +43,33 @@ namespace DataLayer.Repositories.Factory
         {
             foreach (var tag in apartment.Tags)
                 this.DeleteTaggedApartment(new TaggedApartment { TagId = tag.Id, ApartmentId = apartment.Id });
-            SqlHelper.ExecuteNonQuery(APARTMENS_CS, nameof(DeleteApartment), apartment.Id);
+            SqlHelper.ExecuteNonQuery(cs, nameof(DeleteApartment), apartment.Id);
         }
 
         public override void DeleteApartmentPicture(Guid guid)
         {
-            SqlHelper.ExecuteNonQuery(APARTMENS_CS, nameof(DeleteApartmentPicture), guid);
+            SqlHelper.ExecuteNonQuery(cs, nameof(DeleteApartmentPicture), guid);
         }
 
         public override void DeleteTag(int id)
         {
-            SqlHelper.ExecuteNonQuery(APARTMENS_CS, nameof(DeleteTag), id);
+            SqlHelper.ExecuteNonQuery(cs, nameof(DeleteTag), id);
         }
 
+        // bad idea to delete tagged apartments
         public override void DeleteTaggedApartment(int id)
         {
-            //Don't use!!!!!
-            SqlHelper.ExecuteNonQuery(APARTMENS_CS, nameof(DeleteTaggedApartment), id);
+            SqlHelper.ExecuteNonQuery(cs, nameof(DeleteTaggedApartment), id);
         }
 
         public override void DeleteUser(int id)
         {
-            SqlHelper.ExecuteNonQuery(APARTMENS_CS, nameof(DeleteUser), id);
+            SqlHelper.ExecuteNonQuery(cs, nameof(DeleteUser), id);
         }
 
         public override void InsertApartment(Apartment apartment)
         {
-            SqlHelper.ExecuteNonQuery(APARTMENS_CS, nameof(InsertApartment),
+            SqlHelper.ExecuteNonQuery(cs, nameof(InsertApartment),
                 apartment.Guid,
                 apartment.CreatedAt,
                 apartment.OwnerId,
@@ -84,10 +83,12 @@ namespace DataLayer.Repositories.Factory
                 apartment.MaxChildren,
                 apartment.TotalRooms,
                 apartment.BeachDistance);
-            int apartmentId = LoadApartmentIdByGuid(apartment.Guid); //Gets id from database to resolve foreign key errors
+
+            int apartmentId = LoadApartmentIdByGuid(apartment.Guid);
             foreach (Tag tag in apartment.Tags)
                 InsertTaggedApartment(new TaggedApartment { Guid = Guid.NewGuid(), ApartmentId = apartmentId, TagId = tag.Id });
-            foreach (ApartmentPicture picture in apartment.Pictures)
+
+            foreach (ApartmentPicture picture in apartment.ApartmentPictures)
             {
                 picture.ApartmentId = apartmentId;
                 InsertApartmentPicture(picture);
@@ -101,7 +102,7 @@ namespace DataLayer.Repositories.Factory
 
         public override void InsertApartmentPicture(ApartmentPicture apartmentPicture)
         {
-            SqlHelper.ExecuteNonQuery(APARTMENS_CS, nameof(InsertApartmentPicture),
+            SqlHelper.ExecuteNonQuery(cs, nameof(InsertApartmentPicture),
                     apartmentPicture.Guid,
                     apartmentPicture.CreatedAt,
                     apartmentPicture.ApartmentId,
@@ -115,7 +116,7 @@ namespace DataLayer.Repositories.Factory
         public override void InsertApartmentReservation(ApartmentReservation apartmentReservation)
         {
             string details = apartmentReservation.Details;
-            SqlHelper.ExecuteNonQuery(APARTMENS_CS, nameof(InsertApartmentReservation),
+            SqlHelper.ExecuteNonQuery(cs, nameof(InsertApartmentReservation),
                 apartmentReservation.Guid,
                 apartmentReservation.CreatedAt,
                 apartmentReservation.ApartmentId,
@@ -132,7 +133,7 @@ namespace DataLayer.Repositories.Factory
         {
             apartmentReivew.Guid = Guid.NewGuid();
             apartmentReivew.CreatedAt = DateTime.Now;
-            SqlHelper.ExecuteNonQuery(APARTMENS_CS, nameof(InsertApartmentReview),
+            SqlHelper.ExecuteNonQuery(cs, nameof(InsertApartmentReview),
                 apartmentReivew.Guid,
                 apartmentReivew.CreatedAt,
                 apartmentReivew.ApartmentId,
@@ -153,12 +154,12 @@ namespace DataLayer.Repositories.Factory
 
         public override void InsertTag(Tag tag)
         {
-            SqlHelper.ExecuteNonQuery(APARTMENS_CS, nameof(InsertTag), tag.Guid, tag.CreatedAt, tag.TypeId, tag.Name, tag.NameEng);
+            SqlHelper.ExecuteNonQuery(cs, nameof(InsertTag), tag.Guid, tag.CreatedAt, tag.TypeId, tag.Name, tag.NameEng);
         }
 
         public override void InsertTaggedApartment(TaggedApartment taggedApartment)
         {
-            SqlHelper.ExecuteNonQuery(APARTMENS_CS, nameof(InsertTaggedApartment), taggedApartment.Guid, taggedApartment.ApartmentId, taggedApartment.TagId);
+            SqlHelper.ExecuteNonQuery(cs, nameof(InsertTaggedApartment), taggedApartment.Guid, taggedApartment.ApartmentId, taggedApartment.TagId);
         }
 
         public override void InsertTagType(TagType tagType)
@@ -168,7 +169,7 @@ namespace DataLayer.Repositories.Factory
         public override void InsertUser(User user)
         {
             //Also addes role "user" via SQL procedure
-            SqlHelper.ExecuteNonQuery(APARTMENS_CS, nameof(InsertUser),
+            SqlHelper.ExecuteNonQuery(cs, nameof(InsertUser),
                 user.Guid,
                 user.CreatedAt,
                 user.UserName,
@@ -181,13 +182,13 @@ namespace DataLayer.Repositories.Factory
 
         public override Apartment LoadApartmentById(int id)
         {
-            var apartment = this.LoadApartmentByIdRaw(id);
+            var apartment = this.LoadRawApartmentById(id);
             var pictures = this.LoadApartmentPicturesByApartmentId(apartment.Id);
-            var status = this.LoadApartmentStatusByIdRaw(apartment.StatusId);
-            var city = this.LoadCityByIdRaw(apartment.CityId);
+            var status = this.LoadRawApartmentStatusById(apartment.StatusId);
+            var city = this.LoadRawCityById((int)apartment.CityId);
             var tags = this.LoadTagsByApartmentId(apartment.Id);
             var reviews = this.LoadApartmentReviewsByApartmentId(apartment.Id);
-            apartment.Pictures = new List<ApartmentPicture>(pictures);
+            apartment.ApartmentPictures = new List<ApartmentPicture>(pictures);
             apartment.Status = status;
             apartment.City = city;
             apartment.Tags = new List<Tag>(tags);
@@ -200,7 +201,7 @@ namespace DataLayer.Repositories.Factory
         {
             IList<ApartmentReview> apartmentReviews = new List<ApartmentReview>();
 
-            var tblApartmentReviews = SqlHelper.ExecuteDataset(APARTMENS_CS, nameof(LoadApartmentReviewsByApartmentId), id).Tables[0];
+            var tblApartmentReviews = SqlHelper.ExecuteDataset(cs, nameof(LoadApartmentReviewsByApartmentId), id).Tables[0];
             foreach (DataRow row in tblApartmentReviews.Rows)
             {
                 apartmentReviews.Add(
@@ -227,7 +228,7 @@ namespace DataLayer.Repositories.Factory
 
         public override ApartmentOwner LoadApartmentOwnerById(int id)
         {
-            var apartmentOwner = this.LoadApartmentOwnerByIdRaw(id);
+            var apartmentOwner = this.LoadRawApartmentOwnerById(id);
             var apartments = this.LoadApartmentsByOwnerId(apartmentOwner.Id);
 
             apartmentOwner.Apartments = new List<Apartment>(apartments);
@@ -237,24 +238,24 @@ namespace DataLayer.Repositories.Factory
 
         public override IList<ApartmentOwner> LoadApartmentOwners()
         {
-            return this.LoadApartmentOwnersRaw();
+            return this.LoadRawApartmentOwners();
         }
 
         public override ApartmentPicture LoadApartmentPictureById(int id)
         {
-            return this.LoadApartmentPictureByIdRaw(id);
+            return this.LoadRawApartmentPictureById(id);
         }
 
         public override IList<ApartmentPicture> LoadApartmentPictures()
         {
-            return this.LoadApartmentPicturesRaw();
+            return this.LoadRawApartmentPictures();
         }
 
         public override IList<ApartmentPicture> LoadApartmentPicturesByApartmentId(int id)
         {
             IList<ApartmentPicture> apartmentPictures = new List<ApartmentPicture>();
 
-            var tblApartmentPictures = SqlHelper.ExecuteDataset(APARTMENS_CS, nameof(LoadApartmentPicturesByApartmentId), id).Tables[0];
+            var tblApartmentPictures = SqlHelper.ExecuteDataset(cs, nameof(LoadApartmentPicturesByApartmentId), id).Tables[0];
             foreach (DataRow row in tblApartmentPictures.Rows)
             {
                 apartmentPictures.Add(
@@ -277,11 +278,11 @@ namespace DataLayer.Repositories.Factory
 
         public override ApartmentReservation LoadApartmentReservationById(int id)
         {
-            var reservation = this.LoadApartmentReservationByIdRaw(id);
+            var reservation = this.LoadRawApartmentReservationById(id);
             if (reservation.UserId != null)
             {
                 int userId = (int)reservation.UserId;
-                var user = this.LoadUserByIdRaw(userId);
+                var user = this.LoadRawUserById(userId);
                 reservation.User = user;
             }
             else
@@ -293,7 +294,7 @@ namespace DataLayer.Repositories.Factory
                 tempUser.PhoneNumber = reservation.UserPhone;
                 reservation.User = tempUser;
             }
-            var apartment = this.LoadApartmentByIdRaw(reservation.ApartmentId);
+            var apartment = this.LoadRawApartmentById(reservation.ApartmentId);
 
             reservation.Apartment = apartment;
 
@@ -302,14 +303,14 @@ namespace DataLayer.Repositories.Factory
 
         public override IList<ApartmentReservation> LoadApartmentReservations()
         {
-            return this.LoadApartmentReservationsRaw();
+            return this.LoadRawApartmentReservations();
         }
 
         public override ApartmentReview LoadApartmentReviewById(int id)
         {
-            var review = this.LoadApartmentReviewByIdRaw(id);
-            var apartment = this.LoadApartmentByIdRaw(review.ApartmentId);
-            var user = this.LoadUserByIdRaw(review.UserId);
+            var review = this.LoadRawApartmentReviewById(id);
+            var apartment = this.LoadRawApartmentById(review.ApartmentId);
+            var user = this.LoadRawUserById(review.UserId);
 
             review.Apartment = apartment;
             review.User = user;
@@ -319,16 +320,16 @@ namespace DataLayer.Repositories.Factory
 
         public override IList<ApartmentReview> LoadApartmentReviews()
         {
-            return this.LoadApartmentReviewsRaw();
+            return this.LoadRawApartmentReviews();
         }
 
         public override IList<Apartment> LoadApartments()
         {
-            return this.LoadApartmentsRaw();
+            return this.LoadRawApartments();
         }
         public override IList<Apartment> LoadApartments(params Predicate<Apartment>[] filters)
         {
-            var apartments = this.LoadApartmentsRaw();
+            var apartments = this.LoadRawApartments();
             var filteredApartments = new List<Apartment>();
             foreach (var apartment in apartments)
             {
@@ -352,7 +353,7 @@ namespace DataLayer.Repositories.Factory
         {
             IList<Apartment> apartments = new List<Apartment>();
 
-            var tblApartments = SqlHelper.ExecuteDataset(APARTMENS_CS, nameof(LoadApartmentsByOwnerId), id).Tables[0];
+            var tblApartments = SqlHelper.ExecuteDataset(cs, nameof(LoadApartmentsByOwnerId), id).Tables[0];
             foreach (DataRow row in tblApartments.Rows)
             {
                 apartments.Add(
@@ -381,27 +382,27 @@ namespace DataLayer.Repositories.Factory
 
         public override IList<ApartmentStatus> LoadApartmentStatus()
         {
-            return this.LoadApartmentStatusRaw();
+            return this.LoadRawApartmentStatus();
         }
 
         public override ApartmentStatus LoadApartmentStatusById(int id)
         {
-            return this.LoadApartmentStatusByIdRaw(id); //Extra information not necesarry
+            return this.LoadRawApartmentStatusById(id); //Extra information not necesarry
         }
 
         public override IList<City> LoadCities()
         {
-            return this.LoadCitiesRaw();
+            return this.LoadRawCities();
         }
 
         public override City LoadCitiyById(int id)
         {
-            return this.LoadCityByIdRaw(id);
+            return this.LoadRawCityById(id);
         }
 
         public override Tag LoadTagById(int id)
         {
-            return this.LoadTagByIdRaw(id);
+            return this.LoadRawTagById(id);
         }
 
         public override TaggedApartment LoadTaggedApartmentById(int id)
@@ -416,14 +417,14 @@ namespace DataLayer.Repositories.Factory
 
         public override IList<Tag> LoadTags()
         {
-            return this.LoadTagsRaw();
+            return this.LoadRawTags();
         }
 
         public override IList<Tag> LoadTagsByApartmentId(int id)
         {
             IList<Tag> tags = new List<Tag>();
 
-            var tblTags = SqlHelper.ExecuteDataset(APARTMENS_CS, nameof(LoadTagsByApartmentId), id).Tables[0];
+            var tblTags = SqlHelper.ExecuteDataset(cs, nameof(LoadTagsByApartmentId), id).Tables[0];
             foreach (DataRow row in tblTags.Rows)
             {
                 tags.Add(
@@ -444,17 +445,17 @@ namespace DataLayer.Repositories.Factory
 
         public override IList<Tuple<Tag, int>> LoadTagsCounted()
         {
-            var taggedApartments = this.LoadTaggedApartmentsRaw();
+            var taggedApartments = this.LoadRawTaggedApartments();
             Dictionary<Tag, int> dict = new Dictionary<Tag, int>();
             foreach (var taggedApartment in taggedApartments)
             {
-                var tempTag = this.LoadTagByIdRaw(taggedApartment.TagId);
+                var tempTag = this.LoadRawTagById(taggedApartment.TagId);
                 if (!dict.Keys.Contains(tempTag))
                     dict.Add(tempTag, 1);
                 else
                     dict[tempTag]++;
             }
-            var allTags = this.LoadTagsRaw();
+            var allTags = this.LoadRawTags();
             foreach (var tag in allTags)
             {
                 if (!dict.Keys.Contains(tag))
@@ -470,14 +471,14 @@ namespace DataLayer.Repositories.Factory
 
         public override IList<TagType> LoadTagTypes()
         {
-            return this.LoadTagTypesRaw();
+            return this.LoadRawTagTypes();
         }
 
         public string LoadUserRoleByRoleId(int roleId)
         {
             IList<string> roles = new List<string>();
 
-            var tblRoles = SqlHelper.ExecuteDataset(APARTMENS_CS, nameof(LoadUserRoleByRoleId), roleId).Tables[0];
+            var tblRoles = SqlHelper.ExecuteDataset(cs, nameof(LoadUserRoleByRoleId), roleId).Tables[0];
             foreach (DataRow row in tblRoles.Rows)
             {
                 roles.Add((string)row["Name"]);
@@ -488,7 +489,7 @@ namespace DataLayer.Repositories.Factory
         public IList<string> LoadUserRolesByUserId(int userId)
         {
             IList<int> roleIds = new List<int>();
-            var tblRoles = SqlHelper.ExecuteDataset(APARTMENS_CS, nameof(LoadUserRolesByUserId), userId).Tables[0];
+            var tblRoles = SqlHelper.ExecuteDataset(cs, nameof(LoadUserRolesByUserId), userId).Tables[0];
             foreach (DataRow row in tblRoles.Rows)
             {
                 roleIds.Add((int)row["RoleId"]);
@@ -503,14 +504,14 @@ namespace DataLayer.Repositories.Factory
 
         public override User LoadUserById(int id)
         {
-            var user = this.LoadUserByIdRaw(id);
+            var user = this.LoadRawUserById(id);
             user.Roles = this.LoadUserRolesByUserId(int.Parse(user.Id));
             return user;
         }
 
         public override IList<User> LoadUsers()
         {
-            var users = this.LoadUsersRaw();
+            var users = this.LoadRawUsers();
             foreach (var user in users)
             {
                 user.Roles = this.LoadUserRolesByUserId(int.Parse(user.Id));
@@ -535,7 +536,7 @@ namespace DataLayer.Repositories.Factory
                     this.InsertTaggedApartment(new TaggedApartment { Guid = Guid.NewGuid(), ApartmentId = apartment.Id, TagId = tag.Id });
             }
 
-            foreach (ApartmentPicture picture in apartment.Pictures)
+            foreach (ApartmentPicture picture in apartment.ApartmentPictures)
             {
                 picture.ApartmentId = apartment.Id;
                 if (picture.Id == 0)
@@ -548,7 +549,7 @@ namespace DataLayer.Repositories.Factory
                 this.DeleteApartmentPicture(picture.Guid);
             }
 
-            SqlHelper.ExecuteNonQuery(APARTMENS_CS, nameof(UpdateApartment),
+            SqlHelper.ExecuteNonQuery(cs, nameof(UpdateApartment),
                 apartment.Id,
                 apartment.OwnerId,
                 apartment.StatusId,
@@ -565,14 +566,14 @@ namespace DataLayer.Repositories.Factory
 
         private void UpdateApartmentPicture(ApartmentPicture picture)
         {
-            SqlHelper.ExecuteNonQuery(APARTMENS_CS, nameof(UpdateApartmentPicture), picture.Guid, picture.Name, picture.IsRepresentative);
+            SqlHelper.ExecuteNonQuery(cs, nameof(UpdateApartmentPicture), picture.Guid, picture.Name, picture.IsRepresentative);
         }
 
         public override IList<string> LoadApartmentNames()
         {
             IList<string> apartmentNames = new List<string>();
 
-            var tblNames = SqlHelper.ExecuteDataset(APARTMENS_CS, nameof(LoadApartmentNames)).Tables[0];
+            var tblNames = SqlHelper.ExecuteDataset(cs, nameof(LoadApartmentNames)).Tables[0];
             foreach (DataRow row in tblNames.Rows)
             {
                 apartmentNames.Add((string)row[nameof(Apartment.NameEng)]);
@@ -590,7 +591,7 @@ namespace DataLayer.Repositories.Factory
 
         private void UpdateApartmentAsReserved(int apartmentId)
         {
-            SqlHelper.ExecuteNonQuery(APARTMENS_CS, nameof(UpdateApartmentAsReserved), apartmentId);
+            SqlHelper.ExecuteNonQuery(cs, nameof(UpdateApartmentAsReserved), apartmentId);
         }
     }
 }

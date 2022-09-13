@@ -62,5 +62,12 @@ table, th, td {
     border-radius: 0px;
     box-shadow: 0px 0px;
     color: #124773;
-    /*    font-size: 400%;*/
+}
+
+.glyphicon-custom-small {
+    border-color: white;
+    border-radius: 0px;
+    box-shadow: 0px 0px;
+    color: #124773;
+    font-size: 100%;
 }

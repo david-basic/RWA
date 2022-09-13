@@ -18,28 +18,30 @@ namespace Public.Models.Authentication
 
         public static UserManager Create(IdentityFactoryOptions<UserManager> options, IOwinContext context)
         {
-            var manager = new UserManager(
-                        new UserStoreService<User>(context.Get<DataBase>().Users)
-                    );
-            manager.PasswordHasher = new PasswordHasher();
-
-            manager.PasswordValidator = new PasswordValidator
+            var manager = new UserManager(new UserStoreService<User>(context.Get<DataBase>().Users))
             {
-                RequiredLength = 6,
-                RequireNonLetterOrDigit = false,
-                RequireDigit = false,
-                RequireLowercase = false,
-                RequireUppercase = false
-            };
+                PasswordHasher = new PasswordHasher(),
 
-            manager.UserLockoutEnabledByDefault = true;
-            manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            manager.MaxFailedAccessAttemptsBeforeLockout = 5;
+                PasswordValidator = new PasswordValidator
+                {
+                    RequiredLength = 6,
+                    RequireNonLetterOrDigit = false,
+                    RequireDigit = false,
+                    RequireLowercase = false,
+                    RequireUppercase = false
+                },
+
+                UserLockoutEnabledByDefault = true,
+                DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5),
+                MaxFailedAccessAttemptsBeforeLockout = 5
+            };
 
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
-                manager.UserTokenProvider =
-                    new DataProtectorTokenProvider<User>(dataProtectionProvider.Create("ASP.NET Identity"));
+            {
+                manager.UserTokenProvider = new DataProtectorTokenProvider<User>(dataProtectionProvider.Create("ASP.NET Identity"));
+            }
+
             return manager;
         }
 
@@ -49,12 +51,16 @@ namespace Public.Models.Authentication
 
             var user = await FindByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
+            {
                 throw new InvalidOperationException("Invalid user Id");
+            }
 
             var userRoles = await userRoleStore.GetRolesAsync(user).ConfigureAwait(false);
 
             foreach (var role in roles.Where(role => !userRoles.Contains(role)))
+            {
                 await userRoleStore.AddToRoleAsync(user, role).ConfigureAwait(false);
+            }
 
             return await UpdateAsync(user).ConfigureAwait(false);
         }
@@ -65,12 +71,16 @@ namespace Public.Models.Authentication
 
             var user = await FindByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
+            {
                 throw new InvalidOperationException("Invalid user Id");
+            }
 
             var userRoles = await userRoleStore.GetRolesAsync(user).ConfigureAwait(false);
 
             foreach (var role in roles.Where(userRoles.Contains))
+            {
                 await userRoleStore.RemoveFromRoleAsync(user, role).ConfigureAwait(false);
+            }
 
             return await UpdateAsync(user).ConfigureAwait(false);
         }

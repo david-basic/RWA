@@ -34,14 +34,14 @@
                 <asp:TemplateField HeaderText="">
                     <ItemTemplate>
                         <asp:HyperLink ID="hlEditor" runat="server" Style="vertical-align:middle" CssClass="btn btn-xs" Title="Edit apartment" Text="Uredi" NavigateUrl='<%# Eval("Id", "ApartmentEditor.aspx?Id={0}") %>'>
-                            <span class="glyphicon glyphicon-pencil glyphicon-custom"></span>
+                            <span class="glyphicon glyphicon-pencil glyphicon-custom-small"></span>
                         </asp:HyperLink>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="">
                     <ItemTemplate>
                         <asp:HyperLink ID="hlDelete" runat="server" Style="vertical-align:middle" CssClass="btn btn-xs" Title="Delete apartment" NavigateUrl='<%# Eval("Id", "ApartmentDelete.aspx?Id={0}") %>'>
-                            <span class="glyphicon glyphicon-trash glyphicon-custom"></span>
+                            <span class="glyphicon glyphicon-trash glyphicon-custom-small"></span>
                         </asp:HyperLink>
                     </ItemTemplate>
                 </asp:TemplateField>

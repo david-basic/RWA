@@ -55,10 +55,15 @@
     <Compile Include="Models\Apartment.cs" />
     <Compile Include="Models\ApartmentOwner.cs" />
     <Compile Include="Models\ApartmentPicture.cs" />
+    <Compile Include="Models\ApartmentReservation.cs" />
+    <Compile Include="Models\ApartmentReview.cs" />
+    <Compile Include="Models\ApartmentStatus.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Tag.cs" />
+    <Compile Include="Models\TaggedApartment.cs" />
+    <Compile Include="Models\TagType.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApartmentOwnerRepository.cs" />

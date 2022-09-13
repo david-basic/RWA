@@ -6,30 +6,29 @@
     <div class="container-fluid">
             <div class="col-sm-3 col-sm-offset-2">
                 <div class="form-group">
-                    <label>Vlasnik</label>
-                    <asp:Label ID="lblApartmentOwner" runat="server" CssClass="form-control"></asp:Label>
+                    <label class="label-custom">Vlasnik</label>
+                    <asp:Label ID="lblApartmentOwner" runat="server" CssClass="form-control font-goth"></asp:Label>
                 </div>
                 <div class="form-group">
-                    <label>Naziv</label>
-                    <asp:Label ID="lblName" runat="server" CssClass="form-control"></asp:Label>
+                    <label class="label-custom">Naziv</label>
+                    <asp:Label ID="lblName" runat="server" CssClass="form-control font-goth"></asp:Label>
                 </div>
             </div>
 
-            <div class="col-sm-2">
-            </div>
-
-            <div class="col-sm-3">
+            <div class="col-sm-3 col-sm-offset-2">
                 <div class="form-group">
-                    <label>Adresa</label>
-                    <asp:Label ID="lblAddress" runat="server" CssClass="form-control"></asp:Label>
+                    <label class="label-custom">Adresa</label>
+                    <asp:Label ID="lblAddress" runat="server" CssClass="form-control font-goth"></asp:Label>
                 </div>
                 <div class="form-group">
-                    <label>Grad</label>
-                    <asp:Label ID="lblCity" runat="server" CssClass="form-control"></asp:Label>
+                    <label class="label-custom">Grad</label>
+                    <asp:Label ID="lblCity" runat="server" CssClass="form-control font-goth"></asp:Label>
                 </div>
             </div>
     </div>
+
     <hr style="width:10px" />
+
     <div class="text-center">
         <asp:LinkButton ID="lbConfirmDelete" runat="server" Title="Delete apartment" Font-Size="60px" CssClass="btn" OnClick="lbConfirmDelete_Click">
             <span class="glyphicon glyphicon-erase glyphicon-custom"></span>

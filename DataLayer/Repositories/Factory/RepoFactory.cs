@@ -9,5 +9,14 @@ namespace DataLayer.Repositories.Factory
     public class RepoFactory
     {
         private static Repo repo;
+        public static Repo GetRepo()
+        {
+            if (repo is null)
+            {
+                repo = new Repo();
+            }
+
+            return repo;
+        }
     }
 }
