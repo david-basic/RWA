@@ -25,7 +25,7 @@ namespace Admin
 
         private bool ValidateUser(string userName, string password)
         {
-            if (userName == "123" && password == "123")
+            if (userName == "david@admin.com" && password == "1234")
             {
                 return true;
             }
