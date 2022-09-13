@@ -1,1 +1,13 @@
-﻿
+﻿.footer-custom {
+    font-family: 'Century Gothic';
+    color: #124773;
+}
+
+.white-link {
+    color: #ffffff;
+    transition: all ease-in;
+}
+
+.white-link:hover {
+    color: #124773;
+}

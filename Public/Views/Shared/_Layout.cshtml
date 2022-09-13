@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="~/Content/images/IKONA_apartmani_1_veći.png" type="image/x-icon" />
+    @System.Web.Optimization.Styles.Render("~/Content")
+</head>
+<body>
+
+    <div class="navbar sticky-top">
+        <div class="container-fluid">
+            <div class="navbar-brand">
+                <img src="~/Content/images/IKONA_apartmani_1_veći.png" alt="logo" style="height: 2rem; width: 2rem; margin-right:.5rem" />
+                @Html.ActionLink("RWA Apartments", "Index", "Home", null, new { @class = "navbar-brand white-link" })
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="">
+                <span class="navbar-toggler-icon">
+                </span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                    <li class="nav-item">
+                        @Html.ActionLink("Search", "Search", "Home", null, new { @class = "nav-link white-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Contact us", "Contact", "Home", null, new { @class = "nav-link white-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("About us", "About", "Home", null, new { @class = "nav-link white-link" })
+                    </li>
+                </ul>
+                <ul class="navbar-nav d-flex">
+                    @if (HttpContext.Current.User.Identity.Name == "")
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Login", "Index", "Home", null, new { @class = "nav-link" })
+                        </li>
+                    }
+                    @if (HttpContext.Current.User.Identity.Name != "")
+                    {
+                        <li class="nav-item" style="margin-right:.5rem">
+                            <span class="nav-link">
+                                @Html.ActionLink($"{HttpContext.Current.User.Identity.Name}", "UserView", null, new { @class = "nav-link" })
+                            </span>
+                        </li>
+                        <li class="nav-item" style="display:flex; justify-content:center; align-items:center">
+                            @Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "btn btn-outline-danger" })
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    <hr style="width: 10px" />
+
+    <footer class="mt-auto">
+        <div class="text-center">
+            <p class="footer-custom">&copy; : @DateTime.Now.Year - RWA Apartmani - David Bašić</p>
+        </div>
+    </footer>
+
+    @System.Web.Optimization.Scripts.Render("~/Scripts")
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

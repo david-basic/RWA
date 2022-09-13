@@ -10,22 +10,18 @@ namespace Public.App_Start
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new Bundle("~/Scripts").Include(
+            bundles.Add(new ScriptBundle("~/Scripts").Include(
                         "~/Scripts/jquery-3.6.0.min.js",
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/jquery-ui.js",
                         "~/Scripts/jquery.validate.min.js",
-                        "~/Scripts/SlimboxScript/slimbox2.js"));
+                        "~/Scripts/modernizr-2.8.3.js"));
 
-            bundles.Add(new Bundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
-
-            bundles.Add(new Bundle("~/Content").Include(
+            bundles.Add(new StyleBundle("~/Content").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/validation.css",
                       "~/Content/jquery-ui.css",
-                      "~/Content/custom-styles.css",
-                      "~/Content/SlimboxContent/slimbox2.css"));
+                      "~/Content/custom-styles.css"));
         }
     }
 }
