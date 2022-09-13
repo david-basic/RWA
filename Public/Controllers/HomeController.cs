@@ -6,8 +6,11 @@ using System.Web.Mvc;
 
 namespace Public.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
@@ -26,5 +29,16 @@ namespace Public.Controllers
 
             return View();
         }
+
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
     }
 }
