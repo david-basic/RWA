@@ -4,7 +4,7 @@
 
     <div class="container">
         <div class="well" style="background: #12477360">
-            <h2 class="text-center display-2" style="color: #124773"><strong>Feature not yet implemented!</strong></h2>
+            <h2 class="text-center display-2" style="color: #124773; font-family:'Century Gothic'"><strong>Feature not yet implemented!</strong></h2>
         </div>
     </div>
 
