@@ -178,6 +178,15 @@ namespace DataLayer.Repositories
             return tags;
         }
 
+        public void DeleteApartment(int id)
+        {
+            var commandParameters = new List<SqlParameter>();
+
+            commandParameters.Add(new SqlParameter("@id", id));
+
+            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "dbo.DeleteApartment", commandParameters.ToArray());
+        }
+
         public void UpdateApartment(Models.Apartment apartment)
         {
             var commandParameters = new List<SqlParameter>

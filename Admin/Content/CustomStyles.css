@@ -42,9 +42,9 @@ table, th, td {
     color: white;
 }
 
-    .btn-custom:hover {
-        color: #a7d0f1;
-    }
+.btn-custom:hover {
+    color: #a7d0f1;
+}
 
 .footer-custom {
     font-family: 'Century Gothic';

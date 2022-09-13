@@ -33,7 +33,16 @@
                 <asp:BoundField DataField="Price" HeaderText="Cijena" DataFormatString="{0:C}" ItemStyle-HorizontalAlign="Right" />
                 <asp:TemplateField HeaderText="">
                     <ItemTemplate>
-                        <asp:HyperLink ID="hlEditor" runat="server" CssClass="btn btn-custom btn-xs" Text="Uredi" NavigateUrl='<%# Eval("Id", "ApartmentEditor.aspx?Id={0}") %>'></asp:HyperLink>
+                        <asp:HyperLink ID="hlEditor" runat="server" Style="vertical-align:middle" CssClass="btn btn-xs" Title="Edit apartment" Text="Uredi" NavigateUrl='<%# Eval("Id", "ApartmentEditor.aspx?Id={0}") %>'>
+                            <span class="glyphicon glyphicon-pencil glyphicon-custom"></span>
+                        </asp:HyperLink>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="">
+                    <ItemTemplate>
+                        <asp:HyperLink ID="hlDelete" runat="server" Style="vertical-align:middle" CssClass="btn btn-xs" Title="Delete apartment" NavigateUrl='<%# Eval("Id", "ApartmentDelete.aspx?Id={0}") %>'>
+                            <span class="glyphicon glyphicon-trash glyphicon-custom"></span>
+                        </asp:HyperLink>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
@@ -42,5 +51,6 @@
         <div class="text-center">
             <asp:LinkButton ID="lbApartmentEditor" runat="server" Text="Add apartment" CssClass="btn btn-custom" OnClick="lbApartmentEditor_Click" />
         </div>
+
     </div>
 </asp:Content>

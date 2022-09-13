@@ -108,6 +108,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ApartmentDelete.aspx" />
     <Content Include="ApartmentEditor.aspx" />
     <Content Include="ApartmentList.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -167,6 +168,13 @@
     <Content Include="Web.sitemap" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApartmentDelete.aspx.cs">
+      <DependentUpon>ApartmentDelete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ApartmentDelete.aspx.designer.cs">
+      <DependentUpon>ApartmentDelete.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ApartmentEditor.aspx.cs">
       <DependentUpon>ApartmentEditor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
