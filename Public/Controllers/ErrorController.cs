@@ -11,6 +11,7 @@ namespace Public.Controllers
         [HttpGet]
         public ActionResult Index(string error)
         {
+            ViewBag.err = error;
             return View();
         }
     }
