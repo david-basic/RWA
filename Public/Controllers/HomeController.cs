@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using DataLayer.Repositories.Factory;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Public.Models.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,12 +53,14 @@ namespace Public.Controllers
         [HttpGet]
         public async Task<ActionResult> UserView()
         {
-            var user = await A
+            var user = await AuthManager.FindByNameAsync(User.Identity.Name);
 
-            //var loggedUser = await AuthManager.FindByNameAsync(User.Identity.Name);
-            //var model = RepoFactory.GetRepoInstance().LoadUserById(int.Parse(loggedUser.Id));
-            //return View(model);
+            var model = RepoFactory.GetRepo().LoadUserById(int.Parse(user.Id));
+
+            return View(model);
         }
+
+        private UserManager _authManager;
 
         public UserManager AuthManager
         {

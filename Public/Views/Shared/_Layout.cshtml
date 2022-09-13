@@ -4,16 +4,16 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link rel="shortcut icon" href="~/Content/images/IKONA_apartmani_1_veći.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="~/Content/images/IKONA_apartmani_1_veći_white.png" type="image/x-icon" />
     @System.Web.Optimization.Styles.Render("~/Content")
 </head>
 <body>
 
-    <div class="navbar sticky-top">
+    <div class="navbar bg-dark sticky-top">
         <div class="container-fluid">
             <div class="navbar-brand">
-                <img src="~/Content/images/IKONA_apartmani_1_veći.png" alt="logo" style="height: 2rem; width: 2rem; margin-right:.5rem" />
-                @Html.ActionLink("RWA Apartments", "Index", "Home", null, new { @class = "navbar-brand white-link" })
+                <img src="~/Content/images/IKONA_apartmani_1_veći_white.png" alt="logo" style="height: 2rem; width: 2rem; margin-right:.5rem" />
+                @Html.ActionLink("RWA Apartments", "Index", "Home", null, new { @class = "navbar-brand white-text" })
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="">
                 <span class="navbar-toggler-icon">
@@ -23,20 +23,20 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-sm-0">
                     <li class="nav-item">
-                        @Html.ActionLink("Search", "Search", "Home", null, new { @class = "nav-link white-link" })
+                        @Html.ActionLink("Search", "Search", "Home", null, new { @class = "nav-link white-text" })
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("Contact us", "Contact", "Home", null, new { @class = "nav-link white-link" })
+                        @Html.ActionLink("Contact us", "Contact", "Home", null, new { @class = "nav-link white-text" })
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("About us", "About", "Home", null, new { @class = "nav-link white-link" })
+                        @Html.ActionLink("About us", "About", "Home", null, new { @class = "nav-link white-text" })
                     </li>
                 </ul>
                 <ul class="navbar-nav d-flex">
                     @if (HttpContext.Current.User.Identity.Name == "")
                     {
                         <li class="nav-item">
-                            @Html.ActionLink("Login", "Index", "Home", null, new { @class = "nav-link" })
+                            @Html.ActionLink("Login", "Index", "Home", null, new { @class = "nav-link white-text" })
                         </li>
                     }
                     @if (HttpContext.Current.User.Identity.Name != "")
@@ -63,7 +63,7 @@
 
     <footer class="mt-auto">
         <div class="text-center">
-            <p class="footer-custom">&copy; : @DateTime.Now.Year - RWA Apartmani - David Bašić</p>
+            <p class="footer-custom">&copy; @DateTime.Now.Year - RWA Apartmani - David Bašić</p>
         </div>
     </footer>
 

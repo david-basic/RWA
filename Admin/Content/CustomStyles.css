@@ -71,3 +71,11 @@ table, th, td {
     color: #124773;
     font-size: 100%;
 }
+
+.size1of4{
+    width: 100%;
+}
+
+.table-pictures{
+    padding: 1%;
+}

@@ -103,8 +103,52 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="container-fluid">
             <asp:Repeater ID="repApartmentPictures" runat="server">
+                <ItemTemplate>
+                    <div class="col-sm-3">
+                        <div class="form-group text-center">
+                            <asp:HiddenField runat="server" ID="hidApartmentPictureId" Value='<%# Eval("ID") %>' />
+                            <table class="thumbnail">
+                                <tr>
+                                    <td class="table-pictures" colspan="2">
+                                        <a href="<%# Eval("Path") %>">
+                                            <asp:Image ID="imgApartmentPicture" runat="server" CssClass="thumbnail size1of4" ImageUrl='<%# Eval("Path") %>' />
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="2">
+                                        <asp:TextBox ID="txtApartmentPicture" runat="server" CssClass="form-control text-center" Text='<%# Eval("Name") %>' placeholder="Naziv" />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-pictures" colspan="2"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-pictures">
+                                        <label class="btn btn-custom">
+                                            <asp:CheckBox ID="cbIsRepresentative" runat="server" CssClass="is-representative-picture" Checked='<%# Eval("IsRepresentative") %>' />
+                                            Glavna slika
+                                        </label>
+                                    </td>
+                                    <td class="table-pictures">
+                                        <label class="btn btn-danger">
+                                            <asp:CheckBox ID="cbDelete" runat="server" Checked="false" />
+                                            Obriši
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <hr style="width: 5px" />
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
+            <%--<asp:Repeater ID="repApartmentPictures" runat="server">
                 <ItemTemplate>
                     <div class="form-group">
                         <div class="row">
@@ -135,7 +179,7 @@
                     </div>
                     <hr style="width: 5px" />
                 </ItemTemplate>
-            </asp:Repeater>
+            </asp:Repeater>--%>
             <script>
                 $(function () {
                     var repPicCheckboxes = $(".is-representative-picture > input[type=checkbox]");
