@@ -1,33 +1,31 @@
-﻿using System.Web;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.Optimization;
 
-namespace Public
+namespace Public.App_Start
 {
     public class BundleConfig
     {
-        // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/jquery-ui.js"));
+            bundles.Add(new Bundle("~/Scripts").Include(
+                        "~/Scripts/jquery-3.6.0.min.js",
+                        "~/Scripts/bootstrap.js",
+                        "~/Scripts/jquery-ui.js",
+                        "~/Scripts/jquery.validate.min.js",
+                        "~/Scripts/SlimboxScript/slimbox2.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
-
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+            bundles.Add(new Bundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
-
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new Bundle("~/Content").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css",
-                      "~/Content/custom-styles.css"
-                      ));
+                      "~/Content/validation.css",
+                      "~/Content/jquery-ui.css",
+                      "~/Content/custom-styles.css",
+                      "~/Content/SlimboxContent/slimbox2.css"));
         }
     }
 }
