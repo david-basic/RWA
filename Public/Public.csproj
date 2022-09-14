@@ -196,6 +196,14 @@
     <Compile Include="Models\Authentication\DataBase.cs" />
     <Compile Include="Models\Authentication\UserManager.cs" />
     <Compile Include="Models\Authentication\UserStoreService.cs" />
+    <Compile Include="Models\ViewModels\ApartmentListViewModel.cs" />
+    <Compile Include="Models\ViewModels\ApartmentReviewListModel.cs" />
+    <Compile Include="Models\ViewModels\ApartmentsBrowserViewModel.cs" />
+    <Compile Include="Models\ViewModels\ContactReservationViewModel.cs" />
+    <Compile Include="Models\ViewModels\LoginViewModel.cs" />
+    <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
+    <Compile Include="Models\ViewModels\StarsViewModel.cs" />
+    <Compile Include="Models\ViewModels\ViewApartmentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
