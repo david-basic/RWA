@@ -149,6 +149,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\custom-styles.css" />
+    <Content Include="Content\images\Error.png" />
     <Content Include="Content\images\IKONA_apartmani_1_veći.png" />
     <Content Include="Content\images\IKONA_apartmani_1_veći_black.png" />
     <Content Include="Content\images\IKONA_apartmani_1_veći_white.png" />
