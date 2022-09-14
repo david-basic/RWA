@@ -245,6 +245,7 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\_ApartmentListView.cshtml" />
     <Content Include="Views\Shared\_ApartmentInListView.cshtml" />
+    <Content Include="Views\Shared\_TagView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

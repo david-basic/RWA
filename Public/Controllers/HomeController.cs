@@ -1,4 +1,5 @@
-﻿using DataLayer.Repositories.Factory;
+﻿using DataLayer.Models;
+using DataLayer.Repositories.Factory;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Public.Models.Authentication;
@@ -100,6 +101,59 @@ namespace Public.Controllers
             var model = RepoFactory.GetRepo().LoadUserById(int.Parse(user.Id));
 
             return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult LoadApartmentListPartialView(string search, int? cityId, string statusId, string filterCode)
+        {
+            Predicate<Apartment> avaliabilityFilter = a => a.Availability;
+            Predicate<Apartment> nameFilter = a => true;
+            Predicate<Apartment> cityFilter = a => true;
+            Predicate<Apartment> statusFilter = a => true;
+
+            if (search != null && search != string.Empty)
+            {
+                nameFilter = (a => a.NameEng.Contains(search));
+            }
+
+            if (cityId != null && cityId != 0)
+            {
+                cityFilter = (a => a.CityId.Equals(cityId));
+            }
+
+            if (statusId != null && statusId != string.Empty)
+            {
+                if ("all".Equals(statusId))
+                {
+                    avaliabilityFilter = a => true;
+                }
+                else if ("unavaliable".Equals(statusId))
+                {
+                    avaliabilityFilter = a => !a.Availability;
+                }
+            }
+
+            List<Apartment> apartments = (List<Apartment>)RepoFactory.GetRepo().LoadApartments(avaliabilityFilter, nameFilter, cityFilter, statusFilter);
+
+            if (filterCode != null && filterCode != string.Empty)
+            {
+                if (Apartment.ComparisonDicitionary.Keys.Any(key => key.Equals(filterCode)))
+                {
+                    apartments.Sort(Apartment.ComparisonDicitionary[filterCode]);
+                }
+            }
+            else
+            {
+                apartments.Sort(Apartment.PriceLowToHighComp);
+            }
+
+            var model = new ApartmentListVM
+            {
+                Apartments = apartments
+            };
+
+            return PartialView("_ApartmentListView", model);
         }
     }
 }

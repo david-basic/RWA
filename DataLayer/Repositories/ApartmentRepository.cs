@@ -58,9 +58,9 @@ namespace DataLayer.Repositories
                     Address = row["Address"].ToString(),
                     Name = row["Name"].ToString(),
                     Price = Convert.ToDecimal(row["Price"]),
-                    MaxAdults = row["MaxAdults"] != DBNull.Value ? (int?)Convert.ToInt32(row["MaxAdults"]) : null,
-                    MaxChildren = row["MaxChildren"] != DBNull.Value ? (int?)Convert.ToInt32(row["MaxChildren"]) : null,
-                    TotalRooms = row["TotalRooms"] != DBNull.Value ? (int?)Convert.ToInt32(row["TotalRooms"]) : null,
+                    MaxAdults = (int)(row["MaxAdults"] != DBNull.Value ? (int?)Convert.ToInt32(row["MaxAdults"]) : null),
+                    MaxChildren = (int)(row["MaxChildren"] != DBNull.Value ? (int?)Convert.ToInt32(row["MaxChildren"]) : null),
+                    TotalRooms = (int)(row["TotalRooms"] != DBNull.Value ? (int?)Convert.ToInt32(row["TotalRooms"]) : null),
                     BeachDistance = row["BeachDistance"] != DBNull.Value ? (int?)Convert.ToInt32(row["BeachDistance"]) : null
                 };
                 apList.Add(ap);
@@ -69,8 +69,10 @@ namespace DataLayer.Repositories
         }
         public Models.Apartment GetApartment(int id)
         {
-            var commandParameters = new List<SqlParameter>();
-            commandParameters.Add(new SqlParameter("@id", id));
+            var commandParameters = new List<SqlParameter>
+            {
+                new SqlParameter("@id", id)
+            };
 
             var ds = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "dbo.GetApartment", commandParameters.ToArray());
 
@@ -92,9 +94,9 @@ namespace DataLayer.Repositories
                 Address = row["Address"].ToString(),
                 Name = row["Name"].ToString(),
                 Price = Convert.ToDecimal(row["Price"]),
-                MaxAdults = row["MaxAdults"] != DBNull.Value ? (int?)Convert.ToInt32(row["MaxAdults"]) : null,
-                MaxChildren = row["MaxChildren"] != DBNull.Value ? (int?)Convert.ToInt32(row["MaxChildren"]) : null,
-                TotalRooms = row["TotalRooms"] != DBNull.Value ? (int?)Convert.ToInt32(row["TotalRooms"]) : null,
+                MaxAdults = (int)(row["MaxAdults"] != DBNull.Value ? (int?)Convert.ToInt32(row["MaxAdults"]) : null),
+                MaxChildren = (int)(row["MaxChildren"] != DBNull.Value ? (int?)Convert.ToInt32(row["MaxChildren"]) : null),
+                TotalRooms = (int)(row["TotalRooms"] != DBNull.Value ? (int?)Convert.ToInt32(row["TotalRooms"]) : null),
                 BeachDistance = row["BeachDistance"] != DBNull.Value ? (int?)Convert.ToInt32(row["BeachDistance"]) : null
             };
             return ap;
@@ -160,8 +162,10 @@ namespace DataLayer.Repositories
 
         public List<Models.Tag> GetApartmentTags(int apartmentId)
         {
-            var commandParameters = new List<SqlParameter>();
-            commandParameters.Add(new SqlParameter("@apartmentId", apartmentId));
+            var commandParameters = new List<SqlParameter>
+            {
+                new SqlParameter("@apartmentId", apartmentId)
+            };
 
             var ds = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "dbo.GetApartmentTags", commandParameters.ToArray());
 
@@ -180,9 +184,10 @@ namespace DataLayer.Repositories
 
         public void DeleteApartment(int id)
         {
-            var commandParameters = new List<SqlParameter>();
-
-            commandParameters.Add(new SqlParameter("@id", id));
+            var commandParameters = new List<SqlParameter>
+            {
+                new SqlParameter("@id", id)
+            };
 
             SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "dbo.DeleteApartment", commandParameters.ToArray());
         }
@@ -249,8 +254,10 @@ namespace DataLayer.Repositories
 
         public List<Models.ApartmentPicture> GetApartmentPictures(int apartmentId)
         {
-            var commandParameters = new List<SqlParameter>();
-            commandParameters.Add(new SqlParameter("@apartmentId", apartmentId));
+            var commandParameters = new List<SqlParameter>
+            {
+                new SqlParameter("@apartmentId", apartmentId)
+            };
 
             var ds = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "dbo.GetApartmentPictures", commandParameters.ToArray());
             var pics = new List<Models.ApartmentPicture>();
