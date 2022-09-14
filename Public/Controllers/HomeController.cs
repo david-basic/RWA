@@ -115,12 +115,12 @@ namespace Public.Controllers
 
             if (search != null && search != string.Empty)
             {
-                nameFilter = (a => a.NameEng.Contains(search));
+                nameFilter = a => a.NameEng.Contains(search);
             }
 
             if (cityId != null && cityId != 0)
             {
-                cityFilter = (a => a.CityId.Equals(cityId));
+                cityFilter = a => a.CityId.Equals(cityId);
             }
 
             if (statusId != null && statusId != string.Empty)

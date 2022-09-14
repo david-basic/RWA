@@ -243,7 +243,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\UserView.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\_ApartmentListView.cshtml" />
     <Content Include="Views\Shared\_ApartmentInListView.cshtml" />
@@ -257,6 +256,7 @@
     <Content Include="Views\Shared\_AvailabilityView.cshtml" />
     <Content Include="Views\Shared\_ReservationView.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -49,6 +49,7 @@ namespace DataLayer.Models
         public int MaxChildren { get; set; }
         public int TotalRooms { get; set; }
         public int? BeachDistance { get; set; }
+
         public List<Tag> Tags { get; set; }
         public List<ApartmentPicture> ApartmentPictures { get; set; }
         public ApartmentStatus Status { get; set; }

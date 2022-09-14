@@ -9,7 +9,7 @@
     };
 }
 
-<a href="Apartments/ViewApartment/@Model.Id">
+<a href="Home/ViewApartment/@Model.Id">
     <div class="container rounded-3 text-black" style="background-color:rgb(245,245,245)">
         <div class="row mb-3">
             <div class="col-4">
@@ -22,7 +22,7 @@
                     <div class="col-sm">
                         <h2 class="pt-3 text-black" style="height:fit-content">@Model.NameEng</h2>
                         <div class="mb-3">
-                            @*<span style="height:fit-content"><img src="~/Content/images/location_red.png" style="margin-right:.5em" class="icon" />@Model.CityName</span>*@
+                            <span style="height:fit-content">@*<img src="~/Content/images/location_red.png" style="margin-right:.5em" class="icon" />*@@Model.CityName</span>
                         </div>
                         <div>
                             <span style="height:fit-content">@Model.Address</span>
@@ -44,10 +44,10 @@
                     <div style="width:100%; display:flex; justify-content:space-between; height:fit-content">
                         <div style="display:flex;gap:2em;flex-direction:row">
                             <div>
-                                @*<span style="height:fit-content"><img src="~/Content/images/bed.png" style="position: relative; top: -2px;" class="icon" />@Model.TotalPeople.ToString()</span>*@
+                                <span style="height:fit-content">@*<img src="~/Content/images/bed.png" style="position: relative; top: -2px;" class="icon" />*@@Model.TotalPeople.ToString()</span>
                             </div>
                             <div>
-                                @*<span style="height:fit-content"><img src="~/Content/images/sea.png" style="position: relative; top: -2px;" class="icon" />@Model.BeachDistance.ToString()m </span>*@
+                                <span style="height:fit-content">@*<img src="~/Content/images/sea.png" style="position: relative; top: -2px;" class="icon" />*@@Model.BeachDistance.ToString()m </span>
                             </div>
                         </div>
                         <div style="display:flex; flex-direction:row; gap:1em">
