@@ -1,0 +1,23 @@
+﻿@using Public.Models.ViewModels
+@model StarsVM
+@{
+    int fullStarCount = Model.Stars;
+    int emptyStarCount = 5 - fullStarCount;
+}
+
+<div style="width:fit-content; display:flex; ">
+    @for (int i = 1; i <= fullStarCount; i++)
+    {
+        <img class="icon" src="~/Content/images/star.png" />
+    }
+    @for (int i = 1; i <= emptyStarCount; i++)
+    {
+        <img class="icon" src="~/Content/images/emptyStar.png" />
+    }
+    @if (Model.ShowTotalReviews)
+    {
+        <div>
+            <span class="text-black" style="position:relative; top:-.2em">(@Model.TotalReviews)</span>
+        </div>
+    }
+</div>

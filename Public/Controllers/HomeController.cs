@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Public.Models.Authentication;
 using Public.Models.ViewModels;
+using Recaptcha.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -154,6 +155,174 @@ namespace Public.Controllers
             };
 
             return PartialView("_ApartmentListView", model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> ViewApartment(int id)
+        {
+            var loggedUser = await AuthManager.FindByNameAsync(User.Identity.Name);
+
+            var model = new ViewApartmentVM
+            {
+                Apartment = RepoFactory.GetRepo().LoadApartmentById(id),
+                ApartmentId = id,
+                UserId = string.Empty,
+                FirstName = string.Empty,
+                LastName = string.Empty,
+                Email = string.Empty,
+                PhoneNumber = string.Empty,
+                Details = string.Empty,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now,
+            };
+
+            if (loggedUser != null)
+            {
+                model.UserId = loggedUser.Id;
+                model.FirstName = loggedUser.FirstName;
+                model.LastName = loggedUser.LastName;
+                model.Email = loggedUser.Email;
+                model.PhoneNumber = loggedUser.PhoneNumber;
+                model.ShowReviewForm = true;
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ViewApartment(ViewApartmentVM model)
+        {
+            model.Apartment = RepoFactory.GetRepo().LoadApartmentById(model.ApartmentId);
+
+            if (string.IsNullOrEmpty(model.UserId))
+            {
+                var recaptchaHelper = this.GetRecaptchaVerificationHelper(secretKey: "6Ld0Ya0gAAAAAP0oJWaYw1iafuD_aEXB_GUn7iGS");
+                if (string.IsNullOrEmpty(recaptchaHelper.Response))
+                {
+                    ModelState.AddModelError(
+                    "",
+                    "Captcha answer cannot be empty.");
+
+                    return View(model);
+                }
+                var recaptchaResult = recaptchaHelper.VerifyRecaptchaResponse();
+                if (!recaptchaResult.Success)
+                {
+                    ModelState.AddModelError(
+                    "",
+                    "Incorrect captcha answer.");
+
+                }
+            }
+
+            if (ModelState.IsValid)
+            {
+                if (string.IsNullOrEmpty(model.UserId))
+                {
+                    RepoFactory.GetRepo().GenerateApartmentReservation(new ApartmentReservation
+                    {
+                        Guid = Guid.NewGuid(),
+                        CreatedAt = DateTime.Now,
+                        ApartmentId = model.ApartmentId,
+                        Details = $"{model.StartDate.ToShortDateString()} - {model.EndDate.ToShortDateString()}, {model.Details}",
+                        UserEmail = model.Email,
+                        UserName = $"{model.FirstName} {model.LastName}",
+                        UserPhone = model.PhoneNumber
+                    });
+                }
+                else
+                {
+                    RepoFactory.GetRepo().GenerateApartmentReservation(new ApartmentReservation
+                    {
+                        Guid = Guid.NewGuid(),
+                        CreatedAt = DateTime.Now,
+                        ApartmentId = model.ApartmentId,
+                        Details = $"{model.StartDate.ToShortDateString()} - {model.EndDate.ToShortDateString()}, {model.Details}",
+                        UserId = int.Parse(model.UserId),
+                    });
+                }
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult SubmitApartmentReview(ApartmentReview review)
+        {
+            RepoFactory.GetRepo().InsertApartmentReview(review);
+
+            return new EmptyResult();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult LoadApartmentReviewsListView(int apartmentId)
+        {
+            var reviews = RepoFactory.GetRepo().LoadApartmentReviewsByApartmentId(apartmentId);
+
+            return PartialView("_ReviewListView", new ApartmentReviewListVM { Reviews = reviews.Reverse() });
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public ActionResult Register(RegisterVM model)
+        {
+            var recaptchaHelper = this.GetRecaptchaVerificationHelper(secretKey: "6Ld0Ya0gAAAAAP0oJWaYw1iafuD_aEXB_GUn7iGS");
+            if (string.IsNullOrEmpty(recaptchaHelper.Response))
+            {
+                ModelState.AddModelError(
+                "",
+                "Captcha answer cannot be empty.");
+
+                return View(model);
+            }
+            var recaptchaResult = recaptchaHelper.VerifyRecaptchaResponse();
+            if (!recaptchaResult.Success)
+            {
+                ModelState.AddModelError(
+                "",
+                "Incorrect captcha answer.");
+            }
+            if (!ModelState.IsValid)
+                return View(model);
+            var newRegisteredUser = new User
+            {
+                UserName = model.UserName,
+                Email = model.Email,
+                PasswordHash = DataLayer.Encryption.SHA512(model.Password),
+                PhoneNumber = model.PhoneNumber,
+                Address = model.Address,
+                CreatedAt = DateTime.Now,
+                Guid = Guid.NewGuid(),
+            };
+            RepoFactory.GetRepo().InsertUser(newRegisteredUser);
+
+            return RedirectToAction(actionName: "LoginAfterRegistrationAsync", controllerName: "Home", routeValues: new { email = newRegisteredUser.Email, password = model.Password });
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> LoginAfterRegistrationAsync(string email, string password)
+        {
+            var user = await AuthManager.FindAsync(email, password);
+            await SignInManager.SignInAsync(user, true, true);
+
+            ViewBag.username = user.UserName;
+
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
     }
 }

@@ -149,11 +149,13 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\custom-styles.css" />
+    <Content Include="Content\images\emptyStar.png" />
     <Content Include="Content\images\Error.png" />
     <Content Include="Content\images\IKONA_apartmani_1_veći.png" />
     <Content Include="Content\images\IKONA_apartmani_1_veći_black.png" />
     <Content Include="Content\images\IKONA_apartmani_1_veći_white.png" />
     <Content Include="Content\images\IKONA_apartmani_2_veći.png" />
+    <Content Include="Content\images\star.png" />
     <Content Include="Content\images\ui-icons_444444_256x240.png" />
     <Content Include="Content\images\ui-icons_555555_256x240.png" />
     <Content Include="Content\images\ui-icons_777620_256x240.png" />
@@ -246,6 +248,10 @@
     <Content Include="Views\Shared\_ApartmentListView.cshtml" />
     <Content Include="Views\Shared\_ApartmentInListView.cshtml" />
     <Content Include="Views\Shared\_TagView.cshtml" />
+    <Content Include="Views\Home\ViewApartment.cshtml" />
+    <Content Include="Views\Shared\_ReviewListView.cshtml" />
+    <Content Include="Views\Shared\_ReviewView.cshtml" />
+    <Content Include="Views\Shared\_StarsView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

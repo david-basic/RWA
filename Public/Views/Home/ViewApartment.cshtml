@@ -1,0 +1,307 @@
+﻿@using Recaptcha.Web.Mvc
+@using Public.Models.ViewModels
+@model Public.Models.ViewModels.ViewApartmentVM
+@{
+    ViewBag.Title = Model.Apartment.NameEng;
+
+    StarsVM starVM = new StarsVM
+    {
+        Stars = Model.Apartment.Stars,
+        TotalReviews = Model.Apartment.TotalReviews,
+        ShowTotalReviews = false
+    };
+
+    var reviews = Model.Apartment.Reviews.Reverse();
+}
+
+<div class="rounded-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <div id="carouselExampleControls" class="carousel slide rounded-3" data-ride="carousel">
+                    <div class="carousel-inner" style=" width:100%; height: 500px !important;">
+                        @foreach (var picture in Model.Apartment.ApartmentPictures)
+                        {
+                            if (picture.Equals(Model.Apartment.MainPicture))
+                            {
+                                <div class="carousel-item active" style="height:500px !important; object-fit:cover;">
+                                    @*<img class="w-100" style="height:500px !important; object-fit:cover;" src="@picture.Base64Content" alt="apartment picture">*@
+                                    <a href="@picture.Base64Content" rel="lightbox-apartment" title="@picture.Name">
+                                        <img class="w-100" style="height:500px !important; object-fit:cover;" src="@picture.Base64Content" alt="apartment picture">
+                                    </a>
+                                    @if (!string.IsNullOrEmpty(picture.Name))
+                                    {
+                                        <h5 class="text-white p-3" style="position: relative; top: -65px; text-align: center; background: rgba(0, 0, 0, 0.5); height:75px">@picture.Name</h5>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="carousel-item" style="height:500px !important; object-fit:cover;">
+                                    @*<img class="w-100" style="height:500px !important; object-fit:cover;" src="@picture.Base64Content" alt="apartment picture">*@
+                                    <a href="@picture.Base64Content" rel="lightbox-apartment" title="@picture.Name">
+                                        <img class="w-100" style="height:500px !important; object-fit:cover;" src="@picture.Base64Content" alt="apartment picture">
+                                    </a>
+                                    @if (!string.IsNullOrEmpty(picture.Name))
+                                    {
+                                        <h5 class="text-white p-3" style="position: relative; top: -65px; text-align: center; background: rgba(0, 0, 0, 0.5); height:75px">@picture.Name</h5>
+                                    }
+                                </div>
+                            }
+                        }
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev" onclick="$('#carouselExampleControls').carousel('prev')">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next" onclick="$('#carouselExampleControls').carousel('next')">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3 mb-3">
+            <div class="col-sm">
+                <h2>@Model.Apartment.NameEng</h2>
+            </div>
+            <div class="col-md-auto">
+                <div style="display:flex; align-items:center; gap:.7em">
+                    @Html.Partial("_StarsView", model: starVM)
+                    @if (!Model.Apartment.Availability)
+                    {
+                        @Html.Partial("_AvaliabilityView", Model.Apartment.Status)
+                    }
+                    @Html.Partial("_PriceView", Model.Apartment.PriceStringFormat)
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="display:flex; flex-wrap:wrap; gap:.5em">
+                @foreach (var tag in Model.Apartment.Tags)
+                {
+                    @Html.Partial("_TagViewLight", tag.NameEng)
+                }
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="mb-2">
+                <b><span style="height:fit-content"><img src="/Content/images/location_red.png" style="position: relative; top: -2px;" class="icon" />@Model.Apartment.City.Name</span></b>
+            </div>
+            <div>
+                <span>@Model.Apartment.Address</span>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm">
+                <b>
+                    <span><img src="~/Content/images/bed.png" style="position: relative; top: -2px;" class="icon" />@Model.Apartment.TotalPeople Beds</span>
+                </b>
+            </div>
+            <div class="col-sm">
+                <b>
+                    <span><img src="~/Content/images/adult.png" style="position: relative; top: -2px;" class="icon" />@Model.Apartment.MaxAdults Max adults</span>
+                </b>
+            </div>
+            <div class="col-sm">
+                <b>
+                    <span><img src="~/Content/images/child.png" style="position: relative; top: -2px;" class="icon" />@Model.Apartment.MaxChildren Max children</span>
+                </b>
+            </div>
+            <div class="col-sm">
+                <b>
+                    <span><img src="~/Content/images/room.png" style="position: relative; top: -2px;" class="icon" />@Model.Apartment.TotalRooms Total rooms</span>
+                </b>
+            </div>
+            <div class="col-sm">
+                <b>
+                    <span><img src="~/Content/images/sea.png" style="position: relative; top: -2px;" class="icon" />@Model.Apartment.BeachDistance<span>m from nearest beach</span></span>
+                </b>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm">
+                @if (Model.Apartment.Availability)
+                {
+                    <div>
+                        @using (Html.BeginForm(controllerName: "Apartments", actionName: "ViewApartment", method: FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(m => Model.ApartmentId)
+                            @Html.HiddenFor(m => Model.UserId)
+
+                            <div class="row mb-3">
+                                <div class="col-sm">
+                                    <h4>Contact</h4>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm">
+                                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "First name" } })
+                                </div>
+                                <div class="col-sm">
+                                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Last name" } })
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "your@email.com", type = "email" } })
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm">
+                                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Phone number" } })
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm">
+                                    From
+                                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                                <div class="col-sm">
+                                    To
+                                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm">
+                                    Details:
+                                    @Html.TextAreaFor(model => model.Details, htmlAttributes: new { @class = "form-control" }, columns: 1, rows: 3)
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm">
+                                    <input type="submit" value="Reserve" class="btn btn-danger" style="width:100%;" />
+                                </div>
+                                @if (String.IsNullOrEmpty(Model.UserId))
+                                {
+                                    <div class="col-md-auto">
+                                        @Html.RecaptchaWidget(siteKey: "6Ld0Ya0gAAAAABWu7qi05kl8gS4MXJuc5ljtY-cH")
+                                    </div>
+                                }
+                            </div>
+                            <div class="row mb-3">
+                                @if (!ViewData.ModelState.IsValid)
+                                {
+                                    <div class="alert alert-danger">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        @Html.ValidationSummary()
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="row mt-3">
+            @if (Model.ShowReviewForm)
+            {
+                <form id="createReviewForm">
+                    <input type="hidden" name="Stars" , id="Stars" value="0" />
+                    <input type="hidden" name="UserId" , value="@Model.UserId" />
+                    <input type="hidden" name="ApartmentId" , value="@Model.Apartment.Id" />
+                    <div class="tag_container_light rounded-3 mb-3 p-3">
+                        <div class="row">
+                            <div class="col-md-auto">
+                                @*<img src="~/Content/images/user_account.png" class="user_icon" />*@
+                            </div>
+                            <div class="col-sm">
+                                <div class="row h-50">
+                                    <div class="col-md-auto">
+                                        <h5 style="width:fit-content">You</h5>
+                                        <div class="mb-3">
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                <img id="@i" class="icon star" src="~/Content/images/emptyStar.png" />
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <textarea rows="3" cols="1" name="Details" id="details" class="form-control" placeholder="Place your review here..."></textarea>
+                                        </div>
+                                        <div class="col-md-auto">
+                                            <button type="submit" class="btn btn-outline-danger" id="createReview" value="submit" style="height:100%">
+                                                @*<img src="~/Content/images/send.png" style="position: relative; top: -2px; left:3px" class="icon" />*@
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            }
+        </div>
+        <div class="row mt-3 reviews_container"></div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+            loadReviewListAjax();
+        });
+
+        $('#createReview').click(function (e) {
+            var valData = $("#createReviewForm").serialize();
+            $.ajax({
+                type: "POST",
+                url: `/Home/SubmitApartmentReview`,
+                dataType: "json",
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                data: valData
+            }).success(function () {
+            });
+        });
+
+        $("#createReviewForm").submit(function (e) {
+            setTimeout(function () {
+                emptyCommentForm();
+                loadReviewListAjax();
+            }, 300);
+            e.preventDefault();
+        })
+
+        $('.carousel-control-prev').click(function (e) {
+            e.preventDefault();
+        });
+        $('.carousel-control-next').click(function (e) {
+            e.preventDefault();
+        });
+
+        function emptyCommentForm() {
+            for (var i = 1; i <= 5; i++) {
+                $(`img#${i}`).attr('src', '/Content/images/emptyStar.png');
+            }
+            $("#details").html("");
+            $("#details").val("");
+        }
+
+        $("#1, #2, #3, #4, #5").on('click', function () {
+            var id = this.id;
+            for (var i = 1; i <= 5; i++) {
+                $(`img#${i}`).attr('src', '/Content/images/emptyStar.png');
+            }
+            for (var i = 1; i <= id; i++) {
+                $(`img#${i}`).attr('src', '/Content/images/star.png');
+            }
+            $("#Stars").val(id);
+        });
+
+        function loadReviewListAjax() {
+            $.ajax({
+                url: `/Home/LoadApartmentReviewsListView/?apartmentId=@Model.Apartment.Id`,
+                success: function (partialView) {
+                    $(".reviews_container").html("")
+                    $(".reviews_container").append(partialView);
+                }
+            });
+        }
+
+    </script>
+}
