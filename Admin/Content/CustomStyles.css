@@ -74,8 +74,11 @@ table, th, td {
 
 .size1of4{
     width: 100%;
+    padding: 5%;
 }
 
 .table-pictures{
-    padding: 1%;
+    border: 1px solid #ddd;
+    margin-bottom: 1%;
+    border-radius: 5%;
 }

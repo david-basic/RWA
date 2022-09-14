@@ -14,7 +14,7 @@ using System.Web.Mvc;
 
 namespace Public.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class HomeController : Controller
     {
         private UserManager _authManager;
@@ -68,6 +68,7 @@ namespace Public.Controllers
             else
             {
                 ModelState.AddModelError("", "Username or password is incorrect");
+
                 return View(model);
             }
         }
@@ -115,7 +116,7 @@ namespace Public.Controllers
         [AllowAnonymous]
         public ActionResult LoadApartmentListPartialView(string search, int? cityId, string statusId, string filterCode)
         {
-            Predicate<Apartment> avaliabilityFilter = a => a.Availability;
+            Predicate<Apartment> avaliabilityFilter = a => a.IsAvailable;
             Predicate<Apartment> nameFilter = a => true;
             Predicate<Apartment> cityFilter = a => true;
             Predicate<Apartment> statusFilter = a => true;
@@ -138,7 +139,7 @@ namespace Public.Controllers
                 }
                 else if ("unavaliable".Equals(statusId))
                 {
-                    avaliabilityFilter = a => !a.Availability;
+                    avaliabilityFilter = a => !a.IsAvailable;
                 }
             }
 
@@ -214,13 +215,13 @@ namespace Public.Controllers
 
                     return View(model);
                 }
+
                 var recaptchaResult = recaptchaHelper.VerifyRecaptchaResponse();
                 if (!recaptchaResult.Success)
                 {
                     ModelState.AddModelError(
                     "",
                     "Incorrect captcha answer.");
-
                 }
             }
 
@@ -296,6 +297,7 @@ namespace Public.Controllers
 
                 return View(model);
             }
+
             var recaptchaResult = recaptchaHelper.VerifyRecaptchaResponse();
             if (!recaptchaResult.Success)
             {
@@ -303,8 +305,12 @@ namespace Public.Controllers
                 "",
                 "Incorrect captcha answer.");
             }
+
             if (!ModelState.IsValid)
+            {
                 return View(model);
+            }
+
             var newRegisteredUser = new User
             {
                 UserName = model.UserName,
@@ -315,6 +321,7 @@ namespace Public.Controllers
                 CreatedAt = DateTime.Now,
                 Guid = Guid.NewGuid(),
             };
+
             RepoFactory.GetRepo().InsertUser(newRegisteredUser);
 
             return RedirectToAction(actionName: "LoginAfterRegistrationAsync", controllerName: "Home", routeValues: new { email = newRegisteredUser.Email, password = model.Password });
