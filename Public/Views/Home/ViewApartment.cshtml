@@ -124,7 +124,7 @@
                 @if (Model.Apartment.Availability)
                 {
                     <div>
-                        @using (Html.BeginForm(controllerName: "Apartments", actionName: "ViewApartment", method: FormMethod.Post))
+                        @using (Html.BeginForm(controllerName: "Home", actionName: "ViewApartment", method: FormMethod.Post))
                         {
                             @Html.AntiForgeryToken()
                             @Html.HiddenFor(m => Model.ApartmentId)

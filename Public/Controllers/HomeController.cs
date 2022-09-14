@@ -32,6 +32,13 @@ namespace Public.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]    
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpGet]
         [AllowAnonymous]
         public ActionResult Index()
         {
@@ -41,7 +48,7 @@ namespace Public.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public async Task<ActionResult> Index(LoginVM model)
+        public async Task<ActionResult> Login(LoginVM model)
         {
             if (!ModelState.IsValid)
             {
