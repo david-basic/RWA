@@ -14,6 +14,14 @@ namespace Public.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+        private UserManager _authManager;
+
+        public UserManager AuthManager
+        {
+            get { return _authManager ?? HttpContext.GetOwinContext().GetUserManager<UserManager>(); }
+            set { _authManager = value; }
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Index()
@@ -58,14 +66,6 @@ namespace Public.Controllers
             var model = RepoFactory.GetRepo().LoadUserById(int.Parse(user.Id));
 
             return View(model);
-        }
-
-        private UserManager _authManager;
-
-        public UserManager AuthManager
-        {
-            get { return _authManager ?? HttpContext.GetOwinContext().GetUserManager<UserManager>(); }
-            set { _authManager = value; }
         }
     }
 }

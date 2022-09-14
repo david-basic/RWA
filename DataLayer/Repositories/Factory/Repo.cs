@@ -42,7 +42,10 @@ namespace DataLayer.Repositories.Factory
         public override void DeleteApartment(Apartment apartment)
         {
             foreach (var tag in apartment.Tags)
+            {
                 this.DeleteTaggedApartment(new TaggedApartment { TagId = tag.Id, ApartmentId = apartment.Id });
+            }
+
             SqlHelper.ExecuteNonQuery(cs, nameof(DeleteApartment), apartment.Id);
         }
 
@@ -70,19 +73,20 @@ namespace DataLayer.Repositories.Factory
         public override void InsertApartment(Apartment apartment)
         {
             SqlHelper.ExecuteNonQuery(cs, nameof(InsertApartment),
-                apartment.Guid,
-                apartment.CreatedAt,
-                apartment.OwnerId,
-                apartment.StatusId,
-                apartment.CityId,
-                apartment.Address,
-                apartment.Name,
-                apartment.NameEng,
-                apartment.Price,
-                apartment.MaxAdults,
-                apartment.MaxChildren,
-                apartment.TotalRooms,
-                apartment.BeachDistance);
+                    apartment.Guid,
+                    apartment.CreatedAt,
+                    apartment.OwnerId,
+                    apartment.StatusId,
+                    apartment.CityId,
+                    apartment.Address,
+                    apartment.Name,
+                    apartment.NameEng,
+                    apartment.Price,
+                    apartment.MaxAdults,
+                    apartment.MaxChildren,
+                    apartment.TotalRooms,
+                    apartment.BeachDistance
+                );
 
             int apartmentId = LoadApartmentIdByGuid(apartment.Guid);
             foreach (Tag tag in apartment.Tags)
@@ -117,15 +121,15 @@ namespace DataLayer.Repositories.Factory
         {
             string details = apartmentReservation.Details;
             SqlHelper.ExecuteNonQuery(cs, nameof(InsertApartmentReservation),
-                apartmentReservation.Guid,
-                apartmentReservation.CreatedAt,
-                apartmentReservation.ApartmentId,
-                apartmentReservation.Details,
-                apartmentReservation.UserId,
-                apartmentReservation.UserName,
-                apartmentReservation.UserEmail,
-                apartmentReservation.UserPhone,
-                apartmentReservation.UserAddress
+                    apartmentReservation.Guid,
+                    apartmentReservation.CreatedAt,
+                    apartmentReservation.ApartmentId,
+                    apartmentReservation.Details,
+                    apartmentReservation.UserId,
+                    apartmentReservation.UserName,
+                    apartmentReservation.UserEmail,
+                    apartmentReservation.UserPhone,
+                    apartmentReservation.UserAddress
                 );
         }
 
@@ -134,12 +138,13 @@ namespace DataLayer.Repositories.Factory
             apartmentReivew.Guid = Guid.NewGuid();
             apartmentReivew.CreatedAt = DateTime.Now;
             SqlHelper.ExecuteNonQuery(cs, nameof(InsertApartmentReview),
-                apartmentReivew.Guid,
-                apartmentReivew.CreatedAt,
-                apartmentReivew.ApartmentId,
-                apartmentReivew.UserId,
-            apartmentReivew.Details,
-                apartmentReivew.Stars);
+                    apartmentReivew.Guid,
+                    apartmentReivew.CreatedAt,
+                    apartmentReivew.ApartmentId,
+                    apartmentReivew.UserId,
+                    apartmentReivew.Details,
+                    apartmentReivew.Stars
+                );
         }
 
         public override void InsertApartmentStatus(ApartmentStatus apartmentStatus)
@@ -168,15 +173,14 @@ namespace DataLayer.Repositories.Factory
         }
         public override void InsertUser(User user)
         {
-            //Also addes role "user" via SQL procedure
             SqlHelper.ExecuteNonQuery(cs, nameof(InsertUser),
-                user.Guid,
-                user.CreatedAt,
-                user.UserName,
-                user.Email,
-                user.PhoneNumber,
-                user.Address,
-                user.PasswordHash
+                    user.Guid,
+                    user.CreatedAt,
+                    user.UserName,
+                    user.Email,
+                    user.PhoneNumber,
+                    user.Address,
+                    user.PasswordHash
                 );
         }
 
@@ -188,6 +192,7 @@ namespace DataLayer.Repositories.Factory
             var city = this.LoadRawCityById((int)apartment.CityId);
             var tags = this.LoadTagsByApartmentId(apartment.Id);
             var reviews = this.LoadApartmentReviewsByApartmentId(apartment.Id);
+
             apartment.ApartmentPictures = new List<ApartmentPicture>(pictures);
             apartment.Status = status;
             apartment.City = city;
@@ -268,7 +273,7 @@ namespace DataLayer.Repositories.Factory
                         ApartmentId = (int)row[nameof(ApartmentPicture.ApartmentId)],
                         Base64Content = (string)row[nameof(ApartmentPicture.Base64Content)],
                         IsRepresentative = (bool)row[nameof(ApartmentPicture.IsRepresentative)],
-                        Path = !DBNull.Value.Equals(row[nameof(ApartmentPicture.Path)]) ? (string)row[nameof(ApartmentPicture.Path)] : null,
+                        Path = !DBNull.Value.Equals(row[nameof(ApartmentPicture.Path)]) ? (string)row[nameof(ApartmentPicture.Path)] : null
                     }
                 );
             }
@@ -287,13 +292,17 @@ namespace DataLayer.Repositories.Factory
             }
             else
             {
-                var tempUser = new User();
-                tempUser.Address = reservation.UserAddress;
-                tempUser.Email = reservation.UserEmail;
-                tempUser.UserName = reservation.UserName;
-                tempUser.PhoneNumber = reservation.UserPhone;
+                var tempUser = new User
+                {
+                    Address = reservation.UserAddress,
+                    Email = reservation.UserEmail,
+                    UserName = reservation.UserName,
+                    PhoneNumber = reservation.UserPhone
+                };
+
                 reservation.User = tempUser;
             }
+
             var apartment = this.LoadRawApartmentById(reservation.ApartmentId);
 
             reservation.Apartment = apartment;
@@ -327,6 +336,7 @@ namespace DataLayer.Repositories.Factory
         {
             return this.LoadRawApartments();
         }
+
         public override IList<Apartment> LoadApartments(params Predicate<Apartment>[] filters)
         {
             var apartments = this.LoadRawApartments();
@@ -435,7 +445,7 @@ namespace DataLayer.Repositories.Factory
                         Name = (string)row[nameof(Tag.Name)],
                         CreatedAt = (DateTime)row[nameof(Tag.CreatedAt)],
                         NameEng = (string)row[nameof(Tag.NameEng)],
-                        TypeId = (int)row[nameof(Tag.TypeId)],
+                        TypeId = (int)row[nameof(Tag.TypeId)]
                     }
                 );
             }
@@ -447,20 +457,29 @@ namespace DataLayer.Repositories.Factory
         {
             var taggedApartments = this.LoadRawTaggedApartments();
             Dictionary<Tag, int> dict = new Dictionary<Tag, int>();
+
             foreach (var taggedApartment in taggedApartments)
             {
                 var tempTag = this.LoadRawTagById(taggedApartment.TagId);
                 if (!dict.Keys.Contains(tempTag))
+                {
                     dict.Add(tempTag, 1);
+                }
                 else
+                {
                     dict[tempTag]++;
+                }
             }
+
             var allTags = this.LoadRawTags();
             foreach (var tag in allTags)
             {
                 if (!dict.Keys.Contains(tag))
+                {
                     dict.Add(tag, 0);
+                }
             }
+
             return dict.Select(x => new Tuple<Tag, int>(x.Key, x.Value)).ToList();
         }
 
@@ -479,10 +498,12 @@ namespace DataLayer.Repositories.Factory
             IList<string> roles = new List<string>();
 
             var tblRoles = SqlHelper.ExecuteDataset(cs, nameof(LoadUserRoleByRoleId), roleId).Tables[0];
+
             foreach (DataRow row in tblRoles.Rows)
             {
                 roles.Add((string)row["Name"]);
             }
+
             return roles[0];
         }
 
@@ -490,15 +511,18 @@ namespace DataLayer.Repositories.Factory
         {
             IList<int> roleIds = new List<int>();
             var tblRoles = SqlHelper.ExecuteDataset(cs, nameof(LoadUserRolesByUserId), userId).Tables[0];
+
             foreach (DataRow row in tblRoles.Rows)
             {
                 roleIds.Add((int)row["RoleId"]);
             }
+
             IList<string> roles = new List<string>();
             foreach (var roleId in roleIds)
             {
                 roles.Add(this.LoadUserRoleByRoleId(roleId));
             }
+
             return roles;
         }
 
@@ -506,16 +530,19 @@ namespace DataLayer.Repositories.Factory
         {
             var user = this.LoadRawUserById(id);
             user.Roles = this.LoadUserRolesByUserId(int.Parse(user.Id));
+
             return user;
         }
 
         public override IList<User> LoadUsers()
         {
             var users = this.LoadRawUsers();
+
             foreach (var user in users)
             {
                 user.Roles = this.LoadUserRolesByUserId(int.Parse(user.Id));
             }
+
             return users;
         }
 
@@ -531,19 +558,29 @@ namespace DataLayer.Repositories.Factory
                 IList<Tag> tagsToAdd = currentTags.Except(tagsFromDatabase).ToList();
 
                 foreach (Tag tag in tagsToDelete)
+                {
                     this.DeleteTaggedApartment(new TaggedApartment { ApartmentId = apartment.Id, TagId = tag.Id });
+                }
+
                 foreach (Tag tag in tagsToAdd)
+                {
                     this.InsertTaggedApartment(new TaggedApartment { Guid = Guid.NewGuid(), ApartmentId = apartment.Id, TagId = tag.Id });
+                }
             }
 
             foreach (ApartmentPicture picture in apartment.ApartmentPictures)
             {
                 picture.ApartmentId = apartment.Id;
                 if (picture.Id == 0)
+                {
                     this.InsertApartmentPicture(picture);
+                }
                 else
+                {
                     this.UpdateApartmentPicture(picture);
+                }
             }
+
             foreach (ApartmentPicture picture in picturesToRemove)
             {
                 this.DeleteApartmentPicture(picture.Guid);
@@ -574,6 +611,7 @@ namespace DataLayer.Repositories.Factory
             IList<string> apartmentNames = new List<string>();
 
             var tblNames = SqlHelper.ExecuteDataset(cs, nameof(LoadApartmentNames)).Tables[0];
+
             foreach (DataRow row in tblNames.Rows)
             {
                 apartmentNames.Add((string)row[nameof(Apartment.NameEng)]);
