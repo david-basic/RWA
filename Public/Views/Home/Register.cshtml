@@ -10,9 +10,6 @@
     {
         @Html.AntiForgeryToken()
         <div class="container p-4" style="width:500px">
-            <div class="container mb-3" style="display:flex; justify-content:center; align-items:center">
-                @*<img src="~/Content/images/apartment.png" style="width:150px; height:150px" />*@
-            </div>
 
             <div class="mb-4">
                 <h2 style="text-align:center">Register</h2>
@@ -48,14 +45,14 @@
 
             @if (!ViewData.ModelState.IsValid)
             {
-                <div class="alert alert-danger">
+                <div class="alert alert-danger text-center">
                     <img src="~/Content/images/warning.png" aria-hidden="true" />
                     @Html.ValidationSummary()
                 </div>
             }
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-success" style="width: 100%">Register</button>
+                <button type="submit" class="btn btn-custom" style="width: 100%">Register</button>
             </div>
 
             <div class="mb-3" style="display:flex; justify-content: center; align-items:center">
