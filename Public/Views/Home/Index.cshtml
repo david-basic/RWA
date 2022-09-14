@@ -61,7 +61,9 @@
 @section scripts{
     <script>
         $("#filterDropDownList").val("PLH");
+
         $("#statusDropDownList").val("avaliable");
+
         $("#cityDropDownList, #statusDropDownList, #filterDropDownList").each(function () {
             $(this).change(function () {
                 loadApartmentListPartialViewAjax();
@@ -79,12 +81,15 @@
                 return false;
             }
         });
+
         $(document).ready(function () {
             loadApartmentListPartialViewAjax();
         });
+
         $("#findButton").click(function () {
             loadApartmentListPartialViewAjax();
         });
+
         $('body').keypress(function (event) {
             var keycode = (event.keyCode ? event.keyCode : event.which);
             if (keycode == '13') {
