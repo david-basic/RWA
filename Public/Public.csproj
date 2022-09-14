@@ -252,6 +252,11 @@
     <Content Include="Views\Shared\_ReviewListView.cshtml" />
     <Content Include="Views\Shared\_ReviewView.cshtml" />
     <Content Include="Views\Shared\_StarsView.cshtml" />
+    <Content Include="Views\Shared\_PriceView.cshtml" />
+    <Content Include="Views\Shared\_TagViewLight.cshtml" />
+    <Content Include="Views\Shared\_AvailabilityView.cshtml" />
+    <Content Include="Views\Shared\_ReservationView.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

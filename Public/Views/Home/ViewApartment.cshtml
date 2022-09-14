@@ -25,7 +25,7 @@
                             if (picture.Equals(Model.Apartment.MainPicture))
                             {
                                 <div class="carousel-item active" style="height:500px !important; object-fit:cover;">
-                                    @*<img class="w-100" style="height:500px !important; object-fit:cover;" src="@picture.Base64Content" alt="apartment picture">*@
+                                    <img class="w-100" style="height:500px !important; object-fit:cover;" src="@picture.Base64Content" alt="apartment picture">
                                     <a href="@picture.Base64Content" rel="lightbox-apartment" title="@picture.Name">
                                         <img class="w-100" style="height:500px !important; object-fit:cover;" src="@picture.Base64Content" alt="apartment picture">
                                     </a>
@@ -38,7 +38,7 @@
                             else
                             {
                                 <div class="carousel-item" style="height:500px !important; object-fit:cover;">
-                                    @*<img class="w-100" style="height:500px !important; object-fit:cover;" src="@picture.Base64Content" alt="apartment picture">*@
+                                    <img class="w-100" style="height:500px !important; object-fit:cover;" src="@picture.Base64Content" alt="apartment picture">
                                     <a href="@picture.Base64Content" rel="lightbox-apartment" title="@picture.Name">
                                         <img class="w-100" style="height:500px !important; object-fit:cover;" src="@picture.Base64Content" alt="apartment picture">
                                     </a>
@@ -86,7 +86,7 @@
         </div>
         <div class="row mt-3">
             <div class="mb-2">
-                <b><span style="height:fit-content"><img src="/Content/images/location_red.png" style="position: relative; top: -2px;" class="icon" />@Model.Apartment.City.Name</span></b>
+                <b><span style="height:fit-content">@*<img src="/Content/images/location_red.png" style="position: relative; top: -2px;" class="icon" />*@@Model.Apartment.City.Name</span></b>
             </div>
             <div>
                 <span>@Model.Apartment.Address</span>
@@ -95,27 +95,27 @@
         <div class="row mt-3">
             <div class="col-sm">
                 <b>
-                    <span><img src="~/Content/images/bed.png" style="position: relative; top: -2px;" class="icon" />@Model.Apartment.TotalPeople Beds</span>
+                    <span>@*<img src="~/Content/images/bed.png" style="position: relative; top: -2px;" class="icon" />*@@Model.Apartment.TotalPeople Beds</span>
                 </b>
             </div>
             <div class="col-sm">
                 <b>
-                    <span><img src="~/Content/images/adult.png" style="position: relative; top: -2px;" class="icon" />@Model.Apartment.MaxAdults Max adults</span>
+                    <span>@*<img src="~/Content/images/adult.png" style="position: relative; top: -2px;" class="icon" />*@@Model.Apartment.MaxAdults Max adults</span>
                 </b>
             </div>
             <div class="col-sm">
                 <b>
-                    <span><img src="~/Content/images/child.png" style="position: relative; top: -2px;" class="icon" />@Model.Apartment.MaxChildren Max children</span>
+                    <span>@*<img src="~/Content/images/child.png" style="position: relative; top: -2px;" class="icon" />*@@Model.Apartment.MaxChildren Max children</span>
                 </b>
             </div>
             <div class="col-sm">
                 <b>
-                    <span><img src="~/Content/images/room.png" style="position: relative; top: -2px;" class="icon" />@Model.Apartment.TotalRooms Total rooms</span>
+                    <span>@*<img src="~/Content/images/room.png" style="position: relative; top: -2px;" class="icon" />*@@Model.Apartment.TotalRooms Total rooms</span>
                 </b>
             </div>
             <div class="col-sm">
                 <b>
-                    <span><img src="~/Content/images/sea.png" style="position: relative; top: -2px;" class="icon" />@Model.Apartment.BeachDistance<span>m from nearest beach</span></span>
+                    <span>@*<img src="~/Content/images/sea.png" style="position: relative; top: -2px;" class="icon" />*@@Model.Apartment.BeachDistance<span>m from the beach</span></span>
                 </b>
             </div>
         </div>
@@ -184,7 +184,7 @@
                                 @if (!ViewData.ModelState.IsValid)
                                 {
                                     <div class="alert alert-danger">
-                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <img src="~/Content/images/warning.png" aria-hidden="true" />
                                         @Html.ValidationSummary()
                                     </div>
                                 }
@@ -225,7 +225,7 @@
                                         </div>
                                         <div class="col-md-auto">
                                             <button type="submit" class="btn btn-outline-danger" id="createReview" value="submit" style="height:100%">
-                                                @*<img src="~/Content/images/send.png" style="position: relative; top: -2px; left:3px" class="icon" />*@
+                                                @*<img src="~/Content/images/send.png" style="position: relative; top: -2px; left:3px" class="icon" />*@Submit
                                             </button>
                                         </div>
                                     </div>

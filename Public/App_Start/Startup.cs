@@ -24,7 +24,7 @@ namespace Public.App_Start
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions {
                     AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                    LoginPath = new PathString("/Apartments/Index"),
+                    LoginPath = new PathString("/Home/Login"),
                     Provider = new CookieAuthenticationProvider {
                         OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<UserManager, User>(
                             validateInterval: TimeSpan.FromMinutes(30),
