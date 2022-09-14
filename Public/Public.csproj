@@ -195,6 +195,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Authentication\DataBase.cs" />
+    <Compile Include="Models\Authentication\SignInManager.cs" />
     <Compile Include="Models\Authentication\UserManager.cs" />
     <Compile Include="Models\Authentication\UserStoreService.cs" />
     <Compile Include="Models\ViewModels\ApartmentListViewModel.cs" />
