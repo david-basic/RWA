@@ -1,6 +1,33 @@
-﻿
+﻿@using DataLayer.Repositories.Factory
+@using DataLayer.Models
 @{
     ViewBag.Title = "Home";
+
+    SelectList ddlCities = new SelectList(
+            items: (RepoFactory.GetRepo()).LoadCities(),
+            dataTextField: "Name",
+            dataValueField: "Id"
+        );
+
+    IList<SelectListItem> ddlStatusItems = new List<SelectListItem>();
+
+    ddlStatusItems.Add(new SelectListItem { Text = "Avaliable apartments", Value = "avaliable", Selected = true });
+    ddlStatusItems.Add(new SelectListItem { Text = "All apartments", Value = "all" });
+    ddlStatusItems.Add(new SelectListItem { Text = "Unavaliable apartments", Value = "unavaliable" });
+
+    SelectList ddlStatusSource = new SelectList(ddlStatusItems, "Value", "Text");
+
+
+    IList<SelectListItem> ddlFilterItems = new List<SelectListItem>();
+
+    ddlFilterItems.Add(new SelectListItem { Text = "Price: Lowest to highest", Value = "PLH", Selected = true });
+    ddlFilterItems.Add(new SelectListItem { Text = "Price: Highest to lowest", Value = "PHL" });
+    ddlFilterItems.Add(new SelectListItem { Text = "Rooms: Least to most", Value = "RLH" });
+    ddlFilterItems.Add(new SelectListItem { Text = "Rooms: Most to least", Value = "RHL" });
+    ddlFilterItems.Add(new SelectListItem { Text = "Space: Least to most", Value = "SLH" });
+    ddlFilterItems.Add(new SelectListItem { Text = "Space: Most to least", Value = "SHL" });
+
+    SelectList ddlFiltersSource = new SelectList(ddlFilterItems, "Value", "Text");
 }
 
 <div class="container">
@@ -10,7 +37,7 @@
                 @Html.TextBox(name: "Search", value: "", htmlAttributes: new { @class = "form-control", placeholder = "Search apartment..." })
             </div>
             <div class="col-sm">
-                @Html.DropDownList(optionLabel: "Any city", selectList: ddlCitySource, name: "CityId", htmlAttributes: new { @class = "form-control", id = "cityDropDownList" })
+                @Html.DropDownList(optionLabel: "Any city", selectList: ddlCities, name: "CityId", htmlAttributes: new { @class = "form-control", id = "cityDropDownList" })
             </div>
             <div class="col-sm">
                 @Html.DropDownList(optionLabel: null, selectList: ddlStatusSource, name: "StatusId", htmlAttributes: new { @class = "form-control", id = "statusDropDownList" })
