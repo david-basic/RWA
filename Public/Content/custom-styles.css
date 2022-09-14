@@ -18,9 +18,9 @@
     color: white;
 }
 
-.btn-custom:hover {
-    color: #a7d0f1;
-}
+    .btn-custom:hover {
+        color: #a7d0f1;
+    }
 
 .font-goth {
     font-family: 'Century Gothic';
@@ -137,7 +137,6 @@ form {
     color: black;
 }
 
-/*Social media icons*/
 .fa {
     padding: 20px;
     font-size: 30px;

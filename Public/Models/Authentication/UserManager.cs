@@ -18,7 +18,7 @@ namespace Public.Models.Authentication
 
         public static UserManager Create(IdentityFactoryOptions<UserManager> options, IOwinContext context)
         {
-            var manager = new UserManager(new UserStoreService<User>(context.Get<DataBase>().Users))
+            var manager = new UserManager(new UserStoreService<User>(context.Get<DbContext>().Users))
             {
                 PasswordHasher = new PasswordHasher(),
 

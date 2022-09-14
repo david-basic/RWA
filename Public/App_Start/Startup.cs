@@ -18,7 +18,7 @@ namespace Public.App_Start
 
         public void Configuration(IAppBuilder app)
         {
-            app.CreatePerOwinContext(DataBase.Create);
+            app.CreatePerOwinContext(DbContext.Create);
             app.CreatePerOwinContext<UserManager>(UserManager.Create);
             app.CreatePerOwinContext<SignInManager>(SignInManager.Create);
 

@@ -8,20 +8,20 @@ using System.Web;
 
 namespace Public.Models.Authentication
 {
-    public class DataBase : IDisposable
+    public class DbContext : IDisposable
     {
         public IList<User> Users { get; set; }
 
-        public DataBase(IList<User> users)
+        public DbContext(IList<User> users)
         {
             Users = users;
         }
         
-        public static DataBase Create()
+        public static DbContext Create()
         {
             var users = RepoFactory.GetRepo().LoadUsers();
 
-            return new DataBase(users);
+            return new DbContext(users);
         }
 
         public void Dispose()
