@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Public.Models.ViewModels
 {
-    public class ContactReservationViewModel
+    public class ContactReservationVM
     {
         public User User { get; set; }
         public string FirstName { get; set; }

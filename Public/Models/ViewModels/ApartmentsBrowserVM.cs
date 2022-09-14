@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Public.Models.ViewModels
 {
-    public class ApartmentListViewModel
+    public class ApartmentsBrowserVM
     {
         public IEnumerable<Apartment> Apartments { get; set; }
     }

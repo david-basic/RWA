@@ -39,7 +39,7 @@ namespace Public.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public async Task<ActionResult> Index(LoginViewModel model)
+        public async Task<ActionResult> Index(LoginVM model)
         {
             if (!ModelState.IsValid)
             {

@@ -32,5 +32,61 @@ namespace DataLayer.Models
         public ApartmentStatus Status { get; set; }
         public City City { get; set; } = new City();
         public IList<ApartmentReview> Reviews { get; set; }
+        public ApartmentPicture MainPicture
+        {
+            get
+            {
+                var representativePicture = ApartmentPictures.FirstOrDefault(picture => picture.IsRepresentative);
+
+                if (representativePicture is null)
+                {
+                    representativePicture = ApartmentPictures[0];
+                }
+
+                return representativePicture;
+            }
+        }
+        public int TotalPeople
+        {
+            get
+            {
+                return (int)(MaxAdults + MaxChildren);
+            }
+        }
+        public string PriceStringFormat { get => string.Format("{0:0.00}", Price) + "HRK"; }
+        public int Stars
+        {
+            get
+            {
+                double average = 0.0;
+
+                if (Reviews != null && Reviews.Count != 0)
+                {
+                    average = (Reviews.Select(r => r.Stars)).Average();
+
+                    if ((double)(average - (int)average) >= 0.5)
+                    {
+                        average += 1.0;
+                    }
+                }
+
+                return (int)average;
+            }
+        }
+        public int TotalReviews
+        {
+            get
+            {
+                int totalReviews = 0;
+
+                if (Reviews != null && Reviews.Count != 0)
+                {
+                    totalReviews = Reviews.Count;
+                }
+
+                return totalReviews;
+
+            }
+        }
     }
 }

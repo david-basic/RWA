@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Public.Models.ViewModels
 {
-    public class LoginViewModel
+    public class LoginVM
     {
         [Required(ErrorMessage = "E-mail is required")]
         [Display(Name = "Email")]

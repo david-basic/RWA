@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Public.Models.ViewModels
 {
-    public class RegisterViewModel
+    public class RegisterVM
     {
         [Required(ErrorMessage = "Full name is required")]
         [Display(Name = "Full name")]

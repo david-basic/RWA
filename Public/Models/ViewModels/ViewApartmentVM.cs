@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Public.Models.ViewModels
 {
-    public class ViewApartmentViewModel
+    public class ViewApartmentVM
     {
         public int ApartmentId { get; set; } 
         public string UserId { get; set; }
