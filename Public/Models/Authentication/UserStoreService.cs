@@ -8,7 +8,10 @@ using System.Web;
 
 namespace Public.Models.Authentication
 {
-    public class UserStoreService<TUser> : IUserStore<TUser>, IUserPasswordStore<TUser>, IUserRoleStore<TUser> where TUser : User
+    public class UserStoreService<TUser> : IUserStore<TUser>,
+    IUserPasswordStore<TUser>,
+    IUserRoleStore<TUser>
+    where TUser : User
     {
         private readonly IList<TUser> _users;
 

@@ -24,7 +24,7 @@ namespace Public.Models.Authentication
         {
             //var users = new List<User>
             //{
-            //    new User
+            //    new User()
             //    {
             //        CreatedAt = DateTime.Now,
             //        UserName = "david@admin.hr",
