@@ -4,7 +4,8 @@
     ViewBag.Title = "Register";
 }
 
-<div class="container pt-5" style="display: flex; justify-content: center; align-items: center" id="popup_login">
+<div class="container pt-5" style="display: flex; justify-content: center; align-items: center">
+    <hr style="width: 10px" />
     @using (Html.BeginForm("Register", "Home", null, FormMethod.Post, new { role = "form" }))
     {
         @Html.AntiForgeryToken()

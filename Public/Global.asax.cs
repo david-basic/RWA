@@ -20,7 +20,7 @@ namespace Public
 
         protected void Application_Error()
         {
-            Response.Redirect("~/Error/Index");
+            //Response.Redirect("~/Error/Index");
         }
     }
 }

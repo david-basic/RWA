@@ -3,7 +3,8 @@
     ViewBag.Title = "Login";
 }
 
-<div class="container col-sm-6 offset-sm-3" style="font-family:'Century Gothic'" id="popup_login">
+<div class="container col-sm-6 offset-sm-3" style="font-family:'Century Gothic'">
+    <hr style="width: 10px" />
     @using (Html.BeginForm("Login", "Home", null, FormMethod.Post, new { role = "form" }))
     {
         @Html.AntiForgeryToken()
@@ -13,7 +14,7 @@
                 <img src="~/Content/images/IKONA_apartmani_1_veći_white.png" style="width:150px; height:150px" />
             </div>
 
-            <h2 class="text-center display-2" style="color:#124773"><strong>Login page</strong></h2>
+            <h2 class="text-center display-2" style="color:#124773"><strong>Login</strong></h2>
             <br />
 
             <div class="row mb-3">
