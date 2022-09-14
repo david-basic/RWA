@@ -32,7 +32,7 @@
             @if (HttpContext.Current.User.Identity.Name == "")
             {
                 <li class="nav-item">
-                    @Html.ActionLink("Login", "Index", "Home", null, new { @class = "nav-link white-text font-goth" })
+                    @Html.ActionLink("Login", "Login", "Home", null, new { @class = "nav-link white-text font-goth" })
                 </li>
             }
             @if (HttpContext.Current.User.Identity.Name != "")

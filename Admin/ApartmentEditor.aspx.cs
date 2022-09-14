@@ -252,9 +252,9 @@ namespace Admin
                 Address = tbAddress.Text,
                 Name = tbName.Text,
                 Price = price,
-                MaxAdults = maxAdults,
-                MaxChildren = maxChildren,
-                TotalRooms = totalRooms,
+                MaxAdults = (int)maxAdults,
+                MaxChildren = (int)maxChildren,
+                TotalRooms = (int)totalRooms,
                 BeachDistance = beachDistance,
                 Tags = GetRepeaterTags(),
                 ApartmentPictures = GetRepeaterPictures()
@@ -284,9 +284,9 @@ namespace Admin
             tbAddress.Text = apartment.Address;
             ddlCity.SelectedValue = apartment.CityId.ToString();
             tbPrice.Text = apartment.Price.ToString();
-            tbMaxAdults.Text = apartment.MaxAdults?.ToString();
-            tbMaxChildren.Text = apartment.MaxChildren?.ToString();
-            tbTotalRooms.Text = apartment.TotalRooms?.ToString();
+            tbMaxAdults.Text = apartment.MaxAdults.ToString();
+            tbMaxChildren.Text = apartment.MaxChildren.ToString();
+            tbTotalRooms.Text = apartment.TotalRooms.ToString();
             tbBeachDistance.Text = apartment.BeachDistance?.ToString();
 
             repTags.DataSource = apartment.Tags;

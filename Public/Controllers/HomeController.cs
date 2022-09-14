@@ -14,7 +14,7 @@ using System.Web.Mvc;
 
 namespace Public.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class HomeController : Controller
     {
         private UserManager _authManager;
