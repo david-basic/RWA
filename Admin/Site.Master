@@ -46,6 +46,9 @@
                         <span class="icon-bar" style="background-color: white"></span>
                         <span class="icon-bar" style="background-color: white"></span>
                     </button>
+                    <a class="navbar-brand" style="vertical-align: middle" runat="server" href="~/">
+                        <img src="Content/Pictures/IKONA_apartmani_1_veći_white.png" />
+                    </a>
                     <a class="navbar-brand a-custom" runat="server" href="~/"><strong>RWA Apartments Admin</strong></a>
                 </div>
                 <div class="navbar-collapse collapse">

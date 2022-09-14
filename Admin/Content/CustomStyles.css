@@ -75,6 +75,7 @@ table, th, td {
 .size1of4{
     width: 100%;
     padding: 5%;
+    aspect-ratio: 6/4;
 }
 
 .table-pictures{
