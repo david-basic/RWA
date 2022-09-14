@@ -12,10 +12,14 @@
     color: #124773;
 }
 
-.button-custom {
-    font-family:'Century Gothic';
-    color: white;
+.btn-custom {
+    font-family: 'Century Gothic';
     background: #124773;
+    color: white;
+}
+
+.btn-custom:hover {
+    color: #a7d0f1;
 }
 
 .font-goth {
