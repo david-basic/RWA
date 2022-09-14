@@ -16,16 +16,29 @@ namespace Public.Models.Authentication
         {
             Users = users;
         }
+        public void Dispose()
+        {
+        }
         
         public static DbContext Create()
         {
+            //var users = new List<User>
+            //{
+            //    new User
+            //    {
+            //        CreatedAt = DateTime.Now,
+            //        UserName = "david@admin.hr",
+            //        FullName = "David Basic",
+            //        Email = "david@admin.hr",
+            //        Password = "1234",
+            //        Roles = new List<string>() { "Admin" }
+            //    }
+            //};
+
             var users = RepoFactory.GetRepo().LoadUsers();
 
             return new DbContext(users);
         }
 
-        public void Dispose()
-        {
-        }
     }
 }
