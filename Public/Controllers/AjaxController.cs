@@ -9,13 +9,15 @@ namespace Public.Controllers
 {
     public class AjaxController : Controller
     {
-        public ActionResult GetApartmentNames(string wordPart)
+        public ActionResult GetApartmentNames(string term)
         {
             var allNames = RepoFactory.GetRepo().LoadApartmentNames();
 
-            var namesFound = allNames.Where(name => name.ToLower().Contains(wordPart.ToLower()));
+            var found = allNames.Where(
+                name => name.ToLower().Contains(term.ToLower())
+            );
 
-            return Json(namesFound, JsonRequestBehavior.AllowGet);
+            return Json(found, JsonRequestBehavior.AllowGet);
         }
     }
 }

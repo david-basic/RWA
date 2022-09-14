@@ -117,12 +117,12 @@ form {
         color: rgb(236, 179, 101);
     }
 
-.avaliabilty_container_avaliable {
+.availabilty_container_available {
     color: #ffffff;
     background-color: green;
 }
 
-.avaliability_container_unavaliable {
+.availability_container_unavailable {
     color: #ffffff;
     background-color: rgb(220,53,69);
 }

@@ -1,12 +1,12 @@
 ﻿
 @model DataLayer.Models.ApartmentStatus
 @{
-    string cssClass = "availabilty_container_avaliable";
+    string cssClass = "availabilty_container_available";
     string statusText = "Available";
 
     if (Model.Id != 3)
     {
-        cssClass = "availability_container_unavaliable";
+        cssClass = "availability_container_unavailable";
         statusText = "Unavailable";
     }
 

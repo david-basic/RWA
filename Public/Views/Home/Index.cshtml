@@ -47,7 +47,7 @@
                 @Html.DropDownList(optionLabel: null, selectList: ddlFiltersSource, name: "FilterCode", htmlAttributes: new { @class = "form-control", id = "filterDropDownList" })
             </div>
             <div class="col-md-auto">
-                <button type="button" class="btn btn-custom" id="findButton">
+                <button type="button" class="btn btn-custom" id="btnSearch">
                     Search
                 </button>
             </div>
@@ -87,7 +87,7 @@
             loadApartmentListPartialViewAjax();
         });
 
-        $("#findButton").click(function () {
+        $("#btnSearch").click(function () {
             loadApartmentListPartialViewAjax();
         });
 

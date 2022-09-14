@@ -10,30 +10,36 @@
 }
 
 <a href="Home/ViewApartment/@Model.Id">
-    <div class="container rounded-3 text-black" style="background-color:rgb(245,245,245)">
+    <div class="container rounded-0 text-black" style="background-color: #124773">
         <div class="row mb-3">
             <div class="col-4">
                 <div class="container p-3">
-                    <img src="@Model.MainPicture.Base64Content" class="custom_image rounded-3" />
+                    <img src="@Model.MainPicture.Base64Content" class="custom_image rounded-0" />
                 </div>
             </div>
+
             <div class="col-8">
                 <div class="row h-50 clearfix mb-3">
                     <div class="col-sm">
+
                         <h2 class="pt-3 text-black" style="height:fit-content">@Model.NameEng</h2>
+
                         <div class="mb-3">
-                            <span style="height:fit-content">@*<img src="~/Content/images/location_red.png" style="margin-right:.5em" class="icon" />*@@Model.CityName</span>
+                            <span style="height:fit-content">City: @Model.CityName</span>
                         </div>
+
                         <div>
-                            <span style="height:fit-content">@Model.Address</span>
+                            <span style="height:fit-content">Address: @Model.Address</span>
                         </div>
                     </div>
+
                     <div class="col-md-auto">
                         <div class="mt-3">
                             @Html.Partial("_StarsView", model: starsModel)
                         </div>
                     </div>
                 </div>
+
                 <div class="row h-50">
                     <div style="display: flex; flex-direction: row; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; gap: .7em ">
                         @foreach (var tag in Model.Tags)
@@ -41,19 +47,23 @@
                             @Html.Partial("_TagView", model: tag.NameEng)
                         }
                     </div>
+
                     <div style="width:100%; display:flex; justify-content:space-between; height:fit-content">
                         <div style="display:flex;gap:2em;flex-direction:row">
                             <div>
-                                <span style="height:fit-content">@*<img src="~/Content/images/bed.png" style="position: relative; top: -2px;" class="icon" />*@@Model.TotalPeople.ToString()</span>
+                                <span style="height:fit-content">Total spaces: @Model.TotalPeople.ToString()</span>
                             </div>
+
                             <div>
-                                <span style="height:fit-content">@*<img src="~/Content/images/sea.png" style="position: relative; top: -2px;" class="icon" />*@@Model.BeachDistance.ToString()m </span>
+                                <span style="height:fit-content">Distance to beach: @Model.BeachDistance.ToString()m </span>
                             </div>
                         </div>
+
                         <div style="display:flex; flex-direction:row; gap:1em">
                             <div>
-                                @Html.Partial("_AvaliabilityView", model: Model.Status)
+                                @Html.Partial("_AvailabilityView", model: Model.Status)
                             </div>
+
                             <div>
                                 @Html.Partial("_PriceView", model: Model.PriceStringFormat)
                             </div>
