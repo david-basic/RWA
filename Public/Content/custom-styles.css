@@ -12,6 +12,12 @@
     color: #124773;
 }
 
+.navbar-custom {
+    background: #124773;
+    font-family:'Century Gothic';
+    color: white;
+}
+
 .btn-custom {
     font-family: 'Century Gothic';
     background: #124773;

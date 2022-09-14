@@ -4,62 +4,62 @@
     ViewBag.Title = "Register";
 }
 
-<div class="container pt-5" style="display: flex; justify-content: center; align-items: center">
-    <hr style="width: 10px" />
-    @using (Html.BeginForm("Register", "Home", null, FormMethod.Post, new { role = "form" }))
-    {
-        @Html.AntiForgeryToken()
-        <div class="container p-4" style="width:500px">
+<div class="container-fluid mt-5 text-center font-goth" style="color: #124773;">
+    <div class="col-sm-6 offset-sm-3">
+        <div class="col-sm-6 offset-sm-3 vstack gap-3">
 
-            <div class="mb-4">
-                <h2 style="text-align:center">Register</h2>
-            </div>
+            <div class="fs-1" style="text-align:center"><strong>Register</strong></div>
 
-            <div class="mb-3">
-                @Html.TextBoxFor(m => m.UserName, htmlAttributes: new { @class = "form-control", style = "text-align:center", placeholder = "Your name" })
-            </div>
-
-            <div class="mb-3">
-                @Html.TextBoxFor(m => m.Email, htmlAttributes: new { @class = "form-control", style = "text-align:center", placeholder = "Your e-mail address" })
-            </div>
-
-            <div class="mb-3">
-                @Html.TextBoxFor(m => m.Address, htmlAttributes: new { @class = "form-control", style = "text-align:center", placeholder = "Your address" })
-            </div>
-
-            <div class="mb-3">
-                @Html.TextBoxFor(m => m.PhoneNumber, htmlAttributes: new { @class = "form-control", style = "text-align:center", placeholder = "Your phone number" })
-            </div>
-
-            <div class="mb-3">
-                @Html.PasswordFor(m => m.Password, htmlAttributes: new { @class = "form-control", style = "text-align:center", placeholder = "Your password" })
-            </div>
-
-            <div class="mb-3">
-                @Html.PasswordFor(m => m.ConfirmPassword, htmlAttributes: new { @class = "form-control", style = "text-align:center", placeholder = "Confirm password" })
-            </div>
-
-            <div class="mb-3" style="display:flex; justify-content: center; align-items:center">
-                @Html.RecaptchaWidget(siteKey: "6Ld0Ya0gAAAAABWu7qi05kl8gS4MXJuc5ljtY-cH")
-            </div>
-
-            @if (!ViewData.ModelState.IsValid)
+            @using (Html.BeginForm("Register", "Home", null, FormMethod.Post, new { role = "form" }))
             {
-                <div class="alert alert-danger text-center">
-                    <img src="~/Content/images/warning.png" aria-hidden="true" />
-                    @Html.ValidationSummary()
+                @Html.AntiForgeryToken()
+                <div class="vstack gap-3">
+
+                    <div>
+                        @Html.TextBoxFor(m => m.UserName, htmlAttributes: new { @class = "form-control", style = "text-align:center", placeholder = "Your name" })
+                    </div>
+
+                    <div>
+                        @Html.TextBoxFor(m => m.Email, htmlAttributes: new { @class = "form-control", style = "text-align:center", placeholder = "Your e-mail address" })
+                    </div>
+
+                    <div>
+                        @Html.TextBoxFor(m => m.Address, htmlAttributes: new { @class = "form-control", style = "text-align:center", placeholder = "Your address" })
+                    </div>
+
+                    <div>
+                        @Html.TextBoxFor(m => m.PhoneNumber, htmlAttributes: new { @class = "form-control", style = "text-align:center", placeholder = "Your phone number" })
+                    </div>
+
+                    <div>
+                        @Html.PasswordFor(m => m.Password, htmlAttributes: new { @class = "form-control", style = "text-align:center", placeholder = "Your password" })
+                    </div>
+
+                    <div>
+                        @Html.PasswordFor(m => m.ConfirmPassword, htmlAttributes: new { @class = "form-control", style = "text-align:center", placeholder = "Confirm password" })
+                    </div>
+
+                    <div class="d-flex justify-content-center text-center">
+                        @Html.RecaptchaWidget(siteKey: "6Ld0Ya0gAAAAABWu7qi05kl8gS4MXJuc5ljtY-cH")
+                    </div>
+
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger">
+                            @Html.ValidationSummary()
+                        </div>
+                    }
+
+                    <button type="submit" class="btn btn-custom" style="width: 100%">Register</button>
+
+
+                    <div class="mb-3" style="display:flex; justify-content: center; align-items:center">
+                        @Html.ActionLink("Already have an account? Login here", actionName: "Login", controllerName: "Home")
+                    </div>
+
                 </div>
             }
-
-            <div class="mb-3">
-                <button type="submit" class="btn btn-custom" style="width: 100%">Register</button>
-            </div>
-
-            <div class="mb-3" style="display:flex; justify-content: center; align-items:center">
-                @Html.ActionLink("Already have an account? Login here", actionName: "Login", controllerName: "Home")
-            </div>
-
         </div>
-    }
-</div>
+    </div>
 
+</div>

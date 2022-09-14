@@ -19,51 +19,15 @@ namespace Public.Controllers
     {
         private UserManager _authManager;
         private SignInManager _signInManager;
-
-        public UserManager AuthManager
-        {
-            get { return _authManager ?? HttpContext.GetOwinContext().GetUserManager<UserManager>(); }
-            set { _authManager = value; }
-        }
         public SignInManager SignInManager
         {
             get { return _signInManager ?? HttpContext.GetOwinContext().Get<SignInManager>(); }
             set { _signInManager = value; }
         }
-
-        [HttpGet]
-        [AllowAnonymous]    
-        public ActionResult Login()
+        public UserManager AuthManager
         {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [AllowAnonymous]
-        public async Task<ActionResult> Login(LoginVM model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            var user = await AuthManager.FindAsync(model.Email, model.Password);
-
-            if (user != null)
-            {
-                await SignInManager.SignInAsync(user, true, model.RememberMe);
-
-                ViewBag.username = user.UserName;
-
-                return RedirectToAction(actionName: "Index", controllerName: "Home");
-            }
-            else
-            {
-                ModelState.AddModelError("", "Username or password is incorrect");
-
-                return View(model);
-            }
+            get { return _authManager ?? HttpContext.GetOwinContext().GetUserManager<UserManager>(); }
+            set { _authManager = value; }
         }
 
         [HttpGet]
@@ -92,6 +56,39 @@ namespace Public.Controllers
         public ActionResult About()
         {
             return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Login(LoginVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await AuthManager.FindAsync(model.Email, model.Password);
+            if (user != null)
+            {
+                await SignInManager.SignInAsync(user, true, model.RememberMe);
+                ViewBag.username = user.UserName;
+
+                return RedirectToAction(actionName: "Index", controllerName: "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Username or password is incorrect");
+
+                return View(model);
+            }
         }
 
         [HttpGet]
