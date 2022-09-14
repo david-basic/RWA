@@ -10,7 +10,7 @@
         @Html.AntiForgeryToken()
         <div class="card" style="background: #12477360">
 
-            <div class="container" style="display:flex; justify-content:center; align-items:center">
+            <div class="container pt-3" style="display:flex; justify-content:center; align-items:center">
                 <img src="~/Content/images/IKONA_apartmani_1_veći_white.png" style="width:150px; height:150px" />
             </div>
 
@@ -20,7 +20,7 @@
             <div class="row mb-3">
                 <label for="emailInput" class="col-sm-2 col-form-label">@*Email address:*@</label>
                 <div class="col-sm-8">
-                    @Html.TextBoxFor(m => m.Email, htmlAttributes: new { @class = "form-control", style = "text-align:center", placeholder = "E-mail address", id = "emailInput"})
+                    @Html.TextBoxFor(m => m.Email, htmlAttributes: new { @class = "form-control", style = "text-align:center", placeholder = "E-mail address", id = "emailInput" })
                 </div>
             </div>
 
