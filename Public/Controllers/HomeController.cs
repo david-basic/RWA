@@ -38,13 +38,6 @@ namespace Public.Controllers
             return View();
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
@@ -71,6 +64,13 @@ namespace Public.Controllers
 
                 return View(model);
             }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Index()
+        {
+            return View();
         }
 
         [HttpGet]
