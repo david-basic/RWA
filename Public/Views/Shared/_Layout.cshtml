@@ -10,14 +10,11 @@
 <body>
 
     <nav class="navbar navbar-expand-sm" style="background: #124773">
-        <div class="container-fluid">
-            <a class="navbar-brand">
-                <img src="~/Content/images/IKONA_apartmani_1_veći_white.png" alt="logo" style="height: 2rem; width: 2rem; margin-right:.5rem" />
-                @Html.ActionLink("RWA Apartments", "Index", "Home", null, new { @class = "navbar-brand white-text fw-bold" })
-            </a>
-        </div>
-
-        <div class="container-fluid">
+        <div class="container-fluid justify-content-start">
+            <div class="navbar-brand">
+                <img src="~/Content/images/IKONA_apartmani_1_veći_white.png" alt="logo" style="height: 2rem; width: 2rem;" />
+                @Html.ActionLink("RWA Apartments", "Index", "Home", null, new { @class = "navbar-brand white-text fw-bold align-content-start" })
+            </div>
             <ul class="nav navbar-nav">
                 <li class="nav-item">
                     @Html.ActionLink("Search", "Search", "Home", null, new { @class = "nav-link white-text" })
@@ -29,31 +26,30 @@
                     @Html.ActionLink("About us", "About", "Home", null, new { @class = "nav-link white-text" })
                 </li>
             </ul>
-
-            <ul>
-                @if (HttpContext.Current.User.Identity.Name == "")
-                {
-                    <li class="nav-item">
-                        @Html.ActionLink("Login", "Index", "Home", null, new { @class = "nav-link white-text" })
-                    </li>
-                }
-                @if (HttpContext.Current.User.Identity.Name != "")
-                {
-                    <li class="nav-item" style="margin-right:.5rem">
-                        <span class="nav-link">
-                            @Html.ActionLink($"{HttpContext.Current.User.Identity.Name}", "UserView", null, new { @class = "nav-link" })
-                        </span>
-                    </li>
-
-
-                    <li class="nav-item" style="display:flex; justify-content:center; align-items:center">
-                        @Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "btn btn-outline-danger" })
-                    </li>
-                }
-            </ul>
         </div>
-            
-        
+
+        <ul class="nav navbar-nav justify-content-end me-2">
+            @if (HttpContext.Current.User.Identity.Name == "")
+            {
+                <li class="nav-item">
+                    @Html.ActionLink("Login", "Index", "Home", null, new { @class = "nav-link white-text" })
+                </li>
+            }
+            @if (HttpContext.Current.User.Identity.Name != "")
+            {
+                <li class="nav-item" style="margin-right:.5rem">
+                    <span class="nav-link">
+                        @Html.ActionLink($"{HttpContext.Current.User.Identity.Name}", "UserView", null, new { @class = "nav-link white-text" })
+                    </span>
+                </li>
+
+                <li class="nav-item" style="display:flex; justify-content:center; align-items:center">
+                    @Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "btn btn-outline-danger" })
+                </li>
+            }
+        </ul>
+
+
     </nav>
 
     <div class="container-fluid">
