@@ -95,7 +95,7 @@
                 url: `/Home/LoadApartmentListPartialView/?Search=${$("#Search")}&CityId=${$("#cityddl").val()}&StatusId=${$("#statusddl").val()}&FilterCode=${$("#filterddl").val()}`,
                 success: function (partialView) {
                     $(".draw_apartments").fadeIn(500);
-                    $(".draw_apartments").html();
+                    $(".draw_apartments").html("");
                     $(".draw_apartments").append(partialView);
                 }
             });
