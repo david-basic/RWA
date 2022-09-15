@@ -203,35 +203,33 @@
                     <input type="hidden" name="UserId" , value="@Model.UserId" />
                     <input type="hidden" name="ApartmentId" , value="@Model.Apartment.Id" />
 
-                    <div class="tag_container_light rounded-3 mb-3 p-3">
+                    <div class="rounded-3 mb-3 p-3" style="background: #12477320">
                         <div class="row">
-                            <div class="col-md-auto">
-                                <b>USER</b>
+                            <div class="col-sm fs-3">
+                                <i class="fa-solid fa-user fa-xl" style="vertical-align:middle"></i> @Model.FirstName @Model.LastName
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="mb-3 ms-3">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        <i id="@i" class="fa-regular fa-star star fa-lg"></i>
+                                    }
+                                </div>
                             </div>
 
-                            <div class="col-sm">
-                                <div class="row h-50">
-                                    <div class="col-md-auto">
-                                        <h5 style="width:fit-content">You</h5>
-
-                                        <div class="mb-3">
-                                            @for (int i = 1; i <= 5; i++)
-                                            {
-                                                <img id="@i" class="icon star" src="~/Content/images/emptyStar.png" />
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-
+                            <div class="row">
                                 <div class="row">
-                                    <div class="row">
-                                        <div class="col-sm">
-                                            <textarea rows="3" cols="1" name="Details" id="details" class="form-control" placeholder="Your review..."></textarea>
-                                        </div>
+                                    <div class="col-sm">
+                                        <textarea rows="3" cols="1" name="Details" id="details" class="form-control" placeholder="Your review..."></textarea>
+                                    </div>
 
-                                        <div class="col-md-auto">
-                                            <button type="submit" class="btn btn-custom" id="submitReview" value="submit" style="height:100%">Submit</button>
-                                        </div>
+                                    <div class="col-md-auto">
+                                        <button type="submit" class="btn btn-primary btn-custom" id="submitReview" value="submit" style="height:100%">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -282,7 +280,7 @@
 
         function emptyCommentForm() {
             for (var i = 1; i <= 5; i++) {
-                $(`img#${i}`).attr('src', '/Content/images/emptyStar.png');
+                $(`i#${i}`).attr('class', 'fa-regular fa-star star fa-lg');
             }
             $("#details").html("");
             $("#details").val("");
@@ -291,10 +289,10 @@
         $("#1, #2, #3, #4, #5").on('click', function () {
             var id = this.id;
             for (var i = 1; i <= 5; i++) {
-                $(`img#${i}`).attr('src', '/Content/images/emptyStar.png');
+                $(`i#${i}`).attr('class', 'fa-regular fa-star star fa-lg');
             }
             for (var i = 1; i <= id; i++) {
-                $(`img#${i}`).attr('src', '/Content/images/star.png');
+                $(`i#${i}`).attr('class', 'fa-solid fa-star star fa-lg');
             }
             $("#Stars").val(id);
         });
