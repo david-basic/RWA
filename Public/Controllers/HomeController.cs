@@ -113,7 +113,7 @@ namespace Public.Controllers
         [AllowAnonymous]
         public ActionResult LoadApartmentListPartialView(string search, int? cityId, string statusId, string filterCode)
         {
-            Predicate<Apartment> avaliabilityFilter = a => a.IsAvailable;
+            Predicate<Apartment> availabilityFilter = a => a.IsAvailable;
             Predicate<Apartment> nameFilter = a => true;
             Predicate<Apartment> cityFilter = a => true;
             Predicate<Apartment> statusFilter = a => true;
@@ -132,21 +132,21 @@ namespace Public.Controllers
             {
                 if ("all".Equals(statusId))
                 {
-                    avaliabilityFilter = a => true;
+                    availabilityFilter = a => true;
                 }
-                else if ("unavaliable".Equals(statusId))
+                else if ("unavailable".Equals(statusId))
                 {
-                    avaliabilityFilter = a => !a.IsAvailable;
+                    availabilityFilter = a => !a.IsAvailable;
                 }
             }
 
-            List<Apartment> apartments = (List<Apartment>)RepoFactory.GetRepo().LoadApartments(avaliabilityFilter, nameFilter, cityFilter, statusFilter);
+            List<Apartment> apartments = (List<Apartment>)RepoFactory.GetRepo().LoadApartments(availabilityFilter, nameFilter, cityFilter, statusFilter);
 
             if (filterCode != null && filterCode != string.Empty)
             {
-                if (Apartment.ComparisonDicitionary.Keys.Any(key => key.Equals(filterCode)))
+                if (Apartment.ComparisonDictionary.Keys.Any(key => key.Equals(filterCode)))
                 {
-                    apartments.Sort(Apartment.ComparisonDicitionary[filterCode]);
+                    apartments.Sort(Apartment.ComparisonDictionary[filterCode]);
                 }
             }
             else

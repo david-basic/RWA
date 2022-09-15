@@ -13,7 +13,7 @@
     IList<SelectListItem> ddlStatusItems = new List<SelectListItem>();
 
     ddlStatusItems.Add(new SelectListItem { Text = "All apartments", Value = "all", Selected = true });
-    ddlStatusItems.Add(new SelectListItem { Text = "Avaliable apartments", Value = "avaliable"});
+    ddlStatusItems.Add(new SelectListItem { Text = "Avaliable apartments", Value = "avaliable" });
     ddlStatusItems.Add(new SelectListItem { Text = "Unavaliable apartments", Value = "unavaliable" });
 
     SelectList ddlStatusSource = new SelectList(ddlStatusItems, "Value", "Text");
@@ -54,7 +54,7 @@
         </div>
     </div>
 
-    <div class="col-sm apartments_container">
+    <div class="col-sm draw_apartments">
     </div>
 
 </div>
@@ -100,12 +100,17 @@
 
         function loadApartmentListPartialViewAjax() {
             $.ajax({
+                method: 'GET',
                 url: `/Home/LoadApartmentListPartialView/?Search=${$("#Search").val()}&CityId=${$("#cityDropDownList").val()}&StatusId=${$("#statusDropDownList").val()}&FilterCode=${$("#filterDropDownList").val()}`,
                 success: function (partialView) {
-                    $(".apartments_container").html("")
-                    $(".apartments_container").append(partialView);
+                    $(".draw_apartments").html("")
+                    $(".draw_apartments").append(partialView);
                 }
             });
         }
     </script>
 }
+
+@*LoadApartmentListPartialView(string search, int? cityId, string statusId, string filterCode)*@
+
+@*url: `/Home/LoadApartmentListPartialView/?Search=${$("#Search").val()}&CityId=${$("#cityDropDownList").val()}&StatusId=${$("#statusDropDownList").val()}&FilterCode=${$("#filterDropDownList").val()}`,*@

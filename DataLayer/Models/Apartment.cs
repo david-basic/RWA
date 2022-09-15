@@ -99,7 +99,7 @@ namespace DataLayer.Models
         public static Comparison<Apartment> TotalRoomsHighToLowComp = (left, right) => -left.TotalRooms.CompareTo(right.TotalRooms);
         public static Comparison<Apartment> TotalSpaceLowToHighComp = (left, right) => (left.MaxAdults + left.MaxChildren).CompareTo(right.MaxAdults + right.MaxChildren);
         public static Comparison<Apartment> TotalSpaceHighToLowComp = (left, right) => -(left.MaxAdults + left.MaxChildren).CompareTo(right.MaxAdults + right.MaxChildren);
-        public static IDictionary<string, Comparison<Apartment>> ComparisonDicitionary
+        public static IDictionary<string, Comparison<Apartment>> ComparisonDictionary
         {
             get
             {
