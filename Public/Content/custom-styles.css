@@ -15,6 +15,9 @@
 .tag-css {
     background-color: #124773;
     color: white;
+    width: fit-content;
+    white-space: nowrap;
+    font-size: 75%;
 }
 
 .map-container{
