@@ -8,8 +8,21 @@
     transition: all ease-in;
 }
 
+.text-custom-blue {
+    color: #124773;
+}
+
+    .text-custom-blue:hover {
+        color: #124773;
+    }
+
 .white-link:hover {
     color: #124773;
+}
+
+.price-custom {
+    color: white;
+    background-color: #124773;
 }
 
 .tag-css {
@@ -20,14 +33,14 @@
     font-size: 75%;
 }
 
-.map-container{
+.map-container {
     overflow: hidden;
     position: relative;
 }
 
 .navbar-custom {
     background: #124773;
-    font-family:'Century Gothic';
+    font-family: 'Century Gothic';
     color: white;
 }
 
@@ -40,10 +53,12 @@
     font-family: 'Century Gothic';
     background: #124773;
     color: white;
+    border-color: #124773;
 }
 
     .btn-custom:hover {
         color: #a7d0f1;
+        border-color: #124773;
     }
 
 .font-goth {
@@ -155,8 +170,8 @@ form {
 }
 
 .tag_container_light {
-    background-color: rgb(243, 243, 243);
-    color: black;
+    background-color: #12477320;
+    color: #124773;
 }
 
 .fa {

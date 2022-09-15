@@ -12,7 +12,7 @@
         <br />
 
         <div class="fs-6">
-            Use the information provided below to reach us or leave us a message using contact form.
+            Use the information provided below to reach us.
         </div>
         <br />
 
@@ -45,66 +45,5 @@
         </div>
     </div>
 </div>
-
-<br />
-
-<div class="container-fluid col-sm-10 offset-sm-1 font-goth" style="color: #124773">
-    <br />
-
-    <div class="fs-3 offset-sm-1">
-        <strong>Message form</strong>
-    </div>
-    <br />
-
-    <div class="row">
-        <div class="col-sm-4 offset-sm-1">
-            <div class="vstack">
-                <label><strong>Your name:</strong></label>
-                <input class="form-control" type="text" id="txt1" placeholder="Name">
-                <br />
-
-                <label><strong>Your e-mail:</strong></label>
-                <input class="form-control" type="text" id="txt2" placeholder="E-mail">
-                <br />
-
-                <label><strong>Your phone:</strong></label>
-                <input class="form-control" type="text" id="txt3" placeholder="Phone">
-            </div>
-        </div>
-
-        <div class="col-sm-4 offset-sm-1">
-            <div class="vstack">
-                <label><strong>Subject:</strong></label>
-                <input class="form-control" type="text" id="txt4" placeholder="Subject">
-                <br />
-
-                <label><strong>Message:</strong></label>
-                <input class="form-control" type="text" id="txt5" placeholder="Message...">
-                <br />
-
-                <label style="color: transparent;">nothing</label>
-                <button class="btn btn-custom btn-outline-secondary" id="#btnSend" onclick="emptyAndInform()" type="submit" style="border-color: white">Send</button>
-            </div>
-        </div>
-    </div>
-</div>
 <br />
 <br />
-
-@section scripts{
-    <script>
-
-        function emptyAndInform() {
-            $("#btnSend").onclick = function () {
-                alert('Thank you for contacting us!');
-                emptyInputs();
-            };
-        };
-
-        function emptyInputs() {
-            $("#txt1, #txt2, #txt3, #txt4, #txt5").each(function () {
-                $(this).value = ""
-            });
-        }
-    </script>
-}

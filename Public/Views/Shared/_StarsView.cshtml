@@ -5,21 +5,20 @@
     int emptyStarCount = 5 - fullStarCount;
 }
 
-<div style="width:fit-content; display:flex; ">
+<div class="col text-center">
     @for (int i = 1; i <= fullStarCount; i++)
     {
-        <img class="icon" src="~/Content/images/star.png" />
+        <i class="fa-solid fa-star"></i>
     }
 
     @for (int i = 1; i <= emptyStarCount; i++)
     {
-        <img class="icon" src="~/Content/images/emptyStar.png" />
+        <i class="fa-regular fa-star"></i>
     }
 
     @if (Model.ShowTotalReviews)
     {
-        <div>
-            <span class="text-black" style="position:relative; top:-.2em">(@Model.TotalReviews)</span>
-        </div>
+        <br />
+        <strong>@Model.TotalReviews/5</strong>
     }
 </div>

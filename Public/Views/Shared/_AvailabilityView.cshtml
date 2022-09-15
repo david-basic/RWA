@@ -1,20 +1,18 @@
 ﻿@model DataLayer.Models.ApartmentStatus
 @{
-    string cssClass = "availabilty_container_available";
+    string cssCustomAvailability = "availabilty_container_available";
     string statusText = "Available";
 
     if (Model.Id != 3)
     {
-        cssClass = "availability_container_unavailable";
+        cssCustomAvailability = "availability_container_unavailable";
         statusText = "Unavailable";
     }
 
-    ViewBag.css = cssClass;
+    ViewBag.css = cssCustomAvailability;
     ViewBag.statusText = statusText;
 }
 
-<div class="rounded-3 @ViewBag.css" style="width:fit-content; height:fit-content; display:flex; align-items:center; justify-content:center">
-    <div class="p-2">
-        <span>@ViewBag.statusText</span>
-    </div>
+<div class="container rounded p-3 @ViewBag.css" style="width: fit-content">
+    @ViewBag.statusText
 </div>
