@@ -11,12 +11,12 @@
 
     IList<SelectListItem> ddlFilterItems = new List<SelectListItem>();
 
-    ddlFilterItems.Add(new SelectListItem { Text = "Lowest price", Value = "PLH", Selected = true });
+    ddlFilterItems.Add(new SelectListItem { Text = "Lowest price", Value = "PLH" });
     ddlFilterItems.Add(new SelectListItem { Text = "Highest price", Value = "PHL" });
     ddlFilterItems.Add(new SelectListItem { Text = "Least rooms", Value = "RLH" });
     ddlFilterItems.Add(new SelectListItem { Text = "Most rooms", Value = "RHL" });
     ddlFilterItems.Add(new SelectListItem { Text = "Least space", Value = "SLH" });
-    ddlFilterItems.Add(new SelectListItem { Text = "Most space", Value = "SHL" });
+    ddlFilterItems.Add(new SelectListItem { Text = "Most space", Value = "SHL", Selected = true });
 
     SelectList ddlFiltersSource = new SelectList(ddlFilterItems, "Value", "Text");
 
@@ -61,7 +61,7 @@
 
 @section scripts{
     <script>
-        $("#filterddl").val("PLH");
+        $("#filterddl").val("SHL");
 
         $("#statusddl").val("available");
 
@@ -79,7 +79,7 @@
                 console.log(ui);
                 var clickedName = ui.item.label;
                 $(this).val(clickedName);
-                return false;
+                return true;
             }
         });
 
@@ -94,7 +94,7 @@
         function loadApartmentListPartialViewAjax() {
             $.ajax({
                 method: 'GET',
-                url: `/Home/LoadApartmentListPartialView/?Search=${$("#Search")}&CityId=${$("#cityddl").val()}&StatusId=${$("#statusddl").val()}&FilterCode=${$("#filterddl").val()}`,
+                url: `/Home/LoadApartmentListPartialView/?Search=${$("#Search").val()}&CityId=${$("#cityddl").val()}&StatusId=${$("#statusddl").val()}&FilterCode=${$("#filterddl").val()}`,
                 success: function (partialView) {
                     $(".draw_apartments").fadeIn(500);
                     $(".draw_apartments").html("");
