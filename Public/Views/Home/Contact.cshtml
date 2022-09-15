@@ -3,11 +3,108 @@
     ViewBag.Title = "Contact";
 }
 
-<hr style="width: 10px" />
 
-<div class="container">
-    <div class="card" style="background: #12477360">
-        <h2 class="text-center display-2" style="color: #124773; font-family:'Century Gothic'"><strong>Feature not yet implemented!</strong></h2>
+<div class="container-fluid mt-5 font-goth" style="color: #124773">
+    <div class="col-sm-10 offset-sm-1">
+        <div class="fs-1">
+            <strong>Contact us</strong>
+        </div>
+        <br />
+
+        <div class="fs-6">
+            Use the information provided below to reach us or leave us a message using contact form.
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="map-container col-sm-5 ms-5" style="display: flex">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2781.0498253347246!2d15.938931451335453!3d45.810260518203094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4765d6d0241612a7%3A0x3871da416ea5d774!2sGradi%C5%A1%C4%87anska%20ul.%2024%2C%2010000%2C%20Zagreb!5e0!3m2!1sen!2shr!4v1663257700646!5m2!1sen!2shr" width="600" height="320" style="border:0;" allowfullscreen="" loading="eager" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+            <div class="col-sm-4">
+                <hr />
+                <br />
+                <div class="fs-3 mx-3">
+                    <strong>RWA Apartments</strong>
+                </div>
+                <br />
+
+                <div class="col mx-3">
+                    <ul class="fa-ul">
+                        <li><span style="vertical-align:middle" class="fa-li"><i class="fa-solid fa-phone"></i></span> <strong>Telephone:</strong> 01 2332 861</li>
+                        <br />
+                        <li><span style="vertical-align:middle" class="fa-li"><i class="fa-solid fa-fax"></i></span> <strong>Fax:</strong> 01 2332 862</li>
+                        <br />
+                        <li><span style="vertical-align:middle" class="fa-li"><i class="fa-solid fa-map-pin"></i></span> <strong>Address:</strong> Gradišćanska ul. 24, 10 000, Zagreb</li>
+                        <br />
+                    </ul>
+                </div>
+
+                <hr />
+            </div>
+        </div>
     </div>
 </div>
 
+<br />
+
+<div class="container-fluid col-sm-10 offset-sm-1 font-goth" style="color: #124773">
+    <br />
+
+    <div class="fs-3 offset-sm-1">
+        <strong>Message form</strong>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-sm-4 offset-sm-1">
+            <div class="vstack">
+                <label><strong>Your name:</strong></label>
+                <input class="form-control" type="text" id="txt1" placeholder="Name">
+                <br />
+
+                <label><strong>Your e-mail:</strong></label>
+                <input class="form-control" type="text" id="txt2" placeholder="E-mail">
+                <br />
+
+                <label><strong>Your phone:</strong></label>
+                <input class="form-control" type="text" id="txt3" placeholder="Phone">
+            </div>
+        </div>
+
+        <div class="col-sm-4 offset-sm-1">
+            <div class="vstack">
+                <label><strong>Subject:</strong></label>
+                <input class="form-control" type="text" id="txt4" placeholder="Subject">
+                <br />
+
+                <label><strong>Message:</strong></label>
+                <input class="form-control" type="text" id="txt5" placeholder="Message...">
+                <br />
+
+                <label style="color: transparent;">nothing</label>
+                <button class="btn btn-success btn-custom" id="#btnSend" onclick="emptyAndInform()" type="submit" style="background: #124773; border-color: #124773">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+
+@section scripts{
+    <script>
+
+        function emptyAndInform() {
+            $("#btnSend").onclick = function () {
+                alert('Thank you for contacting us!');
+                emptyInputs();
+            };
+        };
+
+        function emptyInputs() {
+            $("#txt1, #txt2, #txt3, #txt4, #txt5").each(function () {
+                $(this).value = "";
+            });
+        }
+    </script>
+}

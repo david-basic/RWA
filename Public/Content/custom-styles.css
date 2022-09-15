@@ -12,10 +12,25 @@
     color: #124773;
 }
 
+.tag-css {
+    background-color: #124773;
+    color: white;
+}
+
+.map-container{
+    overflow: hidden;
+    position: relative;
+}
+
 .navbar-custom {
     background: #124773;
     font-family:'Century Gothic';
     color: white;
+}
+
+.custom-img-100_100 {
+    width: 100%;
+    height: 100%;
 }
 
 .btn-custom {
@@ -66,11 +81,6 @@ form {
 
 .custom_page {
     min-height: 85vh;
-}
-
-.custom_image {
-    width: 100%;
-    height: 100%
 }
 
 .icon {
@@ -126,12 +136,12 @@ form {
     }
 
 .availabilty_container_available {
-    color: #ffffff;
-    background-color: green;
+    color: white;
+    background-color: #124773;
 }
 
 .availability_container_unavailable {
-    color: #ffffff;
+    color: white;
     background-color: #575353;
 }
 
@@ -139,11 +149,6 @@ form {
     color: white;
     background-color: #FF5A5F;
     font-weight: bold;
-}
-
-.tag_container {
-    background-color: rgb(196, 196, 196);
-    color: white;
 }
 
 .tag_container_light {

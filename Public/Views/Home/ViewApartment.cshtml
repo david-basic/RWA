@@ -254,7 +254,7 @@
                                         </div>
 
                                         <div class="col-md-auto">
-                                            <button type="submit" class="btn btn-custom" id="createReview" value="submit" style="height:100%">Submit</button>
+                                            <button type="submit" class="btn btn-custom" id="submitReview" value="submit" style="height:100%">Submit</button>
                                         </div>
                                     </div>
                                 </div>
@@ -277,7 +277,7 @@
             loadReviewListAjax();
         });
 
-        $('#createReview').click(function (e) {
+        $('#submitReview').click(function (e) {
             var valData = $("#createReviewForm").serialize();
             $.ajax({
                 type: "POST",
@@ -327,6 +327,8 @@
             $.ajax({
                 url: `/Home/LoadApartmentReviewsListView/?apartmentId=@Model.Apartment.Id`,
                 success: function (partialView) {
+                    method: 'GET',
+                    $(".reviews_container").fadeIn(500);
                     $(".reviews_container").html("");
                     $(".reviews_container").append(partialView);
                 }

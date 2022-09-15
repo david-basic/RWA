@@ -1,5 +1,7 @@
 ﻿@model Public.Models.ViewModels.ApartmentListVM
-@foreach (var apt in Model.Apartments)
-{
-    @Html.Partial("_ApartmentInListView", apt)
-}
+<div class="mt-3">
+    @foreach (var apt in Model.Apartments)
+    {
+        @Html.Partial("_ApartmentInListView", apt)
+    }
+</div>
