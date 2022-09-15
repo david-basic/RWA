@@ -9,16 +9,6 @@
             dataValueField: "Id"
         );
 
-
-    IList<SelectListItem> ddlStatusItems = new List<SelectListItem>();
-
-    ddlStatusItems.Add(new SelectListItem { Text = "All apartments", Value = "all" });
-    ddlStatusItems.Add(new SelectListItem { Text = "Avaliable apartments", Value = "avaliable", Selected = true });
-    ddlStatusItems.Add(new SelectListItem { Text = "Unavaliable apartments", Value = "unavaliable" });
-
-    SelectList ddlStatusSource = new SelectList(ddlStatusItems, "Value", "Text");
-
-
     IList<SelectListItem> ddlFilterItems = new List<SelectListItem>();
 
     ddlFilterItems.Add(new SelectListItem { Text = "Lowest price", Value = "PLH", Selected = true });
@@ -29,6 +19,14 @@
     ddlFilterItems.Add(new SelectListItem { Text = "Most space", Value = "SHL" });
 
     SelectList ddlFiltersSource = new SelectList(ddlFilterItems, "Value", "Text");
+
+    IList<SelectListItem> ddlStatusItems = new List<SelectListItem>();
+
+    ddlStatusItems.Add(new SelectListItem { Text = "All apartments", Value = "all" });
+    ddlStatusItems.Add(new SelectListItem { Text = "Avaliable apartments", Value = "avaliable", Selected = true });
+    ddlStatusItems.Add(new SelectListItem { Text = "Unavaliable apartments", Value = "unavaliable" });
+
+    SelectList ddlStatusSource = new SelectList(ddlStatusItems, "Value", "Text");
 }
 
 <div class="container">

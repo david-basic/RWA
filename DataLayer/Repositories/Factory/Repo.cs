@@ -99,7 +99,7 @@ namespace DataLayer.Repositories.Factory
             }
         }
 
-        public override void InsertApartmentOwner(ApartmentOwner apartmentOwner)
+        public override void InsertApartmentOwner(AptOwnerMVC apartmentOwner)
         {
             throw new NotImplementedException();
         }
@@ -231,7 +231,7 @@ namespace DataLayer.Repositories.Factory
             return apartmentReviews;
         }
 
-        public override ApartmentOwner LoadApartmentOwnerById(int id)
+        public override AptOwnerMVC LoadApartmentOwnerById(int id)
         {
             var apartmentOwner = this.LoadRawApartmentOwnerById(id);
             var apartments = this.LoadApartmentsByOwnerId(apartmentOwner.Id);
@@ -241,7 +241,7 @@ namespace DataLayer.Repositories.Factory
             return apartmentOwner;
         }
 
-        public override IList<ApartmentOwner> LoadApartmentOwners()
+        public override IList<AptOwnerMVC> LoadApartmentOwners()
         {
             return this.LoadRawApartmentOwners();
         }

@@ -8,6 +8,6 @@ namespace Public.Models.ViewModels
 {
     public class ApartmentsBrowserVM
     {
-        public IEnumerable<Apartment> Apartments { get; set; }
+        public IEnumerable<AptMVC> Apartments { get; set; }
     }
 }

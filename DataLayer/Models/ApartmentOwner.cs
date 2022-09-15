@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Models
 {
-    [Serializable]
     public class ApartmentOwner
     {
         public int Id { get; set; }

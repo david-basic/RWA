@@ -32,7 +32,7 @@ namespace Public.Models.ViewModels
 
         public string Details { get; set; }
 
-        public Apartment Apartment { get; set; }
+        public AptMVC Apartment { get; set; }
         public bool ShowReviewForm { get; set; }
     }
 }

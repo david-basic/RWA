@@ -49,9 +49,9 @@ namespace DataLayer.Repositories.Factory
         void UpdateApartment(AptMVC apartment, IList<AptPicMVC> picturesToRemove);
         IList<AptMVC> LoadApartments(params Predicate<AptMVC>[] filters);
         IList<AptMVC> LoadApartmentsByOwnerId(int id);
-        IList<ApartmentOwner> LoadApartmentOwners();
-        ApartmentOwner LoadApartmentOwnerById(int id);
-        void InsertApartmentOwner(ApartmentOwner apartmentOwner);
+        IList<AptOwnerMVC> LoadApartmentOwners();
+        AptOwnerMVC LoadApartmentOwnerById(int id);
+        void InsertApartmentOwner(AptOwnerMVC apartmentOwner);
         IList<string> LoadApartmentNames();
         IList<AptPicMVC> LoadApartmentPictures();
         AptPicMVC LoadApartmentPictureById(int id);

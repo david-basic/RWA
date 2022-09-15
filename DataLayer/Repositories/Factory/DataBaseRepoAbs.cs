@@ -20,7 +20,7 @@ namespace DataLayer.Repositories.Factory
         public abstract void DeleteUser(int id);
         public abstract void GenerateApartmentReservation(ApartmentReservation apartmentReservation);
         public abstract void InsertApartment(AptMVC apartment);
-        public abstract void InsertApartmentOwner(ApartmentOwner apartmentOwner);
+        public abstract void InsertApartmentOwner(AptOwnerMVC apartmentOwner);
         public abstract void InsertApartmentPicture(AptPicMVC apartmentPicture);
         public abstract void InsertApartmentReservation(ApartmentReservation apartmentReservation);
         public abstract void InsertApartmentReview(ApartmentReview apartmentReivew);
@@ -32,8 +32,8 @@ namespace DataLayer.Repositories.Factory
         public abstract void InsertUser(User user);
         public abstract AptMVC LoadApartmentById(int id);
         public abstract IList<string> LoadApartmentNames();
-        public abstract ApartmentOwner LoadApartmentOwnerById(int id);
-        public abstract IList<ApartmentOwner> LoadApartmentOwners();
+        public abstract AptOwnerMVC LoadApartmentOwnerById(int id);
+        public abstract IList<AptOwnerMVC> LoadApartmentOwners();
         public abstract AptPicMVC LoadApartmentPictureById(int id);
         public abstract IList<AptPicMVC> LoadApartmentPictures();
         public abstract IList<AptPicMVC> LoadApartmentPicturesByApartmentId(int id);
@@ -95,20 +95,20 @@ namespace DataLayer.Repositories.Factory
             return apartments;
         }
 
-        internal IList<ApartmentOwner> LoadRawApartmentOwners()
+        internal IList<AptOwnerMVC> LoadRawApartmentOwners()
         {
-            IList<ApartmentOwner> apartmentsPictures = new List<ApartmentOwner>();
+            IList<AptOwnerMVC> apartmentsPictures = new List<AptOwnerMVC>();
 
             var tblApartmentOwners = SqlHelper.ExecuteDataset(cs, nameof(LoadApartmentOwners)).Tables[0];
             foreach (DataRow row in tblApartmentOwners.Rows)
             {
                 apartmentsPictures.Add(
-                    new ApartmentOwner
+                    new AptOwnerMVC
                     {
-                        Id = (int)(row[nameof(ApartmentOwner.Id)]),
-                        Name = (string)row[nameof(ApartmentOwner.Name)],
-                        CreatedAt = (DateTime)row[nameof(ApartmentOwner.CreatedAt)],
-                        Guid = (Guid)row[nameof(ApartmentOwner.Guid)]
+                        Id = (int)(row[nameof(AptOwnerMVC.Id)]),
+                        Name = (string)row[nameof(AptOwnerMVC.Name)],
+                        CreatedAt = (DateTime)row[nameof(AptOwnerMVC.CreatedAt)],
+                        Guid = (Guid)row[nameof(AptOwnerMVC.Guid)]
                     }
                 );
             }
@@ -351,18 +351,18 @@ namespace DataLayer.Repositories.Factory
             };
         }
 
-        internal ApartmentOwner LoadRawApartmentOwnerById(int id)
+        internal AptOwnerMVC LoadRawApartmentOwnerById(int id)
         {
             var tblApartmentOwners = SqlHelper.ExecuteDataset(cs, nameof(LoadApartmentOwnerById), id).Tables[0];
             if (tblApartmentOwners.Rows.Count == 0) return null;
 
             DataRow row = tblApartmentOwners.Rows[0];
-            return new ApartmentOwner
+            return new AptOwnerMVC
             {
-                Id = (int)(row[nameof(ApartmentOwner.Id)]),
-                Name = (string)row[nameof(ApartmentOwner.Name)],
-                CreatedAt = (DateTime)row[nameof(ApartmentOwner.CreatedAt)],
-                Guid = (Guid)row[nameof(ApartmentOwner.Guid)]
+                Id = (int)(row[nameof(AptOwnerMVC.Id)]),
+                Name = (string)row[nameof(AptOwnerMVC.Name)],
+                CreatedAt = (DateTime)row[nameof(AptOwnerMVC.CreatedAt)],
+                Guid = (Guid)row[nameof(AptOwnerMVC.Guid)]
             };
         }
 

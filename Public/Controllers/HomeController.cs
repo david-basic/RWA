@@ -113,10 +113,10 @@ namespace Public.Controllers
         [AllowAnonymous]
         public ActionResult LoadApartmentListPartialView(string search, int? cityId, string statusId, string filterCode)
         {
-            Predicate<Apartment> availabilityFilter = a => a.IsAvailable;
-            Predicate<Apartment> nameFilter = a => true;
-            Predicate<Apartment> cityFilter = a => true;
-            Predicate<Apartment> statusFilter = a => true;
+            Predicate<AptMVC> availabilityFilter = a => a.IsAvailable;
+            Predicate<AptMVC> nameFilter = a => true;
+            Predicate<AptMVC> cityFilter = a => true;
+            Predicate<AptMVC> statusFilter = a => true;
 
             if (search != null && search != string.Empty)
             {
@@ -140,18 +140,18 @@ namespace Public.Controllers
                 }
             }
 
-            List<Apartment> apartments = (List<Apartment>)RepoFactory.GetRepo().LoadApartments(availabilityFilter, nameFilter, cityFilter, statusFilter);
+            List<AptMVC> apartments = (List<AptMVC>)RepoFactory.GetRepo().LoadApartments(availabilityFilter, nameFilter, cityFilter, statusFilter);
 
             if (filterCode != null && filterCode != string.Empty)
             {
-                if (Apartment.ComparisonDictionary.Keys.Any(key => key.Equals(filterCode)))
+                if (AptMVC.ComparisonDictionary.Keys.Any(key => key.Equals(filterCode)))
                 {
-                    apartments.Sort(Apartment.ComparisonDictionary[filterCode]);
+                    apartments.Sort(AptMVC.ComparisonDictionary[filterCode]);
                 }
             }
             else
             {
-                apartments.Sort(Apartment.PriceLowToHighComp);
+                apartments.Sort(AptMVC.PriceLowToHighComp);
             }
 
             var model = new ApartmentListVM
@@ -166,7 +166,7 @@ namespace Public.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ViewApartment(int id)
         {
-            var loggedUser = await AuthManager.FindByNameAsync(User.Identity.Name);
+            var user = await AuthManager.FindByNameAsync(User.Identity.Name);
 
             var model = new ViewApartmentVM
             {
@@ -179,16 +179,16 @@ namespace Public.Controllers
                 PhoneNumber = string.Empty,
                 Details = string.Empty,
                 StartDate = DateTime.Now,
-                EndDate = DateTime.Now,
+                EndDate = DateTime.Now
             };
 
-            if (loggedUser != null)
+            if (user != null)
             {
-                model.UserId = loggedUser.Id;
-                model.FirstName = loggedUser.FirstName;
-                model.LastName = loggedUser.LastName;
-                model.Email = loggedUser.Email;
-                model.PhoneNumber = loggedUser.PhoneNumber;
+                model.UserId = user.Id;
+                model.FirstName = user.FirstName;
+                model.LastName = user.LastName;
+                model.Email = user.Email;
+                model.PhoneNumber = user.PhoneNumber;
                 model.ShowReviewForm = true;
             }
 
@@ -206,9 +206,7 @@ namespace Public.Controllers
                 var recaptchaHelper = this.GetRecaptchaVerificationHelper(secretKey: "6Ld0Ya0gAAAAAP0oJWaYw1iafuD_aEXB_GUn7iGS");
                 if (string.IsNullOrEmpty(recaptchaHelper.Response))
                 {
-                    ModelState.AddModelError(
-                    "",
-                    "Captcha answer cannot be empty.");
+                    ModelState.AddModelError("", "Captcha answer cannot be empty.");
 
                     return View(model);
                 }
@@ -216,9 +214,7 @@ namespace Public.Controllers
                 var recaptchaResult = recaptchaHelper.VerifyRecaptchaResponse();
                 if (!recaptchaResult.Success)
                 {
-                    ModelState.AddModelError(
-                    "",
-                    "Incorrect captcha answer.");
+                    ModelState.AddModelError("", "Incorrect captcha answer.");
                 }
             }
 
@@ -266,9 +262,9 @@ namespace Public.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult LoadApartmentReviewsListView(int apartmentId)
+        public ActionResult LoadApartmentReviewsListView(int aptId)
         {
-            var reviews = RepoFactory.GetRepo().LoadApartmentReviewsByApartmentId(apartmentId);
+            var reviews = RepoFactory.GetRepo().LoadApartmentReviewsByApartmentId(aptId);
 
             return PartialView("_ReviewListView", new ApartmentReviewListVM { Reviews = reviews.Reverse() });
         }
@@ -288,9 +284,7 @@ namespace Public.Controllers
             var recaptchaHelper = this.GetRecaptchaVerificationHelper(secretKey: "6Ld0Ya0gAAAAAP0oJWaYw1iafuD_aEXB_GUn7iGS");
             if (string.IsNullOrEmpty(recaptchaHelper.Response))
             {
-                ModelState.AddModelError(
-                "",
-                "Captcha answer cannot be empty.");
+                ModelState.AddModelError("", "Captcha answer cannot be empty.");
 
                 return View(model);
             }
@@ -298,9 +292,7 @@ namespace Public.Controllers
             var recaptchaResult = recaptchaHelper.VerifyRecaptchaResponse();
             if (!recaptchaResult.Success)
             {
-                ModelState.AddModelError(
-                "",
-                "Incorrect captcha answer.");
+                ModelState.AddModelError("", "Incorrect captcha answer.");
             }
 
             if (!ModelState.IsValid)
@@ -316,7 +308,7 @@ namespace Public.Controllers
                 PhoneNumber = model.PhoneNumber,
                 Address = model.Address,
                 CreatedAt = DateTime.Now,
-                Guid = Guid.NewGuid(),
+                Guid = Guid.NewGuid()
             };
 
             RepoFactory.GetRepo().InsertUser(newRegisteredUser);
