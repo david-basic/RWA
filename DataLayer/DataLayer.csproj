@@ -59,6 +59,9 @@
     <Compile Include="Models\ApartmentReservation.cs" />
     <Compile Include="Models\ApartmentReview.cs" />
     <Compile Include="Models\ApartmentStatus.cs" />
+    <Compile Include="Models\AptMVC.cs" />
+    <Compile Include="Models\AptOwnerMVC.cs" />
+    <Compile Include="Models\AptPicMVC.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Status.cs" />

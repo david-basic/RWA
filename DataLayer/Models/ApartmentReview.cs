@@ -34,6 +34,6 @@ namespace DataLayer.Models
         [Range(0, 5)]
         public int Stars { get; set; }
         public User User { get; set; }
-        public Apartment Apartment { get; set; }
+        public AptMVC Apartment { get; set; }
     }
 }

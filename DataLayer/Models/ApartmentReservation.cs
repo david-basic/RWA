@@ -20,6 +20,6 @@ namespace DataLayer.Models
         public string UserPhone { get; set; }
         public string UserAddress { get; set; }
         public User User { get; set; }
-        public Apartment Apartment { get; set; }
+        public AptMVC Apartment { get; set; }
     }
 }

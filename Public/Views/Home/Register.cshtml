@@ -8,7 +8,7 @@
     <div class="col-sm-6 offset-sm-3">
         <div class="col-sm-6 offset-sm-3 vstack gap-3">
 
-            <div class="fs-1" style="text-align:center"><strong>Register</strong></div>
+            <div class="fs-1" style="text-align:center"><strong>New user</strong></div>
 
             @using (Html.BeginForm("Register", "Home", null, FormMethod.Post, new { role = "form" }))
             {
@@ -51,7 +51,6 @@
                     }
 
                     <button type="submit" class="btn btn-custom" style="width: 100%">Register</button>
-
 
                     <div class="mb-3" style="display:flex; justify-content: center; align-items:center">
                         @Html.ActionLink("Already have an account? Login here", actionName: "Login", controllerName: "Home")

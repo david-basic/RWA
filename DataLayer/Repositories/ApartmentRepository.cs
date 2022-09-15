@@ -58,10 +58,10 @@ namespace DataLayer.Repositories
                     Address = row["Address"].ToString(),
                     Name = row["Name"].ToString(),
                     Price = Convert.ToDecimal(row["Price"]),
-                    MaxAdults = (int)(row["MaxAdults"] != DBNull.Value ? (int?)Convert.ToInt32(row["MaxAdults"]) : null),
-                    MaxChildren = (int)(row["MaxChildren"] != DBNull.Value ? (int?)Convert.ToInt32(row["MaxChildren"]) : null),
-                    TotalRooms = (int)(row["TotalRooms"] != DBNull.Value ? (int?)Convert.ToInt32(row["TotalRooms"]) : null),
-                    BeachDistance = row["BeachDistance"] != DBNull.Value ? (int?)Convert.ToInt32(row["BeachDistance"]) : null
+                    MaxAdults = (int)(row["MaxAdults"] != DBNull.Value ? (int?)Convert.ToInt32(row["MaxAdults"]) : 0), // removed null
+                    MaxChildren = (int)(row["MaxChildren"] != DBNull.Value ? (int?)Convert.ToInt32(row["MaxChildren"]) : 0), // removed null
+                    TotalRooms = (int)(row["TotalRooms"] != DBNull.Value ? (int?)Convert.ToInt32(row["TotalRooms"]) : 0), // removed null
+                    BeachDistance = row["BeachDistance"] != DBNull.Value ? (int?)Convert.ToInt32(row["BeachDistance"]) : 0 // removed null
                 };
                 apList.Add(ap);
             }

@@ -18,7 +18,7 @@ namespace DataLayer.Repositories.Factory
             var tblApartments = SqlHelper.ExecuteDataset(cs, nameof(LoadApartmentIdByGuid), guid).Tables[0];
             foreach (DataRow row in tblApartments.Rows)
             {
-                apartmentId = (int)(row[nameof(Apartment.Id)]);
+                apartmentId = (int)(row[nameof(AptMVC.Id)]);
             }
 
             return apartmentId;
@@ -39,7 +39,7 @@ namespace DataLayer.Repositories.Factory
             throw new NotImplementedException();
         }
 
-        public override void DeleteApartment(Apartment apartment)
+        public override void DeleteApartment(AptMVC apartment)
         {
             foreach (var tag in apartment.Tags)
             {
@@ -70,7 +70,7 @@ namespace DataLayer.Repositories.Factory
             SqlHelper.ExecuteNonQuery(cs, nameof(DeleteUser), id);
         }
 
-        public override void InsertApartment(Apartment apartment)
+        public override void InsertApartment(AptMVC apartment)
         {
             SqlHelper.ExecuteNonQuery(cs, nameof(InsertApartment),
                     apartment.Guid,
@@ -92,7 +92,7 @@ namespace DataLayer.Repositories.Factory
             foreach (Tag tag in apartment.Tags)
                 InsertTaggedApartment(new TaggedApartment { Guid = Guid.NewGuid(), ApartmentId = apartmentId, TagId = tag.Id });
 
-            foreach (ApartmentPicture picture in apartment.ApartmentPictures)
+            foreach (AptPicMVC picture in apartment.Pictures)
             {
                 picture.ApartmentId = apartmentId;
                 InsertApartmentPicture(picture);
@@ -104,7 +104,7 @@ namespace DataLayer.Repositories.Factory
             throw new NotImplementedException();
         }
 
-        public override void InsertApartmentPicture(ApartmentPicture apartmentPicture)
+        public override void InsertApartmentPicture(AptPicMVC apartmentPicture)
         {
             SqlHelper.ExecuteNonQuery(cs, nameof(InsertApartmentPicture),
                     apartmentPicture.Guid,
@@ -184,7 +184,7 @@ namespace DataLayer.Repositories.Factory
                 );
         }
 
-        public override Apartment LoadApartmentById(int id)
+        public override AptMVC LoadApartmentById(int id)
         {
             var apartment = this.LoadRawApartmentById(id);
             var pictures = this.LoadApartmentPicturesByApartmentId(apartment.Id);
@@ -193,7 +193,7 @@ namespace DataLayer.Repositories.Factory
             var tags = this.LoadTagsByApartmentId(apartment.Id);
             var reviews = this.LoadApartmentReviewsByApartmentId(apartment.Id);
 
-            apartment.ApartmentPictures = new List<ApartmentPicture>(pictures);
+            apartment.Pictures = new List<AptPicMVC>(pictures);
             apartment.Status = status;
             apartment.City = city;
             apartment.Tags = new List<Tag>(tags);
@@ -236,7 +236,7 @@ namespace DataLayer.Repositories.Factory
             var apartmentOwner = this.LoadRawApartmentOwnerById(id);
             var apartments = this.LoadApartmentsByOwnerId(apartmentOwner.Id);
 
-            apartmentOwner.Apartments = new List<Apartment>(apartments);
+            apartmentOwner.Apartments = new List<AptMVC>(apartments);
 
             return apartmentOwner;
         }
@@ -246,34 +246,34 @@ namespace DataLayer.Repositories.Factory
             return this.LoadRawApartmentOwners();
         }
 
-        public override ApartmentPicture LoadApartmentPictureById(int id)
+        public override AptPicMVC LoadApartmentPictureById(int id)
         {
             return this.LoadRawApartmentPictureById(id);
         }
 
-        public override IList<ApartmentPicture> LoadApartmentPictures()
+        public override IList<AptPicMVC> LoadApartmentPictures()
         {
             return this.LoadRawApartmentPictures();
         }
 
-        public override IList<ApartmentPicture> LoadApartmentPicturesByApartmentId(int id)
+        public override IList<AptPicMVC> LoadApartmentPicturesByApartmentId(int id)
         {
-            IList<ApartmentPicture> apartmentPictures = new List<ApartmentPicture>();
+            IList<AptPicMVC> apartmentPictures = new List<AptPicMVC>();
 
             var tblApartmentPictures = SqlHelper.ExecuteDataset(cs, nameof(LoadApartmentPicturesByApartmentId), id).Tables[0];
             foreach (DataRow row in tblApartmentPictures.Rows)
             {
                 apartmentPictures.Add(
-                    new ApartmentPicture
+                    new AptPicMVC
                     {
-                        Id = (int)(row[nameof(ApartmentPicture.Id)]),
-                        Name = (string)row[nameof(ApartmentPicture.Name)],
-                        CreatedAt = (DateTime)row[nameof(ApartmentPicture.CreatedAt)],
-                        Guid = (Guid)row[nameof(ApartmentPicture.Guid)],
-                        ApartmentId = (int)row[nameof(ApartmentPicture.ApartmentId)],
-                        Base64Content = (string)row[nameof(ApartmentPicture.Base64Content)],
-                        IsRepresentative = (bool)row[nameof(ApartmentPicture.IsRepresentative)],
-                        Path = !DBNull.Value.Equals(row[nameof(ApartmentPicture.Path)]) ? (string)row[nameof(ApartmentPicture.Path)] : null
+                        Id = (int)(row[nameof(AptPicMVC.Id)]),
+                        Name = (string)row[nameof(AptPicMVC.Name)],
+                        CreatedAt = (DateTime)row[nameof(AptPicMVC.CreatedAt)],
+                        Guid = (Guid)row[nameof(AptPicMVC.Guid)],
+                        ApartmentId = (int)row[nameof(AptPicMVC.ApartmentId)],
+                        Base64Content = (string)row[nameof(AptPicMVC.Base64Content)],
+                        IsRepresentative = (bool)row[nameof(AptPicMVC.IsRepresentative)],
+                        Path = !DBNull.Value.Equals(row[nameof(AptPicMVC.Path)]) ? (string)row[nameof(AptPicMVC.Path)] : null,
                     }
                 );
             }
@@ -332,15 +332,15 @@ namespace DataLayer.Repositories.Factory
             return this.LoadRawApartmentReviews();
         }
 
-        public override IList<Apartment> LoadApartments()
+        public override IList<AptMVC> LoadApartments()
         {
             return this.LoadRawApartments();
         }
 
-        public override IList<Apartment> LoadApartments(params Predicate<Apartment>[] filters)
+        public override IList<AptMVC> LoadApartments(params Predicate<AptMVC>[] filters)
         {
             var apartments = this.LoadRawApartments();
-            var filteredApartments = new List<Apartment>();
+            var filteredApartments = new List<AptMVC>();
             foreach (var apartment in apartments)
             {
                 var fullApartment = this.LoadApartmentById(apartment.Id);
@@ -359,30 +359,30 @@ namespace DataLayer.Repositories.Factory
             return filteredApartments;
         }
 
-        public override IList<Apartment> LoadApartmentsByOwnerId(int id)
+        public override IList<AptMVC> LoadApartmentsByOwnerId(int id)
         {
-            IList<Apartment> apartments = new List<Apartment>();
+            IList<AptMVC> apartments = new List<AptMVC>();
 
             var tblApartments = SqlHelper.ExecuteDataset(cs, nameof(LoadApartmentsByOwnerId), id).Tables[0];
             foreach (DataRow row in tblApartments.Rows)
             {
                 apartments.Add(
-                    new Apartment
+                    new AptMVC
                     {
-                        Id = (int)(row[nameof(Apartment.Id)]),
-                        Name = (string)row[nameof(Apartment.Name)],
-                        Address = (string)row[nameof(Apartment.Address)],
-                        CityId = (int)(row[nameof(Apartment.CityId)]),
-                        BeachDistance = (int)row[nameof(Apartment.BeachDistance)],
-                        CreatedAt = (DateTime)row[nameof(Apartment.CreatedAt)],
-                        Guid = (Guid)row[nameof(Apartment.Guid)],
-                        MaxAdults = (int)row[nameof(Apartment.MaxAdults)],
-                        MaxChildren = (int)row[nameof(Apartment.MaxChildren)],
-                        OwnerId = (int)row[nameof(Apartment.OwnerId)],
-                        Price = (decimal)row[nameof(Apartment.Price)],
-                        StatusId = (int)row[nameof(Apartment.StatusId)],
-                        TotalRooms = (int)row[nameof(Apartment.TotalRooms)],
-                        TypeId = (int)row[nameof(Apartment.TypeId)]
+                        Id = (int)(row[nameof(AptMVC.Id)]),
+                        Name = (string)row[nameof(AptMVC.Name)],
+                        Address = (string)row[nameof(AptMVC.Address)],
+                        CityId = (int)(row[nameof(AptMVC.CityId)]),
+                        BeachDistance = (int)row[nameof(AptMVC.BeachDistance)],
+                        CreatedAt = (DateTime)row[nameof(AptMVC.CreatedAt)],
+                        Guid = (Guid)row[nameof(AptMVC.Guid)],
+                        MaxAdults = (int)row[nameof(AptMVC.MaxAdults)],
+                        MaxChildren = (int)row[nameof(AptMVC.MaxChildren)],
+                        OwnerId = (int)row[nameof(AptMVC.OwnerId)],
+                        Price = (decimal)row[nameof(AptMVC.Price)],
+                        StatusId = (int)row[nameof(AptMVC.StatusId)],
+                        TotalRooms = (int)row[nameof(AptMVC.TotalRooms)],
+                        TypeId = (int)row[nameof(AptMVC.TypeId)]
                     }
                 );
             }
@@ -397,7 +397,7 @@ namespace DataLayer.Repositories.Factory
 
         public override ApartmentStatus LoadApartmentStatusById(int id)
         {
-            return this.LoadRawApartmentStatusById(id); //Extra information not necesarry
+            return this.LoadRawApartmentStatusById(id);
         }
 
         public override IList<City> LoadCities()
@@ -546,7 +546,7 @@ namespace DataLayer.Repositories.Factory
             return users;
         }
 
-        public override void UpdateApartment(Apartment apartment, IList<ApartmentPicture> picturesToRemove)
+        public override void UpdateApartment(AptMVC apartment, IList<AptPicMVC> picturesToRemove)
         {
             int id = apartment.Id;
             var tagsFromDatabase = this.LoadTagsByApartmentId(apartment.Id);
@@ -568,7 +568,7 @@ namespace DataLayer.Repositories.Factory
                 }
             }
 
-            foreach (ApartmentPicture picture in apartment.ApartmentPictures)
+            foreach (AptPicMVC picture in apartment.Pictures)
             {
                 picture.ApartmentId = apartment.Id;
                 if (picture.Id == 0)
@@ -581,7 +581,7 @@ namespace DataLayer.Repositories.Factory
                 }
             }
 
-            foreach (ApartmentPicture picture in picturesToRemove)
+            foreach (AptPicMVC picture in picturesToRemove)
             {
                 this.DeleteApartmentPicture(picture.Guid);
             }
@@ -601,7 +601,7 @@ namespace DataLayer.Repositories.Factory
                 apartment.BeachDistance);
         }
 
-        private void UpdateApartmentPicture(ApartmentPicture picture)
+        private void UpdateApartmentPicture(AptPicMVC picture)
         {
             SqlHelper.ExecuteNonQuery(cs, nameof(UpdateApartmentPicture), picture.Guid, picture.Name, picture.IsRepresentative);
         }
@@ -614,7 +614,7 @@ namespace DataLayer.Repositories.Factory
 
             foreach (DataRow row in tblNames.Rows)
             {
-                apartmentNames.Add((string)row[nameof(Apartment.NameEng)]);
+                apartmentNames.Add((string)row[nameof(AptMVC.NameEng)]);
             }
 
             return apartmentNames;

@@ -12,8 +12,8 @@
 
     IList<SelectListItem> ddlStatusItems = new List<SelectListItem>();
 
-    ddlStatusItems.Add(new SelectListItem { Text = "All apartments", Value = "all", Selected = true });
-    ddlStatusItems.Add(new SelectListItem { Text = "Avaliable apartments", Value = "avaliable" });
+    ddlStatusItems.Add(new SelectListItem { Text = "All apartments", Value = "all" });
+    ddlStatusItems.Add(new SelectListItem { Text = "Avaliable apartments", Value = "avaliable", Selected = true });
     ddlStatusItems.Add(new SelectListItem { Text = "Unavaliable apartments", Value = "unavaliable" });
 
     SelectList ddlStatusSource = new SelectList(ddlStatusItems, "Value", "Text");
@@ -37,15 +37,19 @@
             <div class="col-sm">
                 @Html.TextBox(name: "Search", value: "", htmlAttributes: new { @class = "form-control", placeholder = "Search apartment..." })
             </div>
+
             <div class="col-sm">
                 @Html.DropDownList(optionLabel: "Any city", selectList: ddlCities, name: "CityId", htmlAttributes: new { @class = "form-control", id = "cityddl" })
             </div>
+
             <div class="col-sm">
                 @Html.DropDownList(optionLabel: null, selectList: ddlStatusSource, name: "StatusId", htmlAttributes: new { @class = "form-control", id = "statusddl" })
             </div>
+
             <div class="col-sm">
                 @Html.DropDownList(optionLabel: null, selectList: ddlFiltersSource, name: "FilterCode", htmlAttributes: new { @class = "form-control", id = "filterddl" })
             </div>
+
             <div class="col-md-auto">
                 <button type="button" class="btn btn-custom" id="btnSearch">Search</button>
             </div>
@@ -61,7 +65,7 @@
     <script>
         $("#filterddl").val("PLH");
 
-        $("#statusddl").val("all");
+        $("#statusddl").val("available");
 
         $("#cityddl, #statusddl, #filterddl").each(function () {
             $(this).change(function () {

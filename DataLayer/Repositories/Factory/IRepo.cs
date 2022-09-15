@@ -42,21 +42,21 @@ namespace DataLayer.Repositories.Factory
         IList<ApartmentReview> LoadApartmentReviewsByApartmentId(int id);
         ApartmentReview LoadApartmentReviewById(int id);
         void InsertApartmentReview(ApartmentReview apartmentReivew);
-        IList<Apartment> LoadApartments();
-        Apartment LoadApartmentById(int id);
-        void InsertApartment(Apartment apartment);
-        void DeleteApartment(Apartment apartment);
-        void UpdateApartment(Apartment apartment, IList<ApartmentPicture> picturesToRemove);
-        IList<Apartment> LoadApartments(params Predicate<Apartment>[] filters);
-        IList<Apartment> LoadApartmentsByOwnerId(int id);
+        IList<AptMVC> LoadApartments();
+        AptMVC LoadApartmentById(int id);
+        void InsertApartment(AptMVC apartment);
+        void DeleteApartment(AptMVC apartment);
+        void UpdateApartment(AptMVC apartment, IList<AptPicMVC> picturesToRemove);
+        IList<AptMVC> LoadApartments(params Predicate<AptMVC>[] filters);
+        IList<AptMVC> LoadApartmentsByOwnerId(int id);
         IList<ApartmentOwner> LoadApartmentOwners();
         ApartmentOwner LoadApartmentOwnerById(int id);
         void InsertApartmentOwner(ApartmentOwner apartmentOwner);
         IList<string> LoadApartmentNames();
-        IList<ApartmentPicture> LoadApartmentPictures();
-        ApartmentPicture LoadApartmentPictureById(int id);
-        void InsertApartmentPicture(ApartmentPicture apartmentPicture);
+        IList<AptPicMVC> LoadApartmentPictures();
+        AptPicMVC LoadApartmentPictureById(int id);
+        void InsertApartmentPicture(AptPicMVC apartmentPicture);
         void DeleteApartmentPicture(Guid guid);
-        IList<ApartmentPicture> LoadApartmentPicturesByApartmentId(int id);
+        IList<AptPicMVC> LoadApartmentPicturesByApartmentId(int id);
     }
 }
