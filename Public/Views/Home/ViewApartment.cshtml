@@ -14,13 +14,13 @@
     var reviews = Model.Apartment.Reviews.Reverse();
 }
 
-<div class="rounded-3">
+<div class="container-fluid mt-5 font-goth">
     <div class="container">
 
         <div class="row">
             <div class="col-sm">
-                <div id="carouselExampleControls" class="carousel slide rounded-3" data-ride="carousel">
-                    <div class="carousel-inner" style=" width:100%; height: 500px !important;">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" >
+                    <div class="carousel-inner rounded-3" style=" width:100%; height: 500px !important;">
                         @foreach (var pic in Model.Apartment.AptPic)
                         {
                             if (pic.Equals(Model.Apartment.MainPicture))
@@ -66,18 +66,20 @@
             </div>
         </div>
 
-        <div class="row mt-3 mb-3">
-            <div class="col-sm">
-                <h2>@Model.Apartment.NameEng</h2>
+        <div class="row mt-3 mb-3 text-custom-blue" style="border: 1px solid black">
+            <div class="col-sm m-sm-auto fs-3">
+                <strong>@Model.Apartment.NameEng</strong>
             </div>
 
-            <div class="col-md-auto">
+            <div class="col-sm-auto">
                 <div style="display:flex; align-items:center; gap:.7em">
                     @Html.Partial("_StarsView", model: starVM)
+
                     @if (!Model.Apartment.IsAvailable)
                     {
                         @Html.Partial("_AvailabilityView", Model.Apartment.Status)
                     }
+
                     @Html.Partial("_PriceView", Model.Apartment.PriceStringFormat)
                 </div>
             </div>
@@ -94,7 +96,7 @@
 
         <div class="row mt-3">
             <div class="mb-2">
-                <b><span style="height:fit-content">City: @Model.Apartment.City.Name</span></b>
+                <strong>City:</strong> @Model.Apartment.City.Name
             </div>
 
             <div>
