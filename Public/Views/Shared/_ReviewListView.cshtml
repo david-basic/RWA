@@ -1,5 +1,7 @@
 ﻿@model Public.Models.ViewModels.ApartmentReviewListVM
-@foreach (var review in Model.Reviews)
-{
-    @Html.Partial("_ReviewView", review)
-}
+<div class="mt-3">
+    @foreach (var review in Model.Reviews)
+    {
+        @Html.Partial("_ReviewView", review)
+    }
+</div>

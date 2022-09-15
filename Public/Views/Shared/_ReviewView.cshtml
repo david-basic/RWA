@@ -9,32 +9,15 @@
 
 <div class="container tag_container_light rounded-3 mb-3 p-3">
     <div class="row">
-        <div class="col-md-auto">
-            <b>USER</b>
+        <div class="col-sm fs-3">
+            <i class="fa-solid fa-user fa-xl" style="vertical-align:middle"></i> @Model.User.FirstName @Model.User.LastName | @Html.Partial("_StarsView", model: starsVM)
         </div>
+    </div>
 
-        <div class="col-sm">
-            <div class="row h-50">
-                <div class="col-md-auto">
-                    <h5 style="width:fit-content">@Model.User.FullName</h5>
-
-                    <div class="mb-3">
-                        @Html.Partial("_StarsView", model: starsVM)
-                    </div>
-                </div>
-            </div>
-
-            <div class="row h-50">
-                <div class="row h-50">
-                    <div class="container">
-                        <p>@Model.Details</p>
-                    </div>
-                </div>
-
-                <div class="row h-50" style="display:flex; justify-content:end">
-                    @Model.CreatedAt.ToShortDateString()
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-sm fs-6">
+            <p style="text-align:justify">" @Model.Details "</p>
+            <p class="position-absolute bottom-0 end-0">@Model.CreatedAt.ToShortDateString()</p>
         </div>
     </div>
 </div>
