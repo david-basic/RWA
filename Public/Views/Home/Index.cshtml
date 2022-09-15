@@ -38,18 +38,16 @@
                 @Html.TextBox(name: "Search", value: "", htmlAttributes: new { @class = "form-control", placeholder = "Search apartment..." })
             </div>
             <div class="col-sm">
-                @Html.DropDownList(optionLabel: "Any city", selectList: ddlCities, name: "CityId", htmlAttributes: new { @class = "form-control", id = "cityDropDownList" })
+                @Html.DropDownList(optionLabel: "Any city", selectList: ddlCities, name: "CityId", htmlAttributes: new { @class = "form-control", id = "cityddl" })
             </div>
             <div class="col-sm">
-                @Html.DropDownList(optionLabel: null, selectList: ddlStatusSource, name: "StatusId", htmlAttributes: new { @class = "form-control", id = "statusDropDownList" })
+                @Html.DropDownList(optionLabel: null, selectList: ddlStatusSource, name: "StatusId", htmlAttributes: new { @class = "form-control", id = "statusddl" })
             </div>
             <div class="col-sm">
-                @Html.DropDownList(optionLabel: null, selectList: ddlFiltersSource, name: "FilterCode", htmlAttributes: new { @class = "form-control", id = "filterDropDownList" })
+                @Html.DropDownList(optionLabel: null, selectList: ddlFiltersSource, name: "FilterCode", htmlAttributes: new { @class = "form-control", id = "filterddl" })
             </div>
             <div class="col-md-auto">
-                <button type="button" class="btn btn-custom" id="btnSearch">
-                    Search
-                </button>
+                <button type="button" class="btn btn-custom" id="btnSearch">Search</button>
             </div>
         </div>
     </div>
@@ -61,11 +59,11 @@
 
 @section scripts{
     <script>
-        $("#filterDropDownList").val("PLH");
+        $("#filterddl").val("PLH");
 
-        $("#statusDropDownList").val("all");
+        $("#statusddl").val("all");
 
-        $("#cityDropDownList, #statusDropDownList, #filterDropDownList").each(function () {
+        $("#cityddl, #statusddl, #filterddl").each(function () {
             $(this).change(function () {
                 loadApartmentListPartialViewAjax();
             });
@@ -91,26 +89,16 @@
             loadApartmentListPartialViewAjax();
         });
 
-        $('body').keypress(function (event) {
-            var keycode = (event.keyCode ? event.keyCode : event.which);
-            if (keycode == '13') {
-                loadApartmentListPartialViewAjax();
-            }
-        });
-
         function loadApartmentListPartialViewAjax() {
             $.ajax({
                 method: 'GET',
-                url: `/Home/LoadApartmentListPartialView/?Search=${$("#Search").val()}&CityId=${$("#cityDropDownList").val()}&StatusId=${$("#statusDropDownList").val()}&FilterCode=${$("#filterDropDownList").val()}`,
+                url: `/Home/LoadApartmentListPartialView/?Search=${$("#Search")}&CityId=${$("#cityddl").val()}&StatusId=${$("#statusddl").val()}&FilterCode=${$("#filterddl").val()}`,
                 success: function (partialView) {
-                    $(".draw_apartments").html("")
+                    $(".draw_apartments").fadeIn(500);
+                    $(".draw_apartments").html();
                     $(".draw_apartments").append(partialView);
                 }
             });
         }
     </script>
 }
-
-@*LoadApartmentListPartialView(string search, int? cityId, string statusId, string filterCode)*@
-
-@*url: `/Home/LoadApartmentListPartialView/?Search=${$("#Search").val()}&CityId=${$("#cityDropDownList").val()}&StatusId=${$("#statusDropDownList").val()}&FilterCode=${$("#filterDropDownList").val()}`,*@

@@ -18,24 +18,26 @@ namespace DataLayer.Models
         public int TypeId { get; set; }
         public int StatusId { get; set; }
         public string StatusName { get; set; }
-        public int? CityId { get; set; }
+        public int CityId { get; set; }
         public string CityName { get; set; }
         public string Address { get; set; }
         public string Name { get; set; }
         public string NameEng { get; set; }
         public decimal Price { get; set; }
+        public string PriceStringFormat { get => string.Format("{0:0.00}", Price) + "HRK"; }
         public int MaxAdults { get; set; }
         public int MaxChildren { get; set; }
         public int TotalRooms { get; set; }
+        public int TotalPeople
+        {
+            get
+            {
+                return MaxAdults + MaxChildren;
+            }
+        }
         public int? BeachDistance { get; set; }
         public List<Tag> Tags { get; set; }
         public List<ApartmentPicture> ApartmentPictures { get; set; }
-        public ApartmentStatus Status { get; set; }
-
-
-        public City City { get; set; } = new City();
-        public IList<ApartmentReview> Reviews { get; set; }
-        public bool IsAvailable { get => StatusId == 3; }
         public int PicturesCount { get => ApartmentPictures.Count; }
         public ApartmentPicture MainPicture
         {
@@ -51,14 +53,23 @@ namespace DataLayer.Models
                 return representativePicture;
             }
         }
-        public int TotalPeople
+        public ApartmentStatus Status { get; set; }
+        public City City { get; set; } = new City();
+        public IList<ApartmentReview> Reviews { get; set; }
+        public int TotalReviews
         {
             get
             {
-                return MaxAdults + MaxChildren;
+                int totalReviews = 0;
+
+                if (Reviews != null && Reviews.Count != 0)
+                {
+                    totalReviews = Reviews.Count;
+                }
+
+                return totalReviews;
             }
         }
-        public string PriceStringFormat { get => string.Format("{0:0.00}", Price) + "HRK"; }
         public int Stars
         {
             get
@@ -77,21 +88,7 @@ namespace DataLayer.Models
                 return (int)average;
             }
         }
-
-        public int TotalReviews
-        {
-            get
-            {
-                int totalReviews = 0;
-
-                if (Reviews != null && Reviews.Count != 0)
-                {
-                    totalReviews = Reviews.Count;
-                }
-
-                return totalReviews;
-            }
-        }
+        public bool IsAvailable { get => StatusId == 3; }
 
         public static Comparison<Apartment> PriceLowToHighComp = (left, right) => left.Price.CompareTo(right.Price);
         public static Comparison<Apartment> PriceHighToLowComp = (left, right) => -left.Price.CompareTo(right.Price);
