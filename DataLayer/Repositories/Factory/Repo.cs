@@ -92,7 +92,7 @@ namespace DataLayer.Repositories.Factory
             foreach (Tag tag in apartment.Tags)
                 InsertTaggedApartment(new TaggedApartment { Guid = Guid.NewGuid(), ApartmentId = apartmentId, TagId = tag.Id });
 
-            foreach (AptPicMVC picture in apartment.Pictures)
+            foreach (AptPicMVC picture in apartment.AptPic)
             {
                 picture.ApartmentId = apartmentId;
                 InsertApartmentPicture(picture);
@@ -193,7 +193,7 @@ namespace DataLayer.Repositories.Factory
             var tags = this.LoadTagsByApartmentId(apartment.Id);
             var reviews = this.LoadApartmentReviewsByApartmentId(apartment.Id);
 
-            apartment.Pictures = new List<AptPicMVC>(pictures);
+            apartment.AptPic = new List<AptPicMVC>(pictures);
             apartment.Status = status;
             apartment.City = city;
             apartment.Tags = new List<Tag>(tags);
@@ -568,7 +568,7 @@ namespace DataLayer.Repositories.Factory
                 }
             }
 
-            foreach (AptPicMVC picture in apartment.Pictures)
+            foreach (AptPicMVC picture in apartment.AptPic)
             {
                 picture.ApartmentId = apartment.Id;
                 if (picture.Id == 0)

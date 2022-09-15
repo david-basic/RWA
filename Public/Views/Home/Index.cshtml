@@ -23,8 +23,8 @@
     IList<SelectListItem> ddlStatusItems = new List<SelectListItem>();
 
     ddlStatusItems.Add(new SelectListItem { Text = "All apartments", Value = "all" });
-    ddlStatusItems.Add(new SelectListItem { Text = "Avaliable apartments", Value = "avaliable", Selected = true });
-    ddlStatusItems.Add(new SelectListItem { Text = "Unavaliable apartments", Value = "unavaliable" });
+    ddlStatusItems.Add(new SelectListItem { Text = "Available apartments", Value = "available", Selected = true });
+    ddlStatusItems.Add(new SelectListItem { Text = "Unavailable apartments", Value = "unavaliable" });
 
     SelectList ddlStatusSource = new SelectList(ddlStatusItems, "Value", "Text");
 }
