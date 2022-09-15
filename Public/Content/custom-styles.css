@@ -36,6 +36,14 @@ a {
     text-decoration: none;
 }
 
+.a-custom {
+    color: #12477320;
+}
+
+    .a-custom:hover {
+        color: #a7d0f1;
+    }
+
 #popup_login {
     padding: 0;
     border-radius: .6em;

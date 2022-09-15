@@ -1,5 +1,3 @@
-USE [RwaApartmani]
-GO
 SET IDENTITY_INSERT [dbo].[ApartmentStatus] ON 
 GO
 INSERT [dbo].[ApartmentStatus] ([Id], [Guid], [Name], [NameEng]) VALUES (1, N'9ced816e-c189-419d-a20b-3eafc71beb61', N'Zauzeto', N'Occupied')
