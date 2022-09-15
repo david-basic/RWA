@@ -119,6 +119,8 @@
     <Content Include="Content\CustomStyles.css" />
     <Content Include="Content\Pictures\apt1.jpg" />
     <Content Include="Content\Pictures\apt2.jpg" />
+    <Content Include="Content\Pictures\apt3.jpg" />
+    <Content Include="Content\Pictures\apt4.jpg" />
     <Content Include="Content\Pictures\IKONA_apartmani_1_veći_white.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
