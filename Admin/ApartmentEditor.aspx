@@ -19,6 +19,10 @@
                     <asp:TextBox ID="tbName" runat="server" CssClass="form-control font-goth"></asp:TextBox>
                 </div>
                 <div class="form-group">
+                    <label class="label-custom">Engleski naziv</label>
+                    <asp:TextBox ID="tbNameEng" runat="server" CssClass="form-control font-goth"></asp:TextBox>
+                </div>
+                <div class="form-group">
                     <label class="label-custom">Adresa</label>
                     <asp:TextBox ID="tbAddress" runat="server" CssClass="form-control font-goth"></asp:TextBox>
                 </div>

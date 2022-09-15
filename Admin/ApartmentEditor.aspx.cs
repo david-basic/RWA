@@ -251,6 +251,7 @@ namespace Admin
                 CityId = cityId,
                 Address = tbAddress.Text,
                 Name = tbName.Text,
+                NameEng = tbNameEng.Text,
                 Price = price,
                 MaxAdults = (int)maxAdults,
                 MaxChildren = (int)maxChildren,

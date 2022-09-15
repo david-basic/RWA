@@ -32,10 +32,10 @@
 <div class="container-fluid mt-5 font-goth" style="color: #124773">
     <div class="row">
         <div class="col-sm-10 offset-sm-1 hstack gap-5">
-            @Html.TextBox(name: "Search", value: "", htmlAttributes: new { @class = "form-control", placeholder = "Search apartment..." })
             @Html.DropDownList(optionLabel: "Any city", selectList: ddlCities, name: "CityId", htmlAttributes: new { @class = "form-control", id = "cityddl" })
             @Html.DropDownList(optionLabel: null, selectList: ddlStatusSource, name: "StatusId", htmlAttributes: new { @class = "form-control", id = "statusddl" })
             @Html.DropDownList(optionLabel: null, selectList: ddlFiltersSource, name: "FilterCode", htmlAttributes: new { @class = "form-control", id = "filterddl" })
+            @Html.TextBox(name: "Search", value: "", htmlAttributes: new { @class = "form-control", placeholder = "Search apartment..." })
             <button type="button" class="btn btn-primary btn-custom" id="btnSearch">Search</button>
         </div>
     </div>
