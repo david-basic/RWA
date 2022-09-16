@@ -25,8 +25,28 @@ namespace Admin
 
         private void RebindTags()
         {
-            gvListaTagova.DataSource = _tagRepository.GetTags();
+            gvListaTagova.DataSource = _tagRepository.GetTags(true);
             gvListaTagova.DataBind();
+        }
+
+        protected void lbTagEdit_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("NotYetImplemented.aspx");
+        }
+
+        protected void lbTagDelete_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("NotYetImplemented.aspx");
+        }
+
+        protected void lblSave_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ApartmentList.aspx");
+        }
+
+        protected void lbReturn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ApartmentList.aspx");
         }
     }
 }

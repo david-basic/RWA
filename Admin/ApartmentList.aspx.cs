@@ -21,7 +21,7 @@ namespace Admin
         {
             _apartmentRepository = new ApartmentRepository();
             _statusRepository = new StatusRepository();
-            _cityRepository = new CityRepository();
+            _cityRepository = new CityRepository(); 
             _orderRepository = new OrderRepository();
         }
         protected void Page_Load(object sender, EventArgs e)

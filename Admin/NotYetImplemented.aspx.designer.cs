@@ -11,26 +11,8 @@ namespace Admin
 {
 
 
-    public partial class TagList
+    public partial class NotYetImplemented
     {
-
-        /// <summary>
-        /// gvListaTagova control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvListaTagova;
-
-        /// <summary>
-        /// lblSave control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lblSave;
 
         /// <summary>
         /// lbReturn control.

@@ -81,7 +81,7 @@ namespace Admin
         }
         private void RebindTags()
         {
-            ddlTags.DataSource = _tagRepository.GetTags();
+            ddlTags.DataSource = _tagRepository.GetTags(false);
             ddlTags.DataBind();
         }
 

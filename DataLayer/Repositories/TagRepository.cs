@@ -16,19 +16,22 @@ namespace DataLayer.Repositories
         {
             _connectionString = ConfigurationManager.ConnectionStrings["rwadb"].ConnectionString;
         }
-        public List<Models.Tag> GetTags()
+        public List<Models.Tag> GetTags(bool forTagListAspx)
         {
             var ds = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "dbo.GetTags");
 
             var tagList = new List<Models.Tag>();
-            tagList.Add(new Models.Tag { Id = 0, Name = "(odabir taga)" });
+            if (!forTagListAspx)
+            {
+                tagList.Add(new Models.Tag { Id = 0, Name = "(odabir taga)" }); 
+            }
 
             foreach (DataRow row in ds.Tables[0].Rows)
             {
                 var tag = new Models.Tag
                 {
                     Id = Convert.ToInt32(row["ID"]),
-                    Name = row["Name"].ToString()
+                    Name = row["Name"].ToString(),
                 };
                 tagList.Add(tag);
             }
